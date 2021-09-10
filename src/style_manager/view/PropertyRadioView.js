@@ -29,14 +29,15 @@ export default PropertyView.extend({
           let id = `${prop}-${el.value}-${cid}`;
           let labelTxt = el.name || el.value;
           let titleAttr = el.title ? `title="${el.title}"` : '';
+          const icon = el.icon ? `<i class="${el.icon}"></i>` : '';
+          const label = `<label class="${cl ||
+            itemCls}" ${titleAttr} for="${id}">${
+            cl ? '' : icon || labelTxt
+          }</label>`;
           inputStr += `
             <div class="${ppfx}radio-item">
-              <input type="radio" class="${clsInput}" id="${id}" name="${prop}-${cid}" value="${
-            el.value
-          }"/>
-              <label class="${cl || itemCls}" ${titleAttr} for="${id}">${
-            cl ? '' : labelTxt
-          }</label>
+              <input type="radio" class="${clsInput}" id="${id}" name="${prop}-${cid}" value="${el.value}"/>
+            ${label}
             </div>
           `;
         });

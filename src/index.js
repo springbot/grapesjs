@@ -3,6 +3,8 @@ import Editor from './editor';
 import { isElement, isFunction } from 'underscore';
 import polyfills from 'utils/polyfills';
 import PluginManager from './plugin_manager';
+import { library, dom } from '@fortawesome/fontawesome-svg-core';
+import { far } from '@fortawesome/pro-regular-svg-icons';
 
 polyfills();
 
@@ -46,6 +48,10 @@ export default {
    * })
    */
   init(config = {}) {
+    // fontawesome icons
+    library.add(far);
+    dom.watch();
+
     const { headless } = config;
     const els = config.container;
     if (!els && !headless) throw new Error("'container' is required");
