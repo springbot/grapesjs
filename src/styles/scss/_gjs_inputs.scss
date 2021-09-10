@@ -222,6 +222,7 @@
 .#{$app-prefix}radio-item {
   flex: 1 1 auto;
   text-align: center;
+  background: $iconBg;
   color: $iconGrayDk;
 
   &:first-child > .#{$app-prefix}radio-item-label {
