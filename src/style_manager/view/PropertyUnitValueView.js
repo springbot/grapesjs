@@ -5,7 +5,7 @@ const $ = Backbone.$;
 
 export default PropertyView.extend({
   templateLabel(model) {
-    return ``;
+    return;
   },
 
   templateInput() {
@@ -19,7 +19,6 @@ export default PropertyView.extend({
     if (textLabel) {
       return `<div class="icon"><span>${textLabel}</span></div>`;
     }
-    return ``;
   },
 
   init() {
@@ -31,7 +30,9 @@ export default PropertyView.extend({
   validityChanged() {
     const ppfx = this.ppfx;
     const fields = this.el.querySelector(`.${ppfx}fields`);
-    if (!fields) return;
+    if (!fields) {
+      return;
+    }
     if (!this.model.get('valid')) {
       fields.style.boxShadow = 'inset 0 0 0 1px red';
     } else {
