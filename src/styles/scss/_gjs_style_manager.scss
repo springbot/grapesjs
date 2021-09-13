@@ -12,16 +12,20 @@
 
   &properties {
     font-size: $fontSizeS;
-    padding: 10px 5px;
+    padding: 24px 8px;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
     box-sizing: border-box;
     width: 100%;
+    column-gap: 8px;
+    row-gap: 24px;
+
   }
 
   &label {
-    margin: 5px 5px 3px 0;
+    margin: 0 0 8px 0;
+    line-height: 16px;
   }
 }
 
@@ -42,7 +46,7 @@
 
 .#{$sm-prefix}sector {
   clear: both;
-  font-weight: lighter;
+  font-weight: 500;
   text-align: left;
 
   ##{$sm-prefix}caret {
@@ -63,11 +67,12 @@
   .#{$sm-prefix}field {
     width: 100%;
     position: relative;
+    border-radius: 4px;
 
     input,
     select {
       background-color: transparent;
-      color: $mainLhlColor;
+      color: $textGray;
       border: none;
       width: 100%;
     }
@@ -159,13 +164,13 @@
       border: 1px solid rgba(0, 0, 0, 0.1);
       box-shadow: 1px 1px 0 $mainLhColor;
       color: $mainLhlColor;
-      border-radius: 2px;
+      border-radius: 4px;
       box-sizing: border-box;
       padding: 0 5px;
     }
 
     &.#{$sm-prefix}composite {
-      border-radius: 2px;
+      border-radius: 4px;
     }
 
     &.#{$sm-prefix}select {
@@ -181,8 +186,13 @@
     }
 
     &.#{$sm-prefix}composite {
-      background-color: $mainDklColor;
-      border: 1px solid rgba(0, 0, 0, 0.25);
+      .#{$sm-prefix}properties {
+        gap: 8px;
+        padding: 0;
+        .#{$sm-prefix}label {
+          display: none;
+        }
+      }
     }
 
     &.#{$sm-prefix}list {
@@ -249,8 +259,14 @@
     box-sizing: border-box;
     float: left;
     width: 50%;
-    margin-bottom: 5px;
-    padding: 0 5px;
+    padding: 0;
+    flex: 1 0 auto;
+    
+    &.#{$sm-prefix}composite {
+      .#{$sm-prefix}property {
+        flex: 1 0 100px;
+      }
+    }
 
     &--full,
     &.#{$sm-prefix}composite,
@@ -264,7 +280,7 @@
 
     .#{$sm-prefix}btn {
       background-color: lighten($mainDkColor, 13%);
-      border-radius: 2px;
+      border-radius: 4px;
       box-shadow: 1px 1px 0 lighten($mainDkColor, 2%), 1px 1px 0 lighten($mainDkColor, 17%) inset;
       padding: 5px;
       position: relative;
@@ -288,7 +304,7 @@
 
     &.#{$sm-prefix}file ##{$sm-prefix}preview-box {
       background-color: $lightBorder;
-      border-radius: 2px;
+      border-radius: 4px;
       margin-top: 5px;
       position: relative;
       overflow: hidden;
@@ -324,7 +340,7 @@
 
     .#{$sm-prefix}layer {
       background-color: rgba(255, 255, 255, 0.055);
-      border-radius: 2px;
+      border-radius: 4px;
       margin: 2px 0;
       padding: 7px;
       position: relative;
@@ -342,7 +358,7 @@
 
       ##{$sm-prefix}preview,
       ##{$sm-prefix}preview-box {
-        border-radius: 2px;
+        border-radius: 4px;
       }
 
       ##{$sm-prefix}close-layer {
@@ -388,7 +404,7 @@
   /* ------------------END Property-------------------- */
 
   .#{$sm-prefix}stack .#{$sm-prefix}properties {
-    padding: 5px 0 0;
+    padding: 8px 0 0;
   }
 
   .#{$sm-prefix}stack ##{$sm-prefix}add {
@@ -419,7 +435,7 @@
     right: 0;
     top: 0;
     box-sizing: border-box;
-    border-radius: 2px;
+    border-radius: 4px;
     padding: 2px;
 
     .#{$app-prefix}checker-bg {
@@ -463,5 +479,38 @@
 
   &:hover {
     @include opacity(0.9);
+  }
+}
+
+.#{$sm-prefix}unitvalue {
+  .#{$app-prefix}fields {
+    height: 32px;
+    display: flex;
+    .icon {
+      height: 32px;
+      width: 32px;
+      font-weight: 400;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: $iconGray;
+      span {
+        height: 14px;
+      }
+    }
+    .#{$app-prefix}field {
+      display: inline-flex;
+      margin: 0 8px;
+      
+      .#{$app-prefix}input-holder {
+        display: flex;
+        align-items: center;
+        input {
+          height: 24px;
+          padding: 0;
+        }
+      }
+    }
   }
 }

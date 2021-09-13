@@ -16,7 +16,7 @@
   }
 
   &commands {
-    width: (100% - $leftWidth);
+    width: calc(100% - #{$leftWidth});
     left: 0;
     top: 0;
     box-shadow: 0 0 5px $mainDkColor;
@@ -58,7 +58,7 @@
     border: none;
     font-size: 18px;
     margin-right: 5px;
-    border-radius: 2px;
+    border-radius: 4px;
     padding: 4px;
     position: relative;
     cursor: pointer;
