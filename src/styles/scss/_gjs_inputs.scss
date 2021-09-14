@@ -222,11 +222,15 @@
 .#{$app-prefix}radio-item {
   flex: 1 1 auto;
   text-align: center;
-  background: $iconBg;
   color: $iconGrayDk;
 
-  &:first-child {
+  &:first-child > .#{$app-prefix}radio-item-label {
     border: none;
+    border-radius: 4px 0 0 4px;
+  }
+
+  &:last-child > .#{$app-prefix}radio-item-label {
+    border-radius: 0 4px 4px 0 ;
   }
 
   &:hover {
@@ -237,8 +241,15 @@
     display: none;
   }
 
+  .#{$app-prefix}radio-item-label {
+    background: $iconBg;
+    border-left: $buttonSeparator 1px solid;
+  }
+
   input:checked + .#{$app-prefix}radio-item-label {
-    background-color: $white;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: $white inset 0 0 0 1px;
+    filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.09));
     color: $textGray;
   }
 
