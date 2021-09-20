@@ -99,6 +99,7 @@ export default () => ({
         case 'align-content':
         case 'align-image':
         case 'text-align':
+        case 'text-decoration':
           obj.type = 'radio';
           break;
         case 'display':
@@ -181,6 +182,8 @@ export default () => ({
         case 'size':
         case 'button-size':
         case 'transform':
+        case 'font-styles':
+        case 'link-styles':
           obj.type = 'composite';
           break;
         case 'color':
@@ -413,6 +416,8 @@ export default () => ({
 
       // Detached
       switch (prop) {
+        case 'font-styles':
+        case 'link-styles':
         case 'background':
           obj.detached = true;
           break;
@@ -456,6 +461,15 @@ export default () => ({
           break;
         case 'padding-bottom':
           obj.icon = 'far fa-arrow-to-bottom';
+          break;
+        case 'font-weight':
+          obj.icon = 'far fa-text-width';
+          break;
+        case 'font-size':
+          obj.icon = 'far fa-text-size';
+          break;
+        case 'line-height':
+          obj.icon = 'far fa-line-height';
           break;
       }
 
@@ -687,6 +701,12 @@ export default () => ({
             { value: 'auto' }
           ];
           break;
+        case 'text-decoration':
+          obj.list = [
+            { value: 'none', icon: 'far fa-times' },
+            { value: 'line-through', icon: 'far fa-strikethrough' },
+            { value: 'underline', icon: 'far fa-underline' }
+          ];
       }
 
       // Properties
@@ -772,6 +792,18 @@ export default () => ({
             'transform-scale-y',
             'transform-scale-z'
           ]);
+          break;
+        case 'link-styles':
+        case 'font-styles':
+          obj.properties = this.build([
+            'font-family',
+            'font-weight',
+            'font-size',
+            'color',
+            'line-height',
+            'text-decoration'
+          ]);
+
           break;
       }
 

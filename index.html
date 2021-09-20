@@ -86,31 +86,6 @@
         height: '100%',
         fromElement: true,
         storageManager: { autoload: 0 },
-        styleManager : {
-          sectors: [{
-              name: 'General',
-              open: false,
-              buildProps: ['float', 'display', 'position', 'top', 'right', 'left', 'bottom']
-            },{
-              name: 'Size & positioning',
-              open: false,
-              buildProps: ['size', 'container-padding', 'link-padding', 'section-padding', 'align-button',
-                'align-content', 'align-image'],
-            },{
-              name: 'Typography',
-              open: false,
-              buildProps: ['font-family', 'font-size', 'font-weight', 'letter-spacing', 'color', 'line-height', 'text-shadow'],
-            },{
-              name: 'Decorations',
-              open: false,
-              buildProps: ['border-radius-c', 'background-color', 'border-radius', 'border', 'box-shadow', 'background'],
-            },{
-              name: 'Extra',
-              open: false,
-              buildProps: ['transition', 'perspective', 'transform'],
-            }
-          ],
-        },
       });
 
       editor.BlockManager.add('testBlock', {
