@@ -106,6 +106,7 @@
   border-radius: 4px;
   box-sizing: border-box;
   padding: 0;
+  height: 100%;
   position: relative;
 
   textarea {
@@ -114,25 +115,22 @@
 
   .#{$app-prefix}sel-arrow {
     height: 100%;
-    width: 9px;
+    width: 32px;
     position: absolute;
     right: 0;
     top: 0;
     z-index: 0;
+    display: flex;
   }
 
   .#{$app-prefix}d-s-arrow {
-    bottom: 0;
-    top: 0;
-    margin: auto;
-    right: $inputPadding;
-    border-top: 4px solid $arrowColor;
-    position: absolute;
-    height: 0;
-    width: 0;
-    border-left: 3px solid transparent;
-    border-right: 4px solid transparent;
-    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    &>* {
+      padding: 9px 0;
+    }
+
   }
 
   &-arrows {
@@ -242,8 +240,13 @@
   }
 
   .#{$app-prefix}radio-item-label {
+    cursor: pointer;
+    display: block;
     background: $iconBg;
-    border-left: $buttonSeparator 1px solid;
+    border-left: $buttonSeparator 0.25px solid;
+    height: 14px;
+    line-height: 14px;
+    padding: 9px;
   }
 
   input:checked + .#{$app-prefix}radio-item-label {
@@ -256,12 +259,6 @@
   &s {
     display: flex;
   }
-}
-
-.#{$app-prefix}radio-item-label {
-  cursor: pointer;
-  display: block;
-  padding: $inputPadding;
 }
 
 .#{$app-prefix}field-units {

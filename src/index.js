@@ -5,6 +5,7 @@ import polyfills from 'utils/polyfills';
 import PluginManager from './plugin_manager';
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { far } from '@fortawesome/pro-regular-svg-icons';
+import { fas } from '@fortawesome/pro-solid-svg-icons';
 
 polyfills();
 
@@ -49,7 +50,7 @@ export default {
    */
   init(config = {}) {
     // fontawesome icons
-    library.add(far);
+    library.add(far, fas);
     dom.watch();
 
     const { headless } = config;
