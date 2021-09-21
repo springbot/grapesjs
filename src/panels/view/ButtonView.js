@@ -178,10 +178,16 @@ export default Backbone.View.extend({
   render() {
     const { model } = this;
     const label = model.get('label');
+    const icon = model.get('icon');
     const { $el } = this;
     !model.get('el') && $el.empty();
     this.updateAttributes();
     label && $el.append(label);
+    if (icon) {
+      const iconEl = document.createElement('i');
+      iconEl.className = icon;
+      $el.append(iconEl);
+    }
     this.checkActive();
     this.updateDisable();
 
