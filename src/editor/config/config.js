@@ -226,18 +226,7 @@ module.exports = {
       {
         name: 'Text editor',
         open: false,
-        buildProps: ['font-styles', 'link-styles'],
-        properties: [
-          {
-            property: 'text-align',
-            list: [
-              { value: 'left', className: 'fa fa-align-left' },
-              { value: 'center', className: 'fa fa-align-center' },
-              { value: 'right', className: 'fa fa-align-right' },
-              { value: 'justify', className: 'fa fa-align-justify' }
-            ]
-          }
-        ]
+        buildProps: ['font-styles', 'link-styles']
       }
     ]
   },
