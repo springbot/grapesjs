@@ -492,11 +492,15 @@
 
 .#{$app-prefix}select>##{$sm-prefix}input-holder:nth-child(2)>select,
 .#{$app-prefix}input>.#{$app-prefix}input-holder:nth-child(2)>input {
-  padding-left: 40px;
+  padding-left: 32px;
 }
 
 .#{$app-prefix}select>##{$sm-prefix}input-holder:nth-last-child(2)>select {
   padding-right: 24px;
+}
+
+.#{$app-prefix}field-units {
+  display: none;
 }
 
 .#{$app-prefix}fields{

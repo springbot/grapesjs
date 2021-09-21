@@ -142,19 +142,19 @@
 
 .#{$app-prefix}field-color {
   input {
-    padding-right: $colorpSize;
+    padding-left: 32px;
     box-sizing: border-box;
   }
 }
 
 .#{$app-prefix}field-colorp {
-  border-left: 1px solid $mainDkColor;
+  border: 1px solid $iconGrayDk;
+  border-radius: 2px;
   box-sizing: border-box;
-  height: 100%;
-  padding: 2px;
+  height: 14px;
   position: absolute;
-  right: 0;
-  top: 0;
+  left: 9px;
+  top: 9px;
   width: $colorpSize;
   z-index: 10;
 
