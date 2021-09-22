@@ -25,6 +25,7 @@ $inputBg:           #FCFCFC;
 $iconBg:            #FAFAFA;
 $panelBg:           #F2F2F2;
 $editorBg:          #E5E5E5;
+$buttonSeparator:   #DCE0E5;
 $iconGrayLt:        #B3B3B3;
 $iconGray:          #8F8F8F;
 $iconGrayDk:        #737373;
@@ -70,8 +71,8 @@ $inputFontColor:    $mainLhlColor !default; /* #d5d5d5 */
 $arrowColor:        $mainLhlColor !default; /* b1b1b1 */
 $darkTextShadow:    $mainDkColor !default; /* #252525 */
 $darkBorder:        rgba(0, 0, 0, 0.15) !default; /* 303030 */
-$colorpSize:        22px !default;
-$inputPadding:      5px !default; // Has to be a single value
+$colorpSize:        14px !default;
+$inputPadding:      8px !default; // Has to be a single value
 
 /* Class manager */
 $addBtnBg:          lighten($mainDkColor, 10%) !default;

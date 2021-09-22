@@ -75,6 +75,7 @@
       color: $textGray;
       border: none;
       width: 100%;
+      height: 32px;
     }
 
     input {
@@ -261,6 +262,13 @@
     width: 50%;
     padding: 0;
     flex: 1 0 auto;
+
+    &:not(.#{$sm-prefix}composite)>.#{$app-prefix}fields {
+      height: 32px;
+      background-color: $inputBg;
+      border-radius: 4px;
+      
+    }
     
     &.#{$sm-prefix}composite {
       .#{$sm-prefix}property {
@@ -482,35 +490,38 @@
   }
 }
 
-.#{$sm-prefix}unitvalue {
-  .#{$app-prefix}fields {
+.#{$app-prefix}select>##{$sm-prefix}input-holder:nth-child(2)>select,
+.#{$app-prefix}input>.#{$app-prefix}input-holder:nth-child(2)>input {
+  padding-left: 32px;
+}
+
+.#{$app-prefix}select>##{$sm-prefix}input-holder:nth-last-child(2)>select {
+  padding-right: 24px;
+}
+
+.#{$app-prefix}field-units {
+  display: none;
+}
+
+.#{$app-prefix}fields{
+  .#{$sm-prefix}icon {
+    position: absolute;
+    width: 32px;
     height: 32px;
-    display: flex;
-    .icon {
-      height: 32px;
-      width: 32px;
-      font-weight: 400;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: $iconGray;
-      span {
-        height: 14px;
-      }
+    color: $iconGrayDk;
+    font-weight: 400;
+    text-align: center;
+    &>*{
+      padding: 9px 0;
     }
-    .#{$app-prefix}field {
-      display: inline-flex;
-      margin: 0 8px;
-      
-      .#{$app-prefix}input-holder {
-        display: flex;
-        align-items: center;
-        input {
-          height: 24px;
-          padding: 0;
-        }
-      }
-    }
+  }
+}
+
+##{$sm-prefix}font-styles,##{$sm-prefix}link-styles {
+  ##{$sm-prefix}font-family,  ##{$sm-prefix}color, ##{$sm-prefix}text-decoration {
+    flex: 1 0 150px;
+  }
+  ##{$sm-prefix}line-height {
+    flex: 0 0 50%;
   }
 }
