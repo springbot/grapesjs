@@ -3,6 +3,7 @@
 .sass-cache/
 .project
 .idea
+.npmrc
 npm-debug.log*
 yarn-error.log
 yarn.lock

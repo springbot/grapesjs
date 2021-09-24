@@ -19,14 +19,28 @@ $trt-prefix:        $app-prefix + 'trt-' !default;
   With this should be easier to overwrite colors
   not only in SCSS but even CSS
 */
-$primaryColor:      #444 !default;
-$secondaryColor:    #ddd !default;
+$white:             #FFFFFF;
+$blockBg:           #FDFDFD;
+$inputBg:           #FCFCFC;
+$iconBg:            #FAFAFA;
+$panelBg:           #F2F2F2;
+$editorBg:          #E5E5E5;
+$iconGrayLt:        #B3B3B3;
+$iconGray:          #8F8F8F;
+$iconGrayDk:        #737373;
+$textGray:          #4A4A4A;
+
+$primaryColor:      $panelBg !default;
+$secondaryColor:    $textGray !default;
 $tertiaryColor:     #804f7b !default;
-$quaternaryColor:   #d278c9 !default;
+$quaternaryColor:   #0092DB !default;
+
+
 
 /* Dark theme */
-$mainColor:         #444 !default; /* Light: #573454 Dark: #3b2639 -moz-linear-gradient(top, #fca99b 0%, #6e2842 100%) */
-$fontColor:         #ddd !default; /* l: #d8d7db */
+$mainColor:         $white !default; /* Light: #573454 Dark: #3b2639 -moz-linear-gradient(top, #fca99b 0%, #6e2842 100%) */
+$fontColor:         $textGray !default; /* l: #d8d7db */
+
 $fontColorActive:   #f8f8f8 !default;
 
 $mainDkColor:       rgba(0, 0, 0, 0.2) !default;/* darken($mainColor, 4%) - #383838 */
@@ -34,14 +48,14 @@ $mainDklColor:      rgba(0, 0, 0, 0.1) !default;
 $mainLhColor:       rgba(255, 255, 255, 0.1) !default; /* #515151 */
 $mainLhlColor:      rgba(255, 255, 255, 0.7) !default;
 $fontColorDk:       #777 !default;
-$colorBlue:         #3b97e3 !default;
+$colorBlue:         #0092DB !default;
 $colorRed:          #dd3636 !default;
 $colorYell:         #ffca6f !default;
 $colorGreen:        #62c462 !default;
 $tagBg:             #804f7b !default;
 $secColor:          $tagBg !default;
 $imageCompDim:      50px !default;
-$leftWidth:         15% !default;
+$leftWidth:         256px !default;
 
 /* Color Helpers */
 $colorHighlight:    #71b7f1 !default;
@@ -70,9 +84,10 @@ $uploadPadding:     150px 10px !default;
 $animSpeed:         0.2s !default;
 
 /* Fonts */
-$mainFont:          Helvetica, sans-serif !default;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+$mainFont:          'Roboto', Helvetica, sans-serif !default;
 $fontPath:          '../fonts' !default;
 $fontName:          'main-fonts' !default;
-$fontSize:           0.7rem !default;
-$fontSizeS:          0.75rem !default;
+$fontSize:           14px !default;
+$fontSizeS:          14px !default;
 $fontV:              20 !default;//random(1000)

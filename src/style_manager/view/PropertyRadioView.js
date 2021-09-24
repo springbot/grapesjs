@@ -25,14 +25,17 @@ module.exports = require('./PropertyView').extend({
           let id = `${prop}-${el.value}`;
           let labelTxt = el.name || el.value;
           let titleAttr = el.title ? `title="${el.title}"` : '';
+          const icon = el.icon ? `<i class="${el.icon}"></i>` : '';
+          const label = `<label class="${cl ||
+            itemCls}" ${titleAttr} for="${id}">${
+            cl ? '' : icon || labelTxt
+          }</label>`;
           inputStr += `
             <div class="${ppfx}radio-item">
               <input type="radio" class="${pfx}radio" id="${id}" name="${prop}" value="${
             el.value
           }"/>
-              <label class="${cl || itemCls}" ${titleAttr} for="${id}">${
-            cl ? '' : labelTxt
-          }</label>
+            ${label}
             </div>
           `;
         });

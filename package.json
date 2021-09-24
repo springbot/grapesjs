@@ -11,7 +11,10 @@
     "url": "https://github.com/artf/grapesjs.git"
   },
   "dependencies": {
-    "backbone": "^1.3.3",
+    "@fortawesome/fontawesome-pro": "^5.15.4",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/pro-regular-svg-icons": "^5.15.4",
+    "backbone": "1.3.3",
     "backbone-undo": "^0.2.5",
     "cash-dom": "^1.3.7",
     "codemirror": "^5.42.0",
@@ -33,7 +36,7 @@
     "husky": "^1.2.0",
     "jest": "^23.6.0",
     "lint-staged": "^8.1.0",
-    "node-sass": "^4.10.0",
+    "node-sass": "^4.13.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.15.3",
     "sinon": "^7.1.1",

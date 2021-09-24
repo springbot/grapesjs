@@ -231,7 +231,6 @@ module.exports = {
           'flex-wrap',
           'justify-content',
           'align-items',
-          'align-content',
           'order',
           'flex-basis',
           'flex-grow',
@@ -240,15 +239,16 @@ module.exports = {
         ]
       },
       {
-        name: 'Dimension',
+        name: 'Size & positioning',
         open: false,
         buildProps: [
-          'width',
-          'height',
-          'max-width',
-          'min-height',
-          'margin',
-          'padding'
+          'size',
+          'container-padding',
+          'link-padding',
+          'section-padding',
+          'align-button',
+          'align-content',
+          'align-image'
         ]
       },
       {

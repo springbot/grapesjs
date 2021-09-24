@@ -90,10 +90,9 @@
 }
 
 .#{$app-prefix}field {
-  background-color: rgba(0, 0, 0, 0.2);
   border: none;
   box-shadow: none;
-  border-radius: 2px;
+  border-radius: 4px;
   box-sizing: border-box;
   padding: 0;
   position: relative;
@@ -203,11 +202,15 @@
     border-style: solid;
   }
 }
-
+.#{$app-prefix}radio-items {
+  border-radius: 4px;
+  overflow: hidden;
+}
 .#{$app-prefix}radio-item {
   flex: 1 1 auto;
   text-align: center;
-  border-left: 1px solid $darkTextShadow;
+  background: $iconBg;
+  color: $iconGrayDk;
 
   &:first-child {
     border: none;
@@ -222,7 +225,8 @@
   }
 
   input:checked + .#{$app-prefix}radio-item-label {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: $white;
+    color: $textGray;
   }
 
   &s {
@@ -323,7 +327,7 @@
   &-prim {
     color: inherit;
     background-color: $mainLhColor;
-    border-radius: 2px;
+    border-radius: 4px;
     padding: 3px 6px;
     padding: $inputPadding;
     cursor: pointer;
@@ -356,7 +360,7 @@
   color: $fontColor;
   cursor: pointer;
   font-size: 1em;
-  border-radius: 2px;
+  border-radius: 4px;
 
   @include opacity(0.75);
 
@@ -367,4 +371,9 @@
   &:active {
     background-color: rgba(0, 0, 0, 0.2);
   }
+}
+
+.#{$sm-prefix}unitvalue {
+  background-color: $inputBg;
+  border-radius: 4px;
 }

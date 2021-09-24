@@ -18,9 +18,33 @@ module.exports = () => ({
       obj.property = prop;
 
       // Property
+      // Styling is based on obj.property, so need to change the custom name back to actual prop being styled
       switch (prop) {
         case 'border-radius-c':
           obj.property = 'border-radius';
+          break;
+        case 'align-content':
+        case 'align-button':
+        case 'align-image':
+          obj.property = 'text-align';
+          break;
+        case 'container-padding':
+        case 'section-padding':
+        case 'link-padding':
+          obj.property = 'padding';
+          break;
+      }
+
+      // Name
+      switch (prop) {
+        case 'align-content':
+        case 'align-button':
+        case 'align-image':
+        case 'container-padding':
+        case 'section-padding':
+        case 'link-padding':
+          let name = prop.split('-').join(' ');
+          obj.name = name.charAt(0).toUpperCase() + name.slice(1);
           break;
       }
 
@@ -69,6 +93,9 @@ module.exports = () => ({
       switch (prop) {
         case 'float':
         case 'position':
+        case 'align-button':
+        case 'align-content':
+        case 'align-image':
         case 'text-align':
           obj.type = 'radio';
           break;
@@ -77,7 +104,6 @@ module.exports = () => ({
         case 'flex-wrap':
         case 'justify-content':
         case 'align-items':
-        case 'align-content':
         case 'align-self':
         case 'font-family':
         case 'font-weight':
@@ -141,12 +167,17 @@ module.exports = () => ({
         case 'flex-grow':
         case 'flex-shrink':
         case 'flex-basis':
-          obj.type = 'integer';
+          obj.type = 'unitvalue';
           break;
         case 'margin':
+        case 'container-padding':
+        case 'section-padding':
+        case 'link-padding':
         case 'padding':
         case 'border-radius':
         case 'border':
+        case 'size':
+        case 'button-size':
         case 'transform':
           obj.type = 'composite';
           break;
@@ -189,9 +220,6 @@ module.exports = () => ({
           obj.defaults = 'flex-start';
           break;
         case 'align-items':
-          obj.defaults = 'stretch';
-          break;
-        case 'align-content':
           obj.defaults = 'stretch';
           break;
         case 'align-self':
@@ -273,6 +301,9 @@ module.exports = () => ({
         case 'box-shadow-color':
           obj.defaults = 'black';
           break;
+        case 'align-button':
+        case 'align-content':
+        case 'align-image':
         case 'text-align':
           obj.defaults = 'left';
           break;
@@ -319,7 +350,6 @@ module.exports = () => ({
         case 'flex-wrap':
         case 'justify-content':
         case 'align-items':
-        case 'align-content':
           obj.requires = { display: ['flex'] };
           break;
         case 'order':
@@ -333,56 +363,6 @@ module.exports = () => ({
 
       // Units
       switch (prop) {
-        case 'top':
-        case 'bottom':
-        case 'margin-top':
-        case 'margin-bottom':
-        case 'padding-top':
-        case 'padding-bottom':
-        case 'min-height':
-        case 'max-height':
-        case 'height':
-          obj.units = ['px', '%', 'vh'];
-          break;
-        case 'right':
-        case 'left':
-        case 'margin-right':
-        case 'margin-left':
-        case 'padding-right':
-        case 'padding-left':
-        case 'min-width':
-        case 'max-width':
-        case 'width':
-          obj.units = ['px', '%', 'vw'];
-          break;
-        case 'flex-basis':
-          obj.units = ['px', '%', 'vw', 'vh'];
-          break;
-        case 'text-shadow-v':
-        case 'text-shadow-h':
-        case 'text-shadow-blur':
-        case 'border-radius-c':
-        case 'border-top-left-radius':
-        case 'border-top-right-radius':
-        case 'border-bottom-left-radius':
-        case 'border-bottom-right-radius':
-        case 'box-shadow-h':
-        case 'box-shadow-v':
-          obj.units = ['px', '%'];
-          break;
-        case 'font-size':
-        case 'letter-spacing':
-        case 'line-height':
-          obj.units = ['px', 'em', 'rem', '%'];
-          break;
-        case 'border-width':
-          obj.units = ['px', 'em'];
-          break;
-        case 'box-shadow-blur':
-        case 'box-shadow-spread':
-        case 'perspective':
-          obj.units = ['px'];
-          break;
         case 'transition-duration':
           obj.units = ['s'];
           break;
@@ -462,6 +442,32 @@ module.exports = () => ({
           break;
       }
 
+      // Icons
+      switch (prop) {
+        case 'padding-left':
+          obj.icon = 'far fa-arrow-to-left';
+          break;
+        case 'padding-right':
+          obj.icon = 'far fa-arrow-to-right';
+          break;
+        case 'padding-top':
+          obj.icon = 'far fa-arrow-to-top';
+          break;
+        case 'padding-bottom':
+          obj.icon = 'far fa-arrow-to-bottom';
+          break;
+      }
+
+      // TextLabels
+      switch (prop) {
+        case 'width':
+          obj.textLabel = 'W';
+          break;
+        case 'height':
+          obj.textLabel = 'H';
+          break;
+      }
+
       // Options
       switch (prop) {
         case 'float':
@@ -507,16 +513,6 @@ module.exports = () => ({
             { value: 'flex-end' },
             { value: 'center' },
             { value: 'baseline' },
-            { value: 'stretch' }
-          ];
-          break;
-        case 'align-content':
-          obj.list = [
-            { value: 'flex-start' },
-            { value: 'flex-end' },
-            { value: 'center' },
-            { value: 'space-between' },
-            { value: 'space-around' },
             { value: 'stretch' }
           ];
           break;
@@ -576,12 +572,21 @@ module.exports = () => ({
             { value: '900', name: 'Ultra-Bold' }
           ];
           break;
+        case 'align-button':
+        case 'align-content':
         case 'text-align':
           obj.list = [
-            { value: 'left' },
-            { value: 'center' },
-            { value: 'right' },
-            { value: 'justify' }
+            { value: 'left', icon: 'far fa-align-left' },
+            { value: 'center', icon: 'far fa-align-center' },
+            { value: 'right', icon: 'far fa-align-right' }
+          ];
+          break;
+        case 'align-image':
+          obj.list = [
+            { value: 'left', icon: 'far fa-align-left' },
+            { value: 'center', icon: 'far fa-align-center' },
+            { value: 'right', icon: 'far fa-align-right' },
+            { value: 'justify', icon: 'far fa-align-justify' }
           ];
           break;
         case 'border-style':
@@ -693,6 +698,9 @@ module.exports = () => ({
             'margin-left'
           ]);
           break;
+        case 'container-padding':
+        case 'section-padding':
+        case 'link-padding':
         case 'padding':
           obj.properties = this.build([
             'padding-top',
@@ -742,6 +750,10 @@ module.exports = () => ({
             'background-attachment',
             'background-size'
           ]);
+          break;
+        case 'button-size':
+        case 'size':
+          obj.properties = this.build(['width', 'height']);
           break;
         case 'transition':
           obj.properties = this.build([
