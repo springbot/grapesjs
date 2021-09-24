@@ -34,6 +34,7 @@ export default TraitView.extend({
     if (!result && !isUndefined(valueFalse)) {
       result = valueFalse;
     }
+
     return result;
   },
 
