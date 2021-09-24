@@ -10,7 +10,9 @@ module.exports = TraitView.extend({
     this.tmpl = `<div class="${fieldClass}">
       <div class="${inputhClass}"></div>
       <div class="${ppfx}sel-arrow">
-        <div class="${ppfx}d-s-arrow"></div>
+        <div class="${ppfx}d-s-arrow">
+          <i class="fas fa-caret-down"></i>
+        </div>
       </div>
     </div>`;
   },

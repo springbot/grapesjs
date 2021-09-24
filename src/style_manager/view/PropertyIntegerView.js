@@ -6,7 +6,21 @@ let timeout;
 
 module.exports = PropertyView.extend({
   templateInput() {
-    return '';
+    const pfx = this.pfx;
+    const ppfx = this.ppfx;
+    const icon = this.model.get('icon');
+    const textLabel = this.model.get('textLabel');
+    const iconEl = icon
+      ? `<i class="${icon}"></i>`
+      : textLabel
+      ? `<div>${textLabel}</div>`
+      : '';
+
+    return `<div class="${ppfx}field ${ppfx}field-integer">
+      <div class="${pfx}icon">
+        ${iconEl}
+      </div>
+    </div>`;
   },
 
   init() {
@@ -29,8 +43,8 @@ module.exports = PropertyView.extend({
       const input = this.model.input;
       input.ppfx = ppfx;
       input.render();
-      const fields = this.el.querySelector(`.${ppfx}fields`);
-      fields.appendChild(input.el);
+      const fields = this.el.querySelector(`.${ppfx}field`);
+      fields.appendChild(input.el.children[0]);
       this.$input = input.inputEl;
       this.unit = input.unitEl;
       this.$unit = $(this.unit);

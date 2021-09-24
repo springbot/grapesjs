@@ -30,12 +30,14 @@ module.exports = TraitView.extend({
       const { model, ppfx } = this;
       const value = this.getModelValue();
       const label = model.get('labelButton') || '';
+      const buttonIcon = model.get('buttonIcon') || '';
       const full = model.get('full');
       const className = `${ppfx}btn`;
       const input = `<button type="button" class="${className}-prim${
         full ? ` ${className}--full` : ''
-      }">
-        ${label}</button>`;
+      }">${
+        buttonIcon ? `<i class="${buttonIcon}"></i>` : ''
+      } ${label}</button>`;
       this.input = input;
     }
 

@@ -54,15 +54,16 @@
     select,
     textarea {
       @include appearance(none);
-
+      font-family: inherit;
       color: inherit;
       border: none;
-      background-color: transparent;
+      background-color: $inputBg;
       box-sizing: border-box;
       width: 100%;
       position: relative;
       padding: $inputPadding;
       z-index: 1;
+      border-radius: 4px;
 
       &:focus {
         outline: none;
@@ -93,10 +94,8 @@
 .#{$app-prefix}field {
   border: none;
   box-shadow: none;
-  border-radius: 4px;
   box-sizing: border-box;
   padding: 0;
-  height: 100%;
   position: relative;
 
   textarea {
@@ -109,7 +108,7 @@
     position: absolute;
     right: 0;
     top: 0;
-    z-index: 0;
+    z-index: 1;
     display: flex;
   }
 
@@ -136,7 +135,7 @@
   }
 
   &-color,
-  &-radio {
+&-radio {
     width: 100%;
   }
 }
@@ -149,7 +148,7 @@
 }
 
 .#{$app-prefix}field-colorp {
-  border: 1px solid $iconGrayDk;
+  border: 1px solid $iconGrayLt;
   border-radius: 2px;
   box-sizing: border-box;
   height: 14px;
@@ -187,18 +186,23 @@
 
 /* ??? */
 .#{$app-prefix}field-checkbox {
+  box-sizing: border-box;
+  border: 2px solid white;
+  border-radius: 4px;
+  background-color: $iconBg;
+  box-shadow:0 0 4px 0 rgba(0, 0, 0, 0.09);
   padding: 0;
-  width: auto !important;
-  height: 17px;
+  width: 24px;
+  height: 24px;
+  display: block;
+  cursor: pointer;
 
   input {
     display: none;
   }
 
   input:checked + .#{$app-prefix}chk-icon {
-    border-color: rgba(255, 255, 255, 0.5);
-    border-width: 0 2px 2px 0;
-    border-style: solid;
+    display:block;
   }
 }
 .#{$app-prefix}radio-items {
@@ -332,15 +336,29 @@
   }
 }
 
+.#{$app-prefix}input-holder, ##{$sm-prefix}input-holder {
+  input, select {
+    height: 32px;
+    background-color: $inputBg;
+    border-radius: 4px;
+  }
+}
+
 .#{$app-prefix}btn {
   &-prim {
-    color: inherit;
-    background-color: $mainLhColor;
+    font-family: inherit;
+    color: $iconGrayDk;
+    background-color: $buttonBg;
     border-radius: 4px;
-    padding: 3px 6px;
-    padding: $inputPadding;
+    padding: $inputPadding 0;
     cursor: pointer;
-    border: none;
+    border: 2px solid white;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+    font-weight: 400;
+    height: 32px;
+    width: 74px;
+    line-height: 12px;
+    flex: 0 1 74px;
 
     &:active {
       background-color: $mainLhColor;
@@ -353,14 +371,11 @@
 }
 
 .#{$app-prefix}chk-icon {
-  @include transform(rotate(45deg));
-
   box-sizing: border-box;
-  display: block;
-  height: 14px;
-  margin: 0 5px;
-  width: 6px;
-  cursor: pointer;
+  display: none;
+  text-align: center;
+  line-height: 20px;
+  color:$iconGrayDk;
 }
 
 .#{$app-prefix}add-trasp {
@@ -380,9 +395,4 @@
   &:active {
     background-color: rgba(0, 0, 0, 0.2);
   }
-}
-
-.#{$sm-prefix}unitvalue {
-  background-color: $inputBg;
-  border-radius: 4px;
 }

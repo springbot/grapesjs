@@ -262,13 +262,6 @@
     width: 50%;
     padding: 0;
     flex: 1 0 auto;
-
-    &:not(.#{$sm-prefix}composite)>.#{$app-prefix}fields {
-      height: 32px;
-      background-color: $inputBg;
-      border-radius: 4px;
-      
-    }
     
     &.#{$sm-prefix}composite {
       .#{$sm-prefix}property {
@@ -287,21 +280,21 @@
     }
 
     .#{$sm-prefix}btn {
-      background-color: lighten($mainDkColor, 13%);
+      font-family: inherit;
+      font-weight: 400;
+      height: 32px;
+      background-color: $buttonBg;
       border-radius: 4px;
-      box-shadow: 1px 1px 0 lighten($mainDkColor, 2%), 1px 1px 0 lighten($mainDkColor, 17%) inset;
+      box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
       padding: 5px;
       position: relative;
       text-align: center;
-      height: auto;
       width: 100%;
       cursor: pointer;
-      color: $fontColor;
+      color: $iconGrayDk;
       box-sizing: border-box;
-      text-shadow: -1px -1px 0 $mainDkColor;
-      border: none;
-
-      @include opacity(0.85);
+      border: 2px solid white;
+      flex: 0 1 74px;
     }
 
     .#{$sm-prefix}btn-c {
@@ -491,8 +484,9 @@
 }
 
 .#{$app-prefix}select>##{$sm-prefix}input-holder:nth-child(2)>select,
-.#{$app-prefix}input>.#{$app-prefix}input-holder:nth-child(2)>input {
-  padding-left: 32px;
+.#{$app-prefix}field-integer>.#{$app-prefix}input-holder:nth-child(2)>input {
+  padding-left: 40px;
+  padding-right: 8px;
 }
 
 .#{$app-prefix}select>##{$sm-prefix}input-holder:nth-last-child(2)>select {
@@ -504,11 +498,12 @@
 }
 
 .#{$app-prefix}fields{
-  .#{$sm-prefix}icon {
+  .#{$sm-prefix}icon, .#{$app-prefix}chk-icon {
     position: absolute;
+    z-index: 2;
     width: 32px;
     height: 32px;
-    color: $iconGrayDk;
+    color: $iconGrayLt;
     font-weight: 400;
     text-align: center;
     &>*{

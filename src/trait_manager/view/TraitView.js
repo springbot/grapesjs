@@ -81,6 +81,11 @@ module.exports = Backbone.View.extend({
     );
   },
 
+  renderIcon() {
+    const icon = this.model.get('icon');
+    this.$el.html(`<div class="${ppfx}icon"><i class="${icon}"></i></div>`);
+  },
+
   /**
    * Returns label for the input
    * @return {string}
@@ -157,7 +162,8 @@ module.exports = Backbone.View.extend({
 
   render() {
     this.$input = null;
-    this.renderLabel();
+    this.model.get('label') && this.renderLabel();
+    this.model.get('icon') && this.renderIcon();
     this.renderField();
     this.el.className = this.className;
     return this;

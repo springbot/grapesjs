@@ -7,7 +7,9 @@ module.exports = TraitView.extend({
     const { ppfx, fieldClass, inputhClass } = this;
     this.tmpl = `<div class="${fieldClass}">
         <label class="${inputhClass}">
-          <i class="${ppfx}chk-icon"></i>
+          <div class="${ppfx}chk-icon">
+            <i class="far fa-check"></i>
+          </div>
         </label>
       </div>`;
   },
