@@ -15,8 +15,6 @@ import PropertySlider from './PropertySlider';
 import PropertySliderView from './../view/PropertySliderView';
 import PropertyInteger from './PropertyInteger';
 import PropertyIntegerView from './../view/PropertyIntegerView';
-import PropertyUnitValue from './PropertyUnitValue';
-import PropertyUnitValueView from '../view/PropertyUnitValueView';
 import PropertyView from './../view/PropertyView';
 
 export default Backbone.Collection.extend(TypeableCollection).extend({
@@ -99,16 +97,6 @@ export default Backbone.Collection.extend(TypeableCollection).extend({
       view: PropertyIntegerView,
       isType(value) {
         if (value && value.type == 'integer') {
-          return value;
-        }
-      }
-    },
-    {
-      id: 'unitvalue',
-      model: PropertyUnitValue,
-      view: PropertyUnitValueView,
-      isType(value) {
-        if (value && value.type == 'unitvalue') {
           return value;
         }
       }
