@@ -4,24 +4,22 @@ import PropertyView from './PropertyView';
 const $ = Backbone.$;
 
 export default PropertyView.extend({
-  templateLabel(model) {
-    return;
-  },
-
   templateInput() {
     const pfx = this.pfx;
     const ppfx = this.ppfx;
     const icon = this.model.get('icon');
-    if (icon) {
-      return `<div class="icon"><i class="${icon}"></i></div>`;
-    }
     const textLabel = this.model.get('textLabel');
-    if (textLabel) {
-      return `<div class="icon"><span>${textLabel}</span></div>`;
-    }
+    const iconEl = icon ? `<i class="${icon}"></i>` : `<div>${textLabel}</div>`;
+
+    return `<div class="${ppfx}field ${ppfx}input">
+      <div class="${pfx}icon">
+        ${iconEl}
+      </div>
+    </div>`;
   },
 
-  init() {
+  initialize(...args) {
+    PropertyView.prototype.initialize.apply(this, args);
     const model = this.model;
     this.listenTo(model, 'change:valid', this.validityChanged);
     this.listenTo(model, 'el:change', this.elementUpdated);
@@ -54,8 +52,8 @@ export default PropertyView.extend({
       const input = this.model.input;
       input.ppfx = ppfx;
       input.render();
-      const fields = this.el.querySelector(`.${ppfx}fields`);
-      fields.appendChild(input.el);
+      const fields = this.el.querySelector(`.${ppfx}field`);
+      fields.appendChild(input.el.children[0]);
       this.$input = input.inputEl;
       this.input = this.$input.get(0);
       this.inputInst = input;

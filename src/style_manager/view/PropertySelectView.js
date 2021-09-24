@@ -6,11 +6,22 @@ module.exports = PropertyView.extend({
   templateInput() {
     const pfx = this.pfx;
     const ppfx = this.ppfx;
+    const icon = this.model.get('icon');
+    const iconEl = !icon
+      ? ''
+      : `
+      <div class="${pfx}icon">
+        <i class="${icon}"></i>
+      </div>
+    `;
     return `
       <div class="${ppfx}field ${ppfx}select">
+        ${iconEl}
         <span id="${pfx}input-holder"></span>
         <div class="${ppfx}sel-arrow">
-          <div class="${ppfx}d-s-arrow"></div>
+          <div class="${ppfx}d-s-arrow">
+            <i class="fas fa-caret-down"></i>
+          </div>
         </div>
       </div>
     `;

@@ -211,34 +211,6 @@ module.exports = {
   styleManager: {
     sectors: [
       {
-        name: 'General',
-        open: false,
-        buildProps: [
-          'float',
-          'display',
-          'position',
-          'top',
-          'right',
-          'left',
-          'bottom'
-        ]
-      },
-      {
-        name: 'Flex',
-        open: false,
-        buildProps: [
-          'flex-direction',
-          'flex-wrap',
-          'justify-content',
-          'align-items',
-          'order',
-          'flex-basis',
-          'flex-grow',
-          'flex-shrink',
-          'align-self'
-        ]
-      },
-      {
         name: 'Size & positioning',
         open: false,
         buildProps: [
@@ -252,18 +224,9 @@ module.exports = {
         ]
       },
       {
-        name: 'Typography',
+        name: 'Text editor',
         open: false,
-        buildProps: [
-          'font-family',
-          'font-size',
-          'font-weight',
-          'letter-spacing',
-          'color',
-          'line-height',
-          'text-align',
-          'text-shadow'
-        ],
+        buildProps: ['font-styles', 'link-styles'],
         properties: [
           {
             property: 'text-align',
@@ -275,23 +238,6 @@ module.exports = {
             ]
           }
         ]
-      },
-      {
-        name: 'Decorations',
-        open: false,
-        buildProps: [
-          'border-radius-c',
-          'background-color',
-          'border-radius',
-          'border',
-          'box-shadow',
-          'background'
-        ]
-      },
-      {
-        name: 'Extra',
-        open: false,
-        buildProps: ['transition', 'perspective', 'transform']
       }
     ]
   },
