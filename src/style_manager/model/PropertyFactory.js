@@ -170,7 +170,7 @@ export default () => ({
         case 'flex-grow':
         case 'flex-shrink':
         case 'flex-basis':
-          obj.type = 'unitvalue';
+          obj.type = 'integer';
           break;
         case 'margin':
         case 'container-padding':
@@ -367,6 +367,44 @@ export default () => ({
 
       // Units
       switch (prop) {
+        case 'top':
+        case 'bottom':
+        case 'margin-top':
+        case 'margin-bottom':
+        case 'padding-top':
+        case 'padding-bottom':
+        case 'min-height':
+        case 'max-height':
+        case 'height':
+        case 'right':
+        case 'left':
+        case 'margin-right':
+        case 'margin-left':
+        case 'padding-right':
+        case 'padding-left':
+        case 'min-width':
+        case 'max-width':
+        case 'width':
+        case 'flex-basis':
+        case 'text-shadow-v':
+        case 'text-shadow-h':
+        case 'text-shadow-blur':
+        case 'border-radius-c':
+        case 'border-top-left-radius':
+        case 'border-top-right-radius':
+        case 'border-bottom-left-radius':
+        case 'border-bottom-right-radius':
+        case 'box-shadow-h':
+        case 'box-shadow-v':
+        case 'font-size':
+        case 'letter-spacing':
+        case 'line-height':
+        case 'border-width':
+        case 'box-shadow-blur':
+        case 'box-shadow-spread':
+        case 'perspective':
+          obj.units = ['px'];
+          break;
         case 'transition-duration':
           obj.units = ['s'];
           break;

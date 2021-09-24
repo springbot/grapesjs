@@ -23,6 +23,7 @@ $white:             #FFFFFF;
 $blockBg:           #FDFDFD;
 $inputBg:           #FCFCFC;
 $iconBg:            #FAFAFA;
+$buttonBg:          #F8F8F8;
 $panelBg:           #F2F2F2;
 $editorBg:          #E5E5E5;
 $buttonSeparator:   #DCE0E5;
@@ -85,12 +86,11 @@ $uploadPadding:     150px 10px !default;
 $animSpeed:         0.2s !default;
 
 /* Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 $mainFont:          'Roboto', Helvetica, sans-serif !default;
 $fontPath:          '../fonts' !default;
 $fontName:          'main-fonts' !default;
 $fontSize:           14px !default;
-$fontSizeS:          14px !default;
+$fontSizeS:          14px !important !default;
 $fontV:              20 !default;//random(1000)
 
 /* Tools */

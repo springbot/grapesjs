@@ -233,7 +233,7 @@ export default {
       {
         name: 'Text editor',
         open: false,
-        buildProps: ['font-styles', 'link-styles']
+        buildProps: ['font-styles', 'link-styles', 'background-image']
       }
     ]
   },

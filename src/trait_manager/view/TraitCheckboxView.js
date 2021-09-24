@@ -7,7 +7,10 @@ export default TraitView.extend({
   templateInput() {
     const { ppfx, clsField } = this;
     return `<label class="${clsField}" data-input>
-    <i class="${ppfx}chk-icon"></i>
+    <div class="${ppfx}chk-icon">
+      <i class="far fa-check"></i>
+    </div>
+    
   </label>`;
   },
 
@@ -31,7 +34,6 @@ export default TraitView.extend({
     if (!result && !isUndefined(valueFalse)) {
       result = valueFalse;
     }
-
     return result;
   },
 

@@ -100,6 +100,7 @@ export default () => {
         config: c
       });
       TraitsViewer.itemsView = types;
+      TraitsViewer.updatedCollection();
       return TraitsViewer.render().el;
     },
 

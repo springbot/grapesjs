@@ -20,6 +20,12 @@ export default Backbone.View.extend({
     return `<div class="${ppfx}label" title="${label}">${label}</div>`;
   },
 
+  templateIcon() {
+    const { ppfx } = this;
+    const icon = this.model.attributes.icon;
+    return `<div class="${ppfx}icon"><i class="${icon}"></i></div>`;
+  },
+
   templateInput() {
     const { clsField } = this;
     return `<div class="${clsField}" data-input></div>`;
@@ -129,6 +135,23 @@ export default Backbone.View.extend({
     }
 
     $el.find('[data-label]').append(tpl);
+  },
+
+  renderIcon() {
+    const { $el, target } = this;
+    const icon = this.model.attributes.icon;
+    let tpl = this.templateIcon(target);
+
+    if (this.createIcon) {
+      tpl =
+        this.createIcon({
+          icon,
+          component: target,
+          trait: this
+        }) || '';
+    }
+
+    $el.find('[data-icon]').append(tpl);
   },
 
   /**
@@ -259,13 +282,14 @@ export default Backbone.View.extend({
 
   render() {
     const { $el, pfx, ppfx, model } = this;
-    const { type, id } = model.attributes;
+    const { type, id, icon } = model.attributes;
     const hasLabel = this.hasLabel && this.hasLabel();
     const cls = `${pfx}trait`;
     this.$input = null;
     let tmpl = `<div class="${cls} ${cls}--${type}">
       ${hasLabel ? `<div class="${ppfx}label-wrp" data-label></div>` : ''}
       <div class="${ppfx}field-wrp ${ppfx}field-wrp--${type}" data-input>
+      ${icon ? `<div class="${ppfx}icon-wrp" data-icon></div>` : ''}
         ${
           this.templateInput
             ? isFunction(this.templateInput)
@@ -277,6 +301,7 @@ export default Backbone.View.extend({
     </div>`;
     $el.empty().append(tmpl);
     hasLabel && this.renderLabel();
+    icon && this.renderIcon();
     this.renderField();
     this.el.className = `${cls}__wrp ${cls}__wrp-${id}`;
     this.postUpdate();

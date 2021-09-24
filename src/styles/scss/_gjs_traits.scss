@@ -1,4 +1,5 @@
 .#{$app-prefix} {
+  font-family: inherit;
   &traits-label {
     border-bottom: 1px solid $mainDkColor;
     font-weight: lighter;
@@ -10,39 +11,70 @@
   &label {
 
     &-wrp {
-      width: 30%;
-      min-width: 30%;
+      width: 100%;
     }
   }
 
   &field {
 
     &-wrp {
-      flex-grow: 1;
+      flex: min-content;
+      margin: 8px 0;
+      box-sizing: border-box;
+      height: 32px;
     }
   }
 }
 
 .#{$trt-prefix}header {
-  font-weight: lighter;
   padding: 10px;
 }
 
 .#{$trt-prefix}trait {
   display: flex;
   justify-content: flex-start;
-  padding: 5px 10px;
-  font-weight: lighter;
+  flex-wrap: wrap;
+  padding: 5px 8px;
   align-items: center;
   text-align: left;
-
   &s {
     font-size: $fontSizeS;
   }
-
+  
   .#{$app-prefix}label {
     text-align: left;
     text-overflow: ellipsis;
     overflow: hidden;
+    font-weight: 500;
+  }
+  .#{$app-prefix}icon-wrp {
+    position: absolute;
+    z-index: 2;
+    .#{$app-prefix}icon {
+      height: 32px;
+      width: 32px;
+      color: $iconGrayDk;
+  
+      &>* {
+        padding: 9px;
+      }
+    }
+    &+.#{$app-prefix}field {
+      select, input {
+        padding-left: 40px;
+      }
+    }
+  }
+  &--checkbox {
+    .#{$app-prefix}field-wrp {
+      display: flex;
+      align-items: center;
+    }
+    .#{$app-prefix}icon-wrp {      
+      &+.#{$app-prefix}field {
+        margin-left: 40px;
+      }
+    }
   }
 }
+

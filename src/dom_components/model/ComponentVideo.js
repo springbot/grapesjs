@@ -189,6 +189,7 @@ export default Component.extend(
      * @private
      */
     getYoutubeTraits() {
+      console.log('AHHHHHHHH');
       return [
         this.getProviderTrait(),
         {

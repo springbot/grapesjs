@@ -5,7 +5,24 @@ export default Component.extend({
     ...Component.prototype.defaults,
     type: 'text',
     droppable: false,
-    editable: true
+    editable: true,
+    traits: [
+      {
+        type: 'select', // Type of the trait
+        label: 'Type', // The label you will see in Settings
+        name: 'type', // The name of the attribute/property to use on component
+        options: [
+          { id: 'text', name: 'Text' },
+          { id: 'email', name: 'Email' },
+          { id: 'password', name: 'Password' },
+          { id: 'number', name: 'Number' }
+        ]
+      },
+      {
+        type: 'checkbox',
+        name: 'required'
+      }
+    ]
   },
 
   toHTML() {

@@ -13,9 +13,11 @@ export default TraitView.extend({
     const { ppfx, clsField } = this;
     return `<div class="${clsField}">
       <div data-input></div>
-      <div class="${ppfx}sel-arrow">
-        <div class="${ppfx}d-s-arrow"></div>
-      </div>
+        <div class="${ppfx}sel-arrow">
+          <div class="${ppfx}d-s-arrow">
+            <i class="fas fa-caret-down"></i>
+          </div>
+        </div>
     </div>`;
   },
 

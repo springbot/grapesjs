@@ -15,7 +15,6 @@ export default DomainViews.extend({
     this.className = this.pfx + 'traits';
     const toListen = 'component:toggled';
     this.listenTo(this.em, toListen, this.updatedCollection);
-    this.updatedCollection();
   },
 
   /**
