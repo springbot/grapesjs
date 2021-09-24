@@ -521,3 +521,22 @@
     flex: 0 0 50%;
   }
 }
+
+##{$sm-prefix}border-top-left-radius, ##{$sm-prefix}border-bottom-right-radius {
+  .#{$sm-prefix}icon {
+    transform: rotate(-45deg);
+  }
+}
+
+##{$sm-prefix}border-bottom-left-radius, ##{$sm-prefix}border-top-right-radius {
+  .#{$sm-prefix}icon {
+    transform: rotate(45deg);
+  }
+}
+
+##{$sm-prefix}border-width {
+  .#{$sm-prefix}icon>* {
+    padding: 0px;
+    font-size: 12px;    
+  }
+}

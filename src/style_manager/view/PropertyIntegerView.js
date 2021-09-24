@@ -10,11 +10,20 @@ module.exports = PropertyView.extend({
     const ppfx = this.ppfx;
     const icon = this.model.get('icon');
     const textLabel = this.model.get('textLabel');
-    const iconEl = icon
-      ? `<i class="${icon}"></i>`
-      : textLabel
-      ? `<div>${textLabel}</div>`
-      : '';
+    let iconEl = '';
+    switch (icon) {
+      case undefined:
+        iconEl = `<div>${textLabel}</div>`;
+        break;
+      case 'border-width':
+        iconEl = `<i class="fal fa-horizontal-rule fa-fw"></i>
+                  <i class="far fa-horizontal-rule fa-fw"></i>
+                  <i class="fas fa-horizontal-rule fa-fw"></i>`;
+        break;
+      default:
+        iconEl = `<i class="${icon}"></i>`;
+        break;
+    }
 
     return `<div class="${ppfx}field ${ppfx}field-integer">
       <div class="${pfx}icon">
