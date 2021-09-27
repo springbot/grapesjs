@@ -83,7 +83,9 @@ module.exports = Backbone.View.extend({
 
   renderIcon() {
     const icon = this.model.get('icon');
-    this.$el.html(`<div class="${ppfx}icon"><i class="${icon}"></i></div>`);
+    this.$el.append(
+      `<div class="${this.ppfx}icon"><i class="${icon}"></i></div>`
+    );
   },
 
   /**
