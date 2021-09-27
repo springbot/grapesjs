@@ -7,79 +7,77 @@
     padding: 10px;
     text-align: left;
   }
-
-  &label {
-
-    &-wrp {
-      width: 100%;
-    }
-  }
-
-  &field {
-
-    &-wrp {
-      flex: min-content;
-      margin: 8px 0;
-      box-sizing: border-box;
-      height: 32px;
-    }
-  }
 }
 
 .#{$trt-prefix}header {
   padding: 10px;
 }
 
+.#{$trt-prefix}traits {
+  padding: 24px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
 .#{$trt-prefix}trait {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
-  padding: 5px 8px;
   align-items: center;
   text-align: left;
+  position: relative;
   &s {
     font-size: $fontSizeS;
   }
   
   .#{$app-prefix}label {
-    width: 30%;
+    width: 100%;
     text-align: left;
     text-overflow: ellipsis;
     overflow: hidden;
     font-weight: 500;
+    margin-bottom: 8px;
+    line-height: 16px;
   }
-  .#{$app-prefix}icon-wrp {
+
+  .#{$app-prefix}field {
+    flex: min-content;
+  }
+  .#{$app-prefix}icon {
     position: absolute;
     z-index: 2;
-    .#{$app-prefix}icon {
-      height: 32px;
-      width: 32px;
-      color: $iconGrayDk;
-  
-      &>* {
-        padding: 9px;
-      }
+    height: 32px;
+    width: 32px;
+    color: $iconGrayDk;
+    bottom: 0;
+
+    &>* {
+      padding: 9px;
     }
+
     &+.#{$app-prefix}field {
       select, input {
         padding-left: 40px;
       }
     }
-  }
-  &--checkbox {
-    .#{$app-prefix}field-wrp {
+
+    &+.#{$app-prefix}field-checkbox {
+      margin-left: 40px;
       display: flex;
       align-items: center;
     }
-    .#{$app-prefix}icon-wrp {      
-      &+.#{$app-prefix}field {
-        margin-left: 40px;
-      }
-    }
   }
 
-  .#{$app-prefix}field {
-    width: 70%;
+  .#{$app-prefix}field-checkbox {
+    margin: 4px 0px;
+    flex: unset;
+    .#{$app-prefix}input-holder {
+      display: block;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 

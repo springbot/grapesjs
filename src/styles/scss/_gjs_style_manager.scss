@@ -506,6 +506,7 @@
     color: $iconGrayLt;
     font-weight: 400;
     text-align: center;
+    pointer-events: none;
     &>*{
       padding: 9px 0;
     }

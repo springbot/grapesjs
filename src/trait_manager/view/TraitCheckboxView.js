@@ -19,6 +19,7 @@ module.exports = TraitView.extend({
    * @private
    */
   onChange() {
+    console.log('AHHH');
     const value = this.getInputEl().checked;
     this.model.set('value', this.getCheckedValue(value));
   },
