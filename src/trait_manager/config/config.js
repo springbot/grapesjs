@@ -20,5 +20,5 @@ module.exports = {
   ],
 
   // Text to show in case no element selected
-  textNoElement: 'Select an element before using Trait Manager'
+  textNoElement: ''
 };
