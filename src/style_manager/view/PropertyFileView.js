@@ -7,20 +7,35 @@ module.exports = PropertyView.extend({
   templateInput() {
     const pfx = this.pfx;
     const ppfx = this.ppfx;
-    const assetsLabel = this.config.assetsLabel || 'Images';
+    const assetsLabel = this.config.assetsLabel || 'Add Image';
     return `
     <div class="${pfx}field ${pfx}file">
+      <div id="${pfx}preview-box">
+        <div id="${pfx}preview-file"></div>
+        <div id="${pfx}close">&Cross;</div>
+      </div>
       <div id='${pfx}input-holder'>
         <div class="${pfx}btn-c">
           <button class="${pfx}btn" id="${pfx}images" type="button">
             ${assetsLabel}
           </button>
         </div>
-        <div style="clear:both;"></div>
-      </div>
-      <div id="${pfx}preview-box">
-        <div id="${pfx}preview-file"></div>
-        <div id="${pfx}close">&Cross;</div>
+        <div class="${pfx}btn-c">
+          <button class="${pfx}btn" id="${pfx}edit" type="button">
+            <i class="far fa-edit"></i> Edit
+          </button>
+        </div>
+        <div class="${pfx}btn-c">
+          <button class="${pfx}btn" id="${pfx}images" type="button">
+            Upload
+          </button>
+        </div>
+        <div class="${pfx}btn-c">
+          <button class="${pfx}btn" id="${pfx}close" type="button">
+            <i class="far fa-times-circle"></i> Delete
+          </button>
+        </div>
+        <div style="clear:both; position:absolute;"></div>
       </div>
     </div>
     `;
