@@ -17,26 +17,26 @@
 
   &commands {
     width: calc(100% - #{$leftWidth});
-    left: 0;
+    right: 0;
     top: 0;
     box-shadow: 0 0 5px $mainDkColor;
   }
 
   &options {
-    right: $leftWidth;
+    right: 0;
     top: 0;
   }
 
   &views {
     border-bottom: 2px solid $mainDkColor;
-    right: 0;
+    left: 0;
     width: $leftWidth;
     z-index: 4;
 
     &-container {
       height: 100%;
       padding: 42px 0 0;
-      right: 0;
+      left: 0;
       width: $leftWidth;
       overflow: auto;
       box-shadow: 0 0 5px $mainDkColor;
@@ -71,5 +71,8 @@
     svg {
       fill: currentColor;
     }
+  }
+  &devices-c {
+    left: $leftWidth;
   }
 }
