@@ -20,6 +20,12 @@ module.exports = () => ({
       // Property
       // Styling is based on obj.property, so need to change the custom name back to actual prop being styled
       switch (prop) {
+        case 'button-corner-radius':
+        case 'image-corner-radius':
+        case 'container-corner-radius':
+        case 'section-corner-radius':
+        case 'icon-corner-radius':
+        case 'column-corner-radius':
         case 'border-radius-c':
           obj.property = 'border-radius';
           break;
@@ -33,10 +39,43 @@ module.exports = () => ({
         case 'link-padding':
           obj.property = 'padding';
           break;
+        case 'button-color':
+        case 'container-background-color':
+        case 'column-color':
+          obj.property = 'background-color';
+          break;
+        case 'icon-color':
+          obj.property = 'color';
+          break;
+        case 'button-border':
+        case 'divider-style':
+        case 'image-border':
+        case 'container-border':
+        case 'section-border':
+        case 'column-border-style':
+          obj.property = 'border';
+          break;
       }
 
       // Name
       switch (prop) {
+        case 'button-color':
+        case 'button-corner-radius':
+        case 'button-border':
+        case 'divider-style':
+        case 'image-corner-radius':
+        case 'image-border':
+        case 'container-background':
+        case 'container-corner-radius':
+        case 'container-border':
+        case 'section-background':
+        case 'section-corner-radius':
+        case 'section-border':
+        case 'icon-color':
+        case 'icon-corner-radius':
+        case 'column-color':
+        case 'column-corner-radius':
+        case 'column-border-style':
         case 'align-content':
         case 'align-button':
         case 'align-image':
@@ -45,6 +84,9 @@ module.exports = () => ({
         case 'link-padding':
           let name = prop.split('-').join(' ');
           obj.name = name.charAt(0).toUpperCase() + name.slice(1);
+          break;
+        case 'container-background-color':
+          obj.name = 'Container color';
           break;
       }
 
@@ -176,12 +218,26 @@ module.exports = () => ({
         case 'link-padding':
         case 'padding':
         case 'border-radius':
+        case 'button-corner-radius':
+        case 'image-corner-radius':
+        case 'container-corner-radius':
+        case 'section-corner-radius':
+        case 'column-corner-radius':
+        case 'icon-corner-radius':
+        case 'button-border':
+        case 'image-border':
+        case 'divider-style':
+        case 'container-border':
+        case 'column-border-style':
+        case 'section-border':
         case 'border':
         case 'size':
         case 'button-size':
         case 'transform':
         case 'font-styles':
         case 'link-styles':
+        case 'container-background':
+        case 'section-background':
           obj.type = 'composite';
           break;
         case 'color':
@@ -189,6 +245,10 @@ module.exports = () => ({
         case 'background-color':
         case 'border-color':
         case 'box-shadow-color':
+        case 'button-color':
+        case 'container-background-color':
+        case 'icon-color':
+        case 'column-color':
           obj.type = 'color';
           break;
         case 'text-shadow':
@@ -204,6 +264,11 @@ module.exports = () => ({
 
       // Defaults
       switch (prop) {
+        case 'button-color':
+        case 'container-background-color':
+        case 'column-color':
+          obj.defaults = '#00000000';
+          break;
         case 'float':
         case 'background-color':
         case 'background-image':
@@ -302,6 +367,7 @@ module.exports = () => ({
         case 'text-shadow-color':
         case 'border-color':
         case 'box-shadow-color':
+        case 'icon-color':
           obj.defaults = 'black';
           break;
         case 'align-button':
@@ -311,7 +377,7 @@ module.exports = () => ({
           obj.defaults = 'left';
           break;
         case 'border-style':
-          obj.defaults = 'solid';
+          obj.defaults = 'none';
           break;
         case 'box-shadow-type':
           obj.defaults = '';
@@ -456,6 +522,8 @@ module.exports = () => ({
         case 'font-styles':
         case 'link-styles':
         case 'background':
+        case 'container-background':
+        case 'section-background':
           obj.detached = true;
           break;
       }
@@ -507,6 +575,20 @@ module.exports = () => ({
           break;
         case 'line-height':
           obj.icon = 'far fa-line-height';
+          break;
+        case 'border-style':
+          obj.icon = 'far fa-border-style';
+          break;
+        case 'border-top-left-radius':
+        case 'border-top-right-radius':
+          obj.icon = 'far fa-chevron-up';
+          break;
+        case 'border-bottom-left-radius':
+        case 'border-bottom-right-radius':
+          obj.icon = 'far fa-chevron-down';
+          break;
+        case 'border-width':
+          obj.icon = 'border-width';
           break;
       }
 
@@ -775,6 +857,12 @@ module.exports = () => ({
             'text-shadow-color'
           ]);
           break;
+        case 'button-border':
+        case 'image-border':
+        case 'container-border':
+        case 'section-border':
+        case 'divider-style':
+        case 'column-border-style':
         case 'border':
           obj.properties = this.build([
             'border-width',
@@ -782,6 +870,12 @@ module.exports = () => ({
             'border-color'
           ]);
           break;
+        case 'button-corner-radius':
+        case 'image-corner-radius':
+        case 'container-corner-radius':
+        case 'section-corner-radius':
+        case 'icon-corner-radius':
+        case 'column-corner-radius':
         case 'border-radius':
           obj.properties = this.build([
             'border-top-left-radius',
@@ -808,6 +902,10 @@ module.exports = () => ({
             'background-attachment',
             'background-size'
           ]);
+          break;
+        case 'container-background':
+        case 'section-background':
+          obj.properties = this.build(['background-color', 'background-image']);
           break;
         case 'button-size':
         case 'size':

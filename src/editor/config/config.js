@@ -227,6 +227,30 @@ module.exports = {
         name: 'Text editor',
         open: false,
         buildProps: ['font-styles', 'link-styles', 'background-image']
+      },
+      {
+        name: 'Borders & backgrounds',
+        open: false,
+        buildProps: [
+          'button-color',
+          'button-corner-radius',
+          'button-border',
+          'divider-style',
+          'image-corner-radius',
+          'image-border',
+          'container-background',
+          'container-background-color',
+          'container-corner-radius',
+          'container-border',
+          'section-background',
+          'section-corner-radius',
+          'section-border',
+          'icon-color',
+          'icon-corner-radius',
+          'column-color',
+          'column-corner-radius',
+          'column-border-style'
+        ]
       }
     ]
   },
