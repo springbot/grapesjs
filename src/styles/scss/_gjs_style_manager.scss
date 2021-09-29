@@ -306,25 +306,50 @@
     &.#{$sm-prefix}file ##{$sm-prefix}preview-box {
       background-color: $lightBorder;
       border-radius: 4px;
-      margin-top: 5px;
       position: relative;
       overflow: hidden;
-
+      &+##{$sm-prefix}input-holder {
+        display: block;
+        &>.#{$sm-prefix}btn-c {
+          display: none;
+          &:first-child {
+            display: block;
+          }
+        }
+      }
+      
       &.#{$sm-prefix}show {
-        border: 1px solid darken($lightBorder, 1%);
-        padding: 3px 20px;
+        height: 116px;
+        background-color: $buttonBg;
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+        margin-bottom: 8px;
+        border: 2px solid white;
+        padding: 6px;
+        &+##{$sm-prefix}input-holder {
+          display: flex;
+          gap: 9px;
+          &>.#{$sm-prefix}btn-c {
+            display: block;
+            &:first-child {
+              display: none;
+            }
+          }
+        }
       }
 
       ##{$sm-prefix}close {
         @extend .#{$sm-prefix}close-btn;
 
         top: -5px;
-        display: block;
+        display: none;
       }
     }
 
     &.#{$sm-prefix}file .#{$sm-prefix}show ##{$sm-prefix}preview-file {
-      height: 50px;
+      height: 100%;
+      width: 100%;
+      background-size: contain;
     }
 
     &.#{$sm-prefix}file ##{$sm-prefix}preview-file {
