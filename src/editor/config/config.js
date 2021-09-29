@@ -232,24 +232,24 @@ module.exports = {
         name: 'Borders & backgrounds',
         open: false,
         buildProps: [
-          'button-color', // background color
+          'button-color',
           'button-corner-radius',
-          'button-border', //border thickness, style, color
-          'divider-style', //border thickness, style, color
+          'button-border',
+          'divider-style',
           'image-corner-radius',
           'image-border',
-          'container-background', //color and image
-          'container-background-color', // background color
+          'container-background',
+          'container-background-color',
           'container-corner-radius',
           'container-border',
-          'section-background', // background color and image
+          'section-background',
           'section-corner-radius',
-          'section-border', // thickness, style, color, side
-          'icon-color', // color color
+          'section-border',
+          'icon-color',
           'icon-corner-radius',
-          'column-color', // background color
+          'column-color',
           'column-corner-radius',
-          'column-border-style' //border thickness, style, color
+          'column-border-style'
         ]
       }
     ]

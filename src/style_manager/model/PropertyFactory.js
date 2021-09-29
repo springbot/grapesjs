@@ -860,7 +860,7 @@ module.exports = () => ({
         case 'button-border':
         case 'image-border':
         case 'container-border':
-        case 'section-border': // actually also has border sides
+        case 'section-border':
         case 'divider-style':
         case 'column-border-style':
         case 'border':
