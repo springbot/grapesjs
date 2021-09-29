@@ -552,3 +552,16 @@
 ##{$sm-prefix}background-image{
   flex: auto;
 }
+
+##{$sm-prefix}border-color .#{$app-prefix}field-color-picker{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background-color: $inputBg;
+    border: 1px solid $iconGrayLt;
+  }
+}
