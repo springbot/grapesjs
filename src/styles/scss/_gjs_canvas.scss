@@ -116,7 +116,7 @@ $guide_pad: 5px;
   overflow: hidden;
   z-index: 1;
   position: absolute;
-  left: 0;
+  right: 0;
   top: 40px;
 
   &#{gjs-is(grab)},

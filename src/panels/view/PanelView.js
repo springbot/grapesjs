@@ -101,7 +101,7 @@ module.exports = Backbone.View.extend({
               ? parseFloat(styleHeight)
               : rect.height;
           return {
-            left: 0,
+            right: 0,
             top: 0,
             width,
             height
