@@ -535,8 +535,20 @@
 }
 
 ##{$sm-prefix}border-width {
-  .#{$sm-prefix}icon>* {
-    padding: 0px;
-    font-size: 12px;    
+  .#{$sm-prefix}icon{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    &>* {
+      padding: 0px;
+      font-size: 12px;
+      margin: -5px 0;
+    }
   }
+}
+
+##{$sm-prefix}background-image{
+  flex: auto;
 }

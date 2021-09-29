@@ -20,6 +20,12 @@ module.exports = () => ({
       // Property
       // Styling is based on obj.property, so need to change the custom name back to actual prop being styled
       switch (prop) {
+        case 'button-corner-radius':
+        case 'image-corner-radius':
+        case 'container-corner-radius':
+        case 'section-corner-radius':
+        case 'icon-corner-radius':
+        case 'column-corner-radius':
         case 'border-radius-c':
           obj.property = 'border-radius';
           break;
@@ -40,6 +46,14 @@ module.exports = () => ({
           break;
         case 'icon-color':
           obj.property = 'color';
+          break;
+        case 'button-border':
+        case 'divider-style':
+        case 'image-border':
+        case 'container-border':
+        case 'section-border':
+        case 'column-border-style':
+          obj.property = 'border';
           break;
       }
 
@@ -215,6 +229,7 @@ module.exports = () => ({
         case 'divider-style':
         case 'container-border':
         case 'column-border-style':
+        case 'section-border':
         case 'border':
         case 'size':
         case 'button-size':
@@ -249,12 +264,14 @@ module.exports = () => ({
 
       // Defaults
       switch (prop) {
-        case 'float':
-        case 'background-color':
-        case 'background-image':
         case 'button-color':
         case 'container-background-color':
         case 'column-color':
+          obj.defaults = '#00000000';
+          break;
+        case 'float':
+        case 'background-color':
+        case 'background-image':
         case 'text-shadow':
           obj.defaults = 'none';
           break;
@@ -360,7 +377,7 @@ module.exports = () => ({
           obj.defaults = 'left';
           break;
         case 'border-style':
-          obj.defaults = 'solid';
+          obj.defaults = 'none';
           break;
         case 'box-shadow-type':
           obj.defaults = '';
@@ -505,6 +522,8 @@ module.exports = () => ({
         case 'font-styles':
         case 'link-styles':
         case 'background':
+        case 'container-background':
+        case 'section-background':
           obj.detached = true;
           break;
       }
@@ -840,6 +859,8 @@ module.exports = () => ({
           break;
         case 'button-border':
         case 'image-border':
+        case 'container-border':
+        case 'section-border': // actually also has border sides
         case 'divider-style':
         case 'column-border-style':
         case 'border':
@@ -884,7 +905,7 @@ module.exports = () => ({
           break;
         case 'container-background':
         case 'section-background':
-          obj.properties = this.build(['background-image', 'background-color']);
+          obj.properties = this.build(['background-color', 'background-image']);
           break;
         case 'button-size':
         case 'size':
