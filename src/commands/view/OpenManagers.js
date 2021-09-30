@@ -69,10 +69,6 @@ module.exports = {
           .trigger('change:appendContent');
       }
 
-      // Class Manager container
-      var clm = em.SelectorManager;
-      if (clm) this.$smCn2.append(clm.render([]));
-
       this.$smCn2.append(em.StyleManager.render());
       var smConfig = em.StyleManager.getConfig();
       const pfx = smConfig.stylePrefix;
