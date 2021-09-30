@@ -4,7 +4,6 @@ const $ = Backbone.$;
 
 module.exports = {
   run(em, sender) {
-    console.log(sender);
     this.sender = sender;
     if (!this.$cn) {
       var config = em.getConfig(),
