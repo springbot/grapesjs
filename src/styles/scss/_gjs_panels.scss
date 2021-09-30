@@ -42,7 +42,11 @@
       left: 0;
       width: $leftWidth;
       overflow: auto;
+      overflow-x: hidden;
       box-shadow: 0 0 5px $mainDkColor;
+      &>div {
+        width: $leftWidth;
+      }
     }
 
     .#{$pn-prefix}buttons {

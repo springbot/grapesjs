@@ -212,6 +212,7 @@ module.exports = {
     sectors: [
       {
         name: 'Size & positioning',
+        icon: 'far fa-object-group',
         open: false,
         buildProps: [
           'size',
@@ -225,11 +226,13 @@ module.exports = {
       },
       {
         name: 'Text editor',
+        icon: 'far fa-edit',
         open: false,
         buildProps: ['font-styles', 'link-styles', 'background-image']
       },
       {
         name: 'Borders & backgrounds',
+        icon: 'far fa-border-inner',
         open: false,
         buildProps: [
           'button-color',

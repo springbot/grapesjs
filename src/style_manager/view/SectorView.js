@@ -5,8 +5,11 @@ var PropertiesView = require('./PropertiesView');
 module.exports = Backbone.View.extend({
   template: _.template(`
   <div class="<%= pfx %>title" data-sector-title>
-    <i id="<%= pfx %>caret" class="fa"></i>
+    <div class="<%= pfx %>icon">
+      <i class="<%= icon %>"></i>
+    </div>
     <%= label %>
+    <i id="<%= pfx %>caret" class="fas"></i>
   </div>`),
 
   events: {
@@ -18,7 +21,7 @@ module.exports = Backbone.View.extend({
     this.pfx = this.config.stylePrefix || '';
     this.target = o.target || {};
     this.propTarget = o.propTarget || {};
-    this.caretR = 'fa-caret-right';
+    this.caretU = 'fa-caret-up';
     this.caretD = 'fa-caret-down';
     const model = this.model;
     this.listenTo(model, 'change:open', this.updateOpen);
@@ -53,7 +56,7 @@ module.exports = Backbone.View.extend({
   show() {
     this.$el.addClass(this.pfx + 'open');
     this.getPropertiesEl().style.display = '';
-    this.$caret.removeClass(this.caretR).addClass(this.caretD);
+    this.$caret.removeClass(this.caretD).addClass(this.caretU);
   },
 
   /**
@@ -62,7 +65,7 @@ module.exports = Backbone.View.extend({
   hide() {
     this.$el.removeClass(this.pfx + 'open');
     this.getPropertiesEl().style.display = 'none';
-    this.$caret.removeClass(this.caretD).addClass(this.caretR);
+    this.$caret.removeClass(this.caretU).addClass(this.caretD);
   },
 
   getPropertiesEl() {
@@ -83,6 +86,7 @@ module.exports = Backbone.View.extend({
     this.$el.html(
       this.template({
         pfx,
+        icon: model.get('icon'),
         label: model.get('name')
       })
     );
