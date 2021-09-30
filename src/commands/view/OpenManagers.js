@@ -6,111 +6,129 @@ module.exports = {
   run(em, sender) {
     this.sender = sender;
     this.em = em;
-    if (!this.$tmCn || !this.smCn) {
-      this.prepareTm();
-      this.prepareSm();
+    if (!this.$traitsMainContainer || !this.stylesContainer) {
+      this.prepareTraitManager();
+      this.prepareStyleManager();
       this.listenTo(this.target, 'component:toggled', this.toggleManagers);
     }
     this.toggleManagers();
   },
-  prepareTm() {
+
+  prepareTraitManager() {
     const em = this.em;
     const config = em.Config;
     const pfx = config.stylePrefix;
-    const tm = em.TraitManager;
+    const traitManager = em.TraitManager;
     var panelC;
 
-    if (!this.$tmCn) {
-      var tmView = tm.getTraitsViewer();
-      var confTm = tm.getConfig();
-      this.$tmCn = $('<div></div>');
-      this.$tmCn2 = $('<div></div>');
-      this.$tmCn.append(this.$tmCn2);
-      this.$tmHeader = $('<div>').append(
-        `<div class="${confTm.stylePrefix}header">${confTm.textNoElement}</div>`
-      );
-      this.$tmCn.append(this.$tmHeader);
-      this.$tmCn2.append(
-        `<div class="${pfx}traits-label">${confTm.labelContainer}</div>`
-      );
-      this.$tmCn2.append(tmView.render().el);
-      var panels = em.Panels;
-
-      if (!panels.getPanel('views-container'))
-        panelC = panels.addPanel({ id: 'views-container' });
-      else panelC = panels.getPanel('views-container');
-
-      panelC
-        .set('appendContent', this.$tmCn.get(0))
-        .trigger('change:appendContent');
-
-      this.target = em.getModel();
-      this.listenTo(this.target, 'component:toggled', this.toggleTm);
+    if (this.$traitsMainContainer) {
+      return;
     }
+
+    var view = traitManager.getTraitsViewer();
+    var traitsConfig = traitManager.getConfig();
+
+    this.$traitsMainContainer = $('<div></div>');
+    this.$traitsContainer = $('<div></div>');
+
+    this.$traitsMainContainer.append(this.$traitsContainer);
+    this.$traitsHeader = $(
+      `<div class="${traitsConfig.stylePrefix}header">
+        ${traitsConfig.textNoElement}
+      </div>`
+    );
+
+    this.$traitsMainContainer.append(this.$traitsHeader);
+    this.$traitsContainer.append(
+      `<div class="${pfx}traits-label">
+        ${traitsConfig.labelContainer}
+      </div>`
+    );
+    this.$traitsContainer.append(view.render().el);
+    var panels = em.Panels;
+
+    if (!panels.getPanel('views-container')) {
+      panelC = panels.addPanel({ id: 'views-container' });
+    } else {
+      panelC = panels.getPanel('views-container');
+    }
+
+    panelC
+      .set('appendContent', this.$traitsMainContainer.get(0))
+      .trigger('change:appendContent');
   },
 
-  prepareSm() {
-    if (!this.$smCn) {
-      const em = this.em;
-      var config = em.getConfig(),
-        panels = em.Panels;
-      // Main container
-      this.$smCn = $('<div></div>');
-      // Secondary container
-      this.$smCn2 = $('<div></div>');
-      this.$smCn.append(this.$smCn2);
+  prepareStyleManager() {
+    if (this.$stylesMainContainer) {
+      return;
+    }
 
-      // Device Manager
-      var dvm = em.DeviceManager;
-      if (dvm && config.showDevices) {
-        var devicePanel = panels.addPanel({ id: 'devices-c' });
-        devicePanel
-          .set('appendContent', dvm.render())
-          .trigger('change:appendContent');
-      }
+    const em = this.em;
+    var config = em.getConfig(),
+      panels = em.Panels;
 
-      this.$smCn2.append(em.StyleManager.render());
-      var smConfig = em.StyleManager.getConfig();
-      const pfx = smConfig.stylePrefix;
-      // Create header
-      this.$smHeader = $(
-        `<div class="${pfx}header">${smConfig.textNoElement}</div>`
-      );
-      this.$smCn.append(this.$smHeader);
+    // Main container
+    this.$stylesMainContainer = $('<div></div>');
+    // Secondary container
+    this.$stylesContainer = $('<div></div>');
+    this.$stylesMainContainer.append(this.$stylesContainer);
 
-      // Create panel if not exists
-      if (!panels.getPanel('views-container'))
-        this.panel = panels.addPanel({ id: 'views-container' });
-      else this.panel = panels.getPanel('views-container');
-
-      // Add all containers to the panel
-      this.panel
-        .set('appendContent', this.$smCn)
+    // Device Manager
+    var dvm = em.DeviceManager;
+    if (dvm && config.showDevices) {
+      var devicePanel = panels.addPanel({ id: 'devices-c' });
+      devicePanel
+        .set('appendContent', dvm.render())
         .trigger('change:appendContent');
     }
+
+    this.$stylesContainer.append(em.StyleManager.render());
+
+    var stylesConfig = em.StyleManager.getConfig();
+    const pfx = stylesConfig.stylePrefix;
+
+    // Create header
+    this.$stylesHeader = $(
+      `<div class="${pfx}header">
+        ${stylesConfig.textNoElement}
+      </div>`
+    );
+    this.$stylesMainContainer.append(this.$stylesHeader);
+
+    // Create panel if not exists
+    if (!panels.getPanel('views-container'))
+      this.panel = panels.addPanel({ id: 'views-container' });
+    else this.panel = panels.getPanel('views-container');
+
+    // Add all containers to the panel
+    this.panel
+      .set('appendContent', this.$stylesMainContainer)
+      .trigger('change:appendContent');
   },
 
   toggleManagers() {
     const sender = this.sender;
-    if (sender && sender.get && !sender.get('active')) return;
+    if (sender && sender.get && !sender.get('active')) {
+      return;
+    }
 
     if (this.target.getSelectedAll().length === 1) {
-      this.$tmCn2.show();
-      this.$smCn2.show();
-      this.$tmHeader.hide();
-      this.$smHeader.hide();
+      this.$traitsContainer.show();
+      this.$stylesContainer.show();
+      this.$traitsHeader.hide();
+      this.$stylesHeader.hide();
     } else {
-      this.$tmCn2.hide();
-      this.$smCn2.hide();
-      this.$tmHeader.show();
-      this.$smHeader.show();
+      this.$traitsContainer.hide();
+      this.$stylesContainer.hide();
+      this.$traitsHeader.show();
+      this.$stylesHeader.show();
     }
   },
 
   stop() {
-    this.$tmCn2 && this.$tmCn2.hide();
-    this.$tmHeader && this.$tmHeader.hide();
-    this.$smCn2 && this.$smCn2.hide();
-    this.$smHeader && this.$smHeader.hide();
+    this.$traitsContainer && this.$traitsContainer.hide();
+    this.$traitsHeader && this.$traitsHeader.hide();
+    this.$stylesContainer && this.$stylesContainer.hide();
+    this.$stylesHeader && this.$stylesHeader.hide();
   }
 };
