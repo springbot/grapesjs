@@ -1,8 +1,6 @@
 var swv = 'sw-visibility';
 var expt = 'export-template';
-var osm = 'open-sm';
-var otm = 'open-tm';
-var ola = 'open-layers';
+var oms = 'open-managers';
 var obl = 'open-blocks';
 var ful = 'fullscreen';
 var prv = 'preview';
@@ -53,26 +51,12 @@ module.exports = {
       id: 'views',
       buttons: [
         {
-          id: osm,
+          id: oms,
           icon: 'fas fa-paint-brush',
-          command: osm,
+          command: oms,
           active: true,
           togglable: 0,
           attributes: { title: 'Open Style Manager' }
-        },
-        {
-          id: otm,
-          icon: 'fas fa-cog',
-          command: otm,
-          togglable: 0,
-          attributes: { title: 'Settings' }
-        },
-        {
-          id: ola,
-          icon: 'fas fa-bars',
-          command: ola,
-          togglable: 0,
-          attributes: { title: 'Open Layer Manager' }
         },
         {
           id: obl,
