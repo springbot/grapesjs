@@ -56,7 +56,7 @@ module.exports = Backbone.View.extend({
   show() {
     this.$el.addClass(this.pfx + 'open');
     this.getPropertiesEl().style.display = '';
-    this.$caret.removeClass(this.caretD).addClass(this.caretU);
+    this.$caret.removeClass(this.caretU).addClass(this.caretD);
   },
 
   /**
@@ -65,7 +65,7 @@ module.exports = Backbone.View.extend({
   hide() {
     this.$el.removeClass(this.pfx + 'open');
     this.getPropertiesEl().style.display = 'none';
-    this.$caret.removeClass(this.caretU).addClass(this.caretD);
+    this.$caret.removeClass(this.caretD).addClass(this.caretU);
   },
 
   getPropertiesEl() {
