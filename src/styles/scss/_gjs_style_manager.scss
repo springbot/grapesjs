@@ -49,14 +49,6 @@
   font-weight: 500;
   text-align: left;
 
-  ##{$sm-prefix}caret {
-    float: right;
-    padding-right: 16px;
-    font-size: 14px;
-    position: absolute;
-    right: 0;
-  }
-
   &.#{$sm-prefix}open {
     @extend .#{$app-prefix}category-open;
     .#{$sm-prefix}title{
@@ -75,17 +67,6 @@
 
   .#{$sm-prefix}title {
     @extend .#{$app-prefix}category-title;
-
-    .#{$sm-prefix}icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      width: 46px;
-      height: 46px;
-      margin: 1px 8px 1px 1px;
-      background-color: $iconBg;
-    }
   }
 
   /* ------------------Field-------------------- */

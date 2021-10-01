@@ -390,10 +390,8 @@ $colorsAll: (one, $primaryColor),
   display: flex;
   align-items: center;
   font-weight: 700;
-  background-color: $white;
-  padding: 16px 0;
+  background-color: white;
   height: 48px;
-  box-sizing: border-box;
   box-shadow: 0px 2px 15px rgba(71, 71, 121, 0.08);
   margin: 1px 0;
   text-align: left;
@@ -401,6 +399,22 @@ $colorsAll: (one, $primaryColor),
   cursor: pointer;
   svg {
     color: $iconGrayDk;
+  }
+  [class*="-icon"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 46px;
+    height: 46px;
+    margin: 1px 8px 1px 1px;
+    background-color: $iconBg;
+  }
+  [id*="-caret"] {
+    float: right;
+    padding-right: 16px;
+    font-size: 14px;
+    position: absolute;
+    right: 0;
   }
 }
 

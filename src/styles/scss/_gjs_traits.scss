@@ -1,11 +1,7 @@
 .#{$app-prefix} {
   font-family: inherit;
   &traits-label {
-    border-bottom: 1px solid $mainDkColor;
-    font-weight: lighter;
-    margin-bottom: 5px;
-    padding: 10px;
-    text-align: left;
+    @extend .#{$app-prefix}category-title
   }
 }
 

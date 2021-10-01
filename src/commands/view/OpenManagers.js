@@ -40,11 +40,16 @@ module.exports = {
     );
 
     this.$traitsMainContainer.append(this.$traitsHeader);
-    this.$traitsContainer.append(
+    this.$traitsTitle = $(
       `<div class="${pfx}traits-label">
-        ${traitsConfig.labelContainer}
-      </div>`
+      <div class="${pfx}icon">
+        <i class="far fa-sliders-h"></i>
+      </div>
+      ${traitsConfig.labelContainer}
+      <i id="${pfx}caret" class="fas fa-caret-up"></i>
+    </div>`
     );
+    this.$traitsContainer.append(this.$traitsTitle);
     this.$traitsContainer.append(view.render().el);
     var panels = em.Panels;
 
@@ -105,6 +110,10 @@ module.exports = {
     this.panel
       .set('appendContent', this.$stylesMainContainer)
       .trigger('change:appendContent');
+  },
+
+  toggleTraitManager() {
+    this.$traitsContainer.hide();
   },
 
   toggleManagers() {
