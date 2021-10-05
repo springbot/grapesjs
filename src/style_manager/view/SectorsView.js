@@ -26,6 +26,7 @@ module.exports = Backbone.View.extend({
       'component:toggled component:update:classes component:update:state change:device';
     this.listenTo(coll, 'add', this.addTo);
     this.listenTo(coll, 'reset', this.render);
+    this.listenTo(coll, 'change:open', this.autoClose);
     this.listenTo(this.target, events, this.targetUpdated);
   },
 
@@ -155,6 +156,24 @@ module.exports = Backbone.View.extend({
     }
 
     return rendered;
+  },
+
+  initListeners() {
+    this.listenTo(
+      this.target.get('TraitManager').getManagerLabel(),
+      'change:open',
+      this.autoClose
+    );
+  },
+
+  autoClose(model) {
+    if (model && model.attributes.open) {
+      this.collection.forEach(sector => {
+        if (sector && sector !== model && sector.attributes.open) {
+          sector.set('open', 0);
+        }
+      });
+    }
   },
 
   render() {

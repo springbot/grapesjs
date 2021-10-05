@@ -49,11 +49,6 @@
   font-weight: 500;
   text-align: left;
 
-  ##{$sm-prefix}caret {
-    padding-right: 5px;
-    font-size: 11px;
-  }
-
   &.#{$sm-prefix}open {
     @extend .#{$app-prefix}category-open;
   }

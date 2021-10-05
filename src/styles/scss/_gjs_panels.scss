@@ -41,8 +41,12 @@
       padding: $headerHeight 0 0;
       left: 0;
       width: $leftWidth;
-      overflow: auto;
+      overflow: overlay;
+      overflow-x: hidden;
       box-shadow: 0 0 5px $mainDkColor;
+      &>div {
+        width: $leftWidth;
+      }
     }
 
     .#{$pn-prefix}buttons {

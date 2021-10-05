@@ -7,6 +7,7 @@ module.exports = {
     this.sender = sender;
     this.em = em;
     if (!this.$traitsMainContainer || !this.stylesContainer) {
+      this.target = em.getModel();
       this.prepareTraitManager();
       this.prepareStyleManager();
       this.listenTo(this.target, 'component:toggled', this.toggleManagers);
@@ -39,11 +40,6 @@ module.exports = {
     );
 
     this.$traitsMainContainer.append(this.$traitsHeader);
-    this.$traitsContainer.append(
-      `<div class="${pfx}traits-label">
-        ${traitsConfig.labelContainer}
-      </div>`
-    );
     this.$traitsContainer.append(view.render().el);
     var panels = em.Panels;
 
