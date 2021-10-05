@@ -2,10 +2,13 @@ import { defaults, isElement } from 'underscore';
 
 const defaultOpts = require('./config/config');
 const TraitsView = require('./view/TraitsView');
+const ManagerLabel = require('./model/ManagerLabel');
+const ManagerLabelView = require('./view/ManagerLabelView');
 
 module.exports = () => {
   let c = {};
   let TraitsViewer;
+  let managerLabel;
 
   return {
     TraitsView,
@@ -35,12 +38,24 @@ module.exports = () => {
       defaults(c, defaultOpts);
       const ppfx = c.pStylePrefix;
       ppfx && (c.stylePrefix = `${ppfx}${c.stylePrefix}`);
-      TraitsViewer = new TraitsView({
-        collection: [],
+
+      managerLabel = new ManagerLabelView({
+        model: new ManagerLabel(),
         editor: c.em,
         config: c
       });
+
+      TraitsViewer = new TraitsView({
+        collection: [],
+        editor: c.em,
+        config: c,
+        managerLabel: managerLabel
+      });
       return this;
+    },
+
+    onLoad() {
+      TraitsViewer.initListeners();
     },
 
     postRender() {
@@ -50,6 +65,10 @@ module.exports = () => {
         const el = isElement(elTo) ? elTo : document.querySelector(elTo);
         el.appendChild(this.render());
       }
+    },
+
+    getManagerLabel() {
+      return managerLabel.model;
     },
 
     /**

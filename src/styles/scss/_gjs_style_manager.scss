@@ -51,18 +51,6 @@
 
   &.#{$sm-prefix}open {
     @extend .#{$app-prefix}category-open;
-    .#{$sm-prefix}title{
-      &>.#{$sm-prefix}icon {
-        background-color: $colorBlue;
-        svg {
-          color: white;
-        }
-      }
-      &>svg {
-        transform: scaleY(-1);
-        color: $colorBlue;
-      }
-    }
   }
 
   .#{$sm-prefix}title {

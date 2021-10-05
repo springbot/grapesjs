@@ -1,8 +1,8 @@
 .#{$app-prefix} {
   font-family: inherit;
-  &traits-label {
-    @extend .#{$app-prefix}category-title
-  }
+}
+.#{$trt-prefix}traits-title {
+  @extend .#{$app-prefix}category-title
 }
 
 .#{$trt-prefix}header {
@@ -10,8 +10,20 @@
 }
 
 .#{$trt-prefix}traits {
+  &.open {
+    @extend .#{$app-prefix}category-open;
+    .#{$trt-prefix}traits-container {
+      display: flex;
+    }
+  }
+  &.empty {
+    display: none;
+  }
+}
+
+.#{$trt-prefix}traits-container {
   padding: 24px 8px;
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 24px;
 }

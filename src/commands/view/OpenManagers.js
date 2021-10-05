@@ -40,16 +40,6 @@ module.exports = {
     );
 
     this.$traitsMainContainer.append(this.$traitsHeader);
-    this.$traitsTitle = $(
-      `<div class="${pfx}traits-label">
-      <div class="${pfx}icon">
-        <i class="far fa-sliders-h"></i>
-      </div>
-      ${traitsConfig.labelContainer}
-      <i id="${pfx}caret" class="fas fa-caret-up"></i>
-    </div>`
-    );
-    this.$traitsContainer.append(this.$traitsTitle);
     this.$traitsContainer.append(view.render().el);
     var panels = em.Panels;
 

@@ -22,11 +22,14 @@ module.exports = DomainViews.extend({
     const config = o.config || {};
     this.config = config;
     this.em = o.editor;
+    this.managerLabel = o.managerLabel;
     this.pfx = config.stylePrefix || '';
     this.ppfx = config.pStylePrefix || '';
     this.className = this.pfx + 'traits';
+    this.collection = o.collection;
     const toListen = 'component:toggled';
     this.listenTo(this.em, toListen, this.updatedCollection);
+    this.listenTo(this.managerLabel.model, 'change:open', this.render);
   },
 
   /**
@@ -34,10 +37,45 @@ module.exports = DomainViews.extend({
    * @private
    */
   updatedCollection() {
-    const ppfx = this.ppfx;
     const comp = this.em.getSelected();
-    this.el.className = `${this.className} ${ppfx}one-bg ${ppfx}two-color`;
+
     this.collection = comp ? comp.get('traits') : [];
     this.render();
+  },
+
+  initListeners() {
+    this.listenTo(
+      this.em.get('StyleManager').getSectors(),
+      'change:open',
+      model => {
+        if (model.get('open')) {
+          this.managerLabel.forceClose();
+        }
+      }
+    );
+  },
+
+  render() {
+    const ppfx = this.ppfx;
+    const isOpen = this.managerLabel.model.get('open') ? 'open' : '';
+    const isEmpty = !this.collection.length ? 'empty' : '';
+
+    this.el.className = `${
+      this.className
+    } ${ppfx}one-bg ${ppfx}two-color ${isOpen} ${isEmpty}`;
+
+    this.$el.empty();
+    this.$el.append(this.managerLabel.render().el);
+
+    var ManagerLabel = document.createElement('div');
+    ManagerLabel.className = `${this.pfx}traits-container`;
+
+    if (this.collection.length)
+      this.collection.each(function(model) {
+        this.add(model, ManagerLabel);
+      }, this);
+
+    this.$el.append(ManagerLabel);
+    return this;
   }
 });

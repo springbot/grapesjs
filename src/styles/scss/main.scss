@@ -381,7 +381,18 @@ $colorsAll: (one, $primaryColor),
 /********* General **********/
 
 .#{$app-prefix}category-open {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  [class*="-title"] {
+    &>[class*="-icon"] {
+      background-color: $colorBlue;
+      svg {
+        color: white;
+      }
+    }
+    &>svg {
+      transform: scaleY(-1);
+        color: $colorBlue;
+    }
+  }
 }
 
 .#{$app-prefix}category-title {

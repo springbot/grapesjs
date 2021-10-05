@@ -86,6 +86,7 @@ module.exports = () => {
 
     onLoad() {
       sectors.add(c.sectors);
+      SectView.initListeners();
     },
 
     postRender() {
