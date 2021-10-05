@@ -102,10 +102,6 @@ module.exports = {
       .trigger('change:appendContent');
   },
 
-  toggleTraitManager() {
-    this.$traitsContainer.hide();
-  },
-
   toggleManagers() {
     const sender = this.sender;
     if (sender && sender.get && !sender.get('active')) {
