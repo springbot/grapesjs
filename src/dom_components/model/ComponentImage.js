@@ -58,7 +58,7 @@ module.exports = Component.extend(
 
           if (!hasButtonBool) {
             tb.push({
-              attributes: { class: 'fa fa-pencil' },
+              attributes: { class: 'far fa-pencil' },
               command: cmdName
             });
             this.set('toolbar', tb);

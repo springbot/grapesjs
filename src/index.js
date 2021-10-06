@@ -3,10 +3,7 @@ import Editor from './editor';
 import { isElement, isFunction } from 'underscore';
 import polyfills from 'utils/polyfills';
 import PluginManager from './plugin_manager';
-import { library, dom } from '@fortawesome/fontawesome-svg-core';
-import { far } from '@fortawesome/pro-regular-svg-icons';
-import { fas } from '@fortawesome/pro-solid-svg-icons';
-import { faHorizontalRule as falFaHorizontalRule } from '@fortawesome/pro-light-svg-icons';
+import { loadIcons } from './utils/FontAwesome';
 
 polyfills();
 
@@ -50,10 +47,7 @@ module.exports = (() => {
      * })
      */
     init(config = {}) {
-      // fontawesome icons
-      library.add(far, fas, falFaHorizontalRule);
-      dom.watch();
-
+      loadIcons();
       const els = config.container;
       if (!els) throw new Error("'container' is required");
       config = { ...defaultConfig, ...config };

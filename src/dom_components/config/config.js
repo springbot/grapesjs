@@ -27,7 +27,7 @@ module.exports = {
   components: [],
 
   // Class for new image component
-  imageCompClass: 'fa fa-picture-o',
+  imageCompClass: 'far fa-image',
 
   // Open assets manager on create of image component
   oAssetsOnCreate: true,

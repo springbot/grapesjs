@@ -106,8 +106,8 @@ module.exports = require('backbone').View.extend({
    */
   updateStatus() {
     const { model, $el } = this;
-    const chkOn = 'fa-check-square-o';
-    const chkOff = 'fa-square-o';
+    const chkOn = 'fa-check-square';
+    const chkOff = 'fa-square';
     const $chk = $el.find('[data-tag-status]');
 
     if (model.get('active')) {
