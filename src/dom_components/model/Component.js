@@ -72,7 +72,7 @@ const avoidInline = em => em && em.getConfig('avoidInlineStyle');
  * @property {Boolean} [hoverable=true] Shows a highlight outline when hovering on the element if `true`. Default: `true`
  * @property {Boolean} [void=false] This property is used by the HTML exporter as void elements don't have closing tags, eg. `<br/>`, `<hr/>`, etc. Default: `false`
  * @property {String} [content=''] Content of the component (not escaped) which will be appended before children rendering. Default: `''`
- * @property {String} [icon=''] Component's icon, this string will be inserted before the name (in Layers and badge), eg. it can be an HTML string '<i class="fa fa-square-o"></i>'. Default: `''`
+ * @property {String} [icon=''] Component's icon, this string will be inserted before the name (in Layers and badge), eg. it can be an HTML string '<i class="far fa-square-o"></i>'. Default: `''`
  * @property {String|Function} [script=''] Component's javascript. More about it [here](/modules/Components-js.html). Default: `''`
  * @property {Array<Object|String>} [traits=''] Component's traits. More about it [here](/modules/Traits.html). Default: `['id', 'title']`
  * @property {Array<String>} [propagate=[]] Indicates an array of properties which will be inhereted by all NEW appended children.
@@ -641,7 +641,7 @@ const Component = Backbone.Model.extend(Styleable).extend(
         if (model.get('draggable')) {
           tb.push({
             attributes: {
-              class: `fa fa-arrows ${ppfx}no-touch-actions`,
+              class: `far fa-arrows ${ppfx}no-touch-actions`,
               draggable: true
             },
             //events: hasDnd(this.em) ? { dragstart: 'execCommand' } : '',

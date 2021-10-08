@@ -556,15 +556,12 @@
 
 ##{$sm-prefix}border-width {
   .#{$sm-prefix}icon{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2px;
+    line-height: 4px;
+    padding: 10px 0;
     &>* {
+      line-height: 4px;
       padding: 0px;
       font-size: 12px;
-      margin: -5px 0;
     }
   }
 }

@@ -20,28 +20,28 @@ module.exports = {
         {
           active: true,
           id: swv,
-          icon: 'far fa-square',
+          className: 'far fa-square',
           command: swv,
           context: swv,
           attributes: { title: 'View components' }
         },
         {
           id: prv,
-          icon: 'far fa-eye',
+          className: 'far fa-eye',
           command: prv,
           context: prv,
           attributes: { title: 'Preview' }
         },
         {
           id: ful,
-          icon: 'far fa-arrows-alt',
+          className: 'far fa-arrows-alt',
           command: ful,
           context: ful,
           attributes: { title: 'Fullscreen' }
         },
         {
           id: expt,
-          icon: 'far fa-code',
+          className: 'far fa-code',
           command: expt,
           attributes: { title: 'View code' }
         }
@@ -52,7 +52,7 @@ module.exports = {
       buttons: [
         {
           id: oms,
-          icon: 'fas fa-paint-brush',
+          className: 'fas fa-paint-brush',
           command: oms,
           active: true,
           togglable: 0,
@@ -60,7 +60,7 @@ module.exports = {
         },
         {
           id: obl,
-          icon: 'fas fa-th-large',
+          className: 'fas fa-th-large',
           command: obl,
           togglable: 0,
           attributes: { title: 'Open Blocks' }

@@ -14,7 +14,7 @@ module.exports = Backbone.View.extend({
 
     return `
       <div id="${pfx}move" class="${ppfx}no-touch-actions" data-move-layer>
-        <i class="fa fa-arrows"></i>
+        <i class="far fa-arrows"></i>
       </div>
       <div id="${pfx}label">${label}</div>
       <div id="${pfx}preview-box">

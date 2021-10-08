@@ -12,8 +12,9 @@ module.exports = PropertyView.extend({
     const textLabel = this.model.get('textLabel');
     let iconEl = '';
     switch (icon) {
+      case '':
       case undefined:
-        iconEl = `<div>${textLabel}</div>`;
+        iconEl = `<div>${textLabel ? textLabel : ''}</div>`;
         break;
       case 'border-width':
         iconEl = `<i class="fal fa-horizontal-rule fa-fw"></i>

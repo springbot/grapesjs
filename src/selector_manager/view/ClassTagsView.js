@@ -24,7 +24,7 @@ module.exports = Backbone.View.extend({
   <div id="<%= pfx %>tags-field" class="<%= ppfx %>field">
     <div id="<%= pfx %>tags-c"></div>
     <input id="<%= pfx %>new" />
-    <span id="<%= pfx %>add-tag" class="fa fa-plus"></span>
+    <span id="<%= pfx %>add-tag" class="far fa-plus"></span>
   </div>
   <div id="<%= pfx %>sel-help">
     <div id="<%= pfx %>label"><%= selectedLabel %></div>
