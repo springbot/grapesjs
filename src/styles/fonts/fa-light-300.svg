@@ -1,0 +1,28 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+<metadata>
+Created by FontForge 20201107 at Wed Aug  4 13:24:15 2021
+ By rhiannan
+Copyright (c) Font Awesome
+</metadata>
+<defs>
+<font id="FontAwesome5Pro-Light" horiz-adv-x="640" >
+  <font-face 
+    font-family="Font Awesome 5 Pro Light"
+    font-weight="300"
+    font-stretch="normal"
+    units-per-em="512"
+    panose-1="2 0 3 3 0 0 0 0 0 0"
+    ascent="448"
+    descent="-64"
+    bbox="0 176 640 208"
+    underline-thickness="25"
+    underline-position="-49"
+    unicode-range="U+F86C-F86C"
+  />
+    <missing-glyph />
+    <glyph glyph-name="horizontal-rule" unicode="&#xf86c;" 
+d="M640 200v-16q0 -8 -8 -8h-624q-8 0 -8 8v16q0 8 8 8h624q8 0 8 -8z" />
+  </font>
+</defs></svg>

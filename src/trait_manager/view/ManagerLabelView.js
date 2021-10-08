@@ -7,7 +7,7 @@ module.exports = Backbone.View.extend({
       <i class="far fa-sliders-h"></i>
     </div>
     <%= labelContainer %>
-    <i id="<%= pfx %>caret" class="fas fa-caret-up"></i>
+    <i id="<%= pfx %>caret" class="fas fa-caret-down"></i>
   </div>
   `),
 

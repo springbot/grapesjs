@@ -3,7 +3,6 @@ import Editor from './editor';
 import { isElement, isFunction } from 'underscore';
 import polyfills from 'utils/polyfills';
 import PluginManager from './plugin_manager';
-import { loadIcons } from './utils/FontAwesome';
 
 polyfills();
 
@@ -47,7 +46,6 @@ module.exports = (() => {
      * })
      */
     init(config = {}) {
-      loadIcons();
       const els = config.container;
       if (!els) throw new Error("'container' is required");
       config = { ...defaultConfig, ...config };

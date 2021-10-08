@@ -1,11 +1,14 @@
 /* stylelint-disable */
 @import "node_modules/spectrum-colorpicker/spectrum";
-@import "node_modules/font-awesome/scss/font-awesome";
 @import "node_modules/codemirror/lib/codemirror";
 @import "node_modules/codemirror/theme/hopscotch";
 
 @import "gjs_variables.scss";
 
+@import "node_modules/@fortawesome/fontawesome-pro/scss/fontawesome";
+@import "node_modules/@fortawesome/fontawesome-pro/scss/solid";
+@import "node_modules/@fortawesome/fontawesome-pro/scss/regular";
+@import "node_modules/@fortawesome/fontawesome-pro/scss/light";
 
 @font-face {
   font-family: 'font3336';
@@ -384,11 +387,11 @@ $colorsAll: (one, $primaryColor),
   [class*="-title"] {
     &>[class*="-icon"] {
       background-color: $colorBlue;
-      svg {
+      i {
         color: white;
       }
     }
-    &>svg {
+    &>i {
       transform: scaleY(-1);
         color: $colorBlue;
     }
@@ -408,7 +411,7 @@ $colorsAll: (one, $primaryColor),
   text-align: left;
   position: relative;
   cursor: pointer;
-  svg {
+  i {
     color: $iconGrayDk;
   }
   [class*="-icon"] {

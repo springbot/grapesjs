@@ -27,7 +27,7 @@ module.exports = {
     if (!this.helper) {
       const helper = document.createElement('span');
       const icon = document.createElement('i');
-      icon.className = `${pfx}off-prv fa fa-eye-slash`;
+      icon.className = `${pfx}off-prv far fa-eye-slash`;
       helper.appendChild(icon);
       editorEl.appendChild(helper);
       helper.onclick = () => editor.stopCommand('preview');

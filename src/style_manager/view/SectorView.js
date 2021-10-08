@@ -9,7 +9,7 @@ module.exports = Backbone.View.extend({
       <i class="<%= icon %>"></i>
     </div>
     <%= label %>
-    <i id="<%= pfx %>caret" class="fas"></i>
+    <i id="<%= pfx %>caret" class="fas fa-caret-down"></i>
   </div>`),
 
   events: {
@@ -21,8 +21,6 @@ module.exports = Backbone.View.extend({
     this.pfx = this.config.stylePrefix || '';
     this.target = o.target || {};
     this.propTarget = o.propTarget || {};
-    this.caretU = 'fa-caret-up';
-    this.caretD = 'fa-caret-down';
     const model = this.model;
     this.listenTo(model, 'change:open', this.updateOpen);
     this.listenTo(model, 'updateVisibility', this.updateVisibility);
@@ -56,7 +54,6 @@ module.exports = Backbone.View.extend({
   show() {
     this.$el.addClass(this.pfx + 'open');
     this.getPropertiesEl().style.display = '';
-    this.$caret.removeClass(this.caretU).addClass(this.caretD);
   },
 
   /**
@@ -65,7 +62,6 @@ module.exports = Backbone.View.extend({
   hide() {
     this.$el.removeClass(this.pfx + 'open');
     this.getPropertiesEl().style.display = 'none';
-    this.$caret.removeClass(this.caretD).addClass(this.caretU);
   },
 
   getPropertiesEl() {
