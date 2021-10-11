@@ -53,7 +53,7 @@ module.exports = Backbone.View.extend({
     if (em && em.getDeviceModel && devEl) {
       var device = em.getDeviceModel();
       var name = device ? device.get('name') : '';
-      devEl.find(`input[value=${name}]`).checked = true;
+      devEl.find(`input[value="${name}"]`).checked = true;
     }
   },
 

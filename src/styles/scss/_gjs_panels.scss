@@ -6,6 +6,8 @@
     text-align: center;
     padding: 5px;
     z-index: 3;
+    height: $headerHeight;
+    background-color: white;
 
     .icon-undo,
     .icon-redo {
@@ -28,15 +30,15 @@
   }
 
   &views {
-    background-color: $iconBg;
+    background-color: $panelBg;
     box-shadow: 1px 0 2px 0 rgba(0, 0, 0, 0.1);
-    padding: 12px;
     left: 0;
     width: $leftWidth;
     height: $headerHeight;
     z-index: 4;
 
     &-container {
+      background-color: $panelBg;
       height: 100%;
       padding: $headerHeight 0 0;
       left: 0;
@@ -64,13 +66,14 @@
     align-items: center;
     display: flex;
     justify-content: center;
+    height: 100%;
   }
 
   &btn {
     box-sizing: border-box;
     min-height: 30px;
     min-width: 30px;
-    line-height: 21px;
+    line-height: 1;
     background-color: transparent;
     border: none;
     font-size: 18px;

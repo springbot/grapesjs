@@ -26,13 +26,6 @@ module.exports = {
           attributes: { title: 'View components' }
         },
         {
-          id: prv,
-          className: 'far fa-eye',
-          command: prv,
-          context: prv,
-          attributes: { title: 'Preview' }
-        },
-        {
           id: ful,
           className: 'far fa-arrows-alt',
           command: ful,

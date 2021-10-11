@@ -1,5 +1,5 @@
 $frameAnimation: 0.35s ease;
-$canvasTop: 40px;
+$canvasTop: 48px;
 $guide_pad: 5px;
 
 .#{$prefix} {
@@ -117,7 +117,7 @@ $guide_pad: 5px;
   z-index: 1;
   position: absolute;
   right: 0;
-  top: 40px;
+  top: $canvasTop;
 
   &#{gjs-is(grab)},
   &#{gjs-is(grabbing)} {
