@@ -4,6 +4,10 @@ import Backbone from 'backbone';
 module.exports = Backbone.Model.extend({
   idAttribute: 'name',
 
+  id: '',
+
+  className: '',
+
   defaults: {
     name: '',
 
@@ -18,7 +22,9 @@ module.exports = Backbone.Model.extend({
     widthMedia: null,
 
     // Setup the order of media queries
-    priority: null
+    priority: null,
+
+    className: ''
   },
 
   initialize() {
@@ -29,6 +35,10 @@ module.exports = Backbone.Model.extend({
       this.set('priority', parseFloat(this.get('widthMedia')) || 0);
     const toCheck = ['width', 'height', 'widthMedia'];
     toCheck.forEach(prop => this.checkUnit(prop));
+    this.id = this.get('name')
+      .toLowerCase()
+      .replace(/ /g, '-');
+    this.className = this.get('className');
   },
 
   checkUnit(prop) {

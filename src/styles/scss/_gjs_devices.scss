@@ -17,4 +17,23 @@
     flex-grow: 1;
     margin-left: 5px;
   }
+
+  .#{$app-prefix}radio-items {
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .#{$app-prefix}radio-item {
+    font-size: 20px;
+    label {
+      padding: 0;
+      border: none;
+      height: 32px;
+      width: 32px;
+      line-height: 32px;
+    }
+
+    input:checked + label {
+      color: $colorBlue;
+    }
+  }
 }
