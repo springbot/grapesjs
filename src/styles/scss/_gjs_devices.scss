@@ -1,5 +1,8 @@
 .#{$pn-prefix}devices-c {
   background-color: transparent;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
 }
 
 .#{$app-prefix}devices-c {

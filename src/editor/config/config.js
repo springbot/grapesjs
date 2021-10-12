@@ -186,6 +186,7 @@ module.exports = {
   deviceManager: {
     devices: [
       {
+        active: true,
         name: 'Desktop',
         width: '',
         className: 'far fa-desktop'

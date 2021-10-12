@@ -24,7 +24,9 @@ module.exports = Backbone.Model.extend({
     // Setup the order of media queries
     priority: null,
 
-    className: ''
+    className: '',
+
+    active: false
   },
 
   initialize() {

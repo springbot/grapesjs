@@ -68,9 +68,11 @@ module.exports = Backbone.View.extend({
       const { id, className } = device;
       result += `
         <div class="${this.ppfx}radio-item">
-          <input id="${id}" class="${
-        this.ppfx
-      }radio" type="radio" name="device" value="${device.get('name')}">
+          <input id="${id}" class="${this.ppfx}radio" 
+          type="radio" 
+          name="device" 
+          value="${device.get('name')}" 
+          ${device.get('active') ? ' checked' : ''}>
           <label class="${
             this.ppfx
           }radio-item-label ${className}" for="${id}"></label>

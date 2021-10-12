@@ -62,7 +62,8 @@ module.exports = () => {
     ['component-exit', 'ComponentExit', 'select-parent'],
     ['component-delete', 'ComponentDelete'],
     ['component-style-clear', 'ComponentStyleClear'],
-    ['component-drag', 'ComponentDrag']
+    ['component-drag', 'ComponentDrag'],
+    ['open-hidden-options', 'OpenHiddenOptions', 'open-hidden-options']
   ];
 
   // Need it here as it would be used below
