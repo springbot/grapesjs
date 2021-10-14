@@ -26819,7 +26819,7 @@ module.exports = function () {
   var commands = {};
   var defaultCommands = {};
   var active = {};
-  var commandsDef = [['preview', 'Preview', 'preview'], ['resize', 'Resize', 'resize'], ['fullscreen', 'Fullscreen', 'fullscreen'], ['copy', 'CopyComponent'], ['paste', 'PasteComponent'], ['canvas-move', 'CanvasMove'], ['canvas-clear', 'CanvasClear'], ['open-code', 'ExportTemplate', 'export-template'], ['open-layers', 'OpenLayers', 'open-layers'], ['open-styles', 'OpenStyleManager', 'open-sm'], ['open-traits', 'OpenTraitManager', 'open-tm'], ['open-blocks', 'OpenBlocks', 'open-blocks'], ['open-assets', 'OpenAssets', 'open-assets'], ['open-managers', 'OpenManagers', 'open-managers'], ['component-select', 'SelectComponent', 'select-comp'], ['component-outline', 'SwitchVisibility', 'sw-visibility'], ['component-offset', 'ShowOffset', 'show-offset'], ['component-move', 'MoveComponent', 'move-comp'], ['component-next', 'ComponentNext'], ['component-prev', 'ComponentPrev'], ['component-enter', 'ComponentEnter'], ['component-exit', 'ComponentExit', 'select-parent'], ['component-delete', 'ComponentDelete'], ['component-style-clear', 'ComponentStyleClear'], ['component-drag', 'ComponentDrag']];
+  var commandsDef = [['preview', 'Preview', 'preview'], ['resize', 'Resize', 'resize'], ['fullscreen', 'Fullscreen', 'fullscreen'], ['copy', 'CopyComponent'], ['paste', 'PasteComponent'], ['canvas-move', 'CanvasMove'], ['canvas-clear', 'CanvasClear'], ['open-code', 'ExportTemplate', 'export-template'], ['open-layers', 'OpenLayers', 'open-layers'], ['open-styles', 'OpenStyleManager', 'open-sm'], ['open-traits', 'OpenTraitManager', 'open-tm'], ['open-blocks', 'OpenBlocks', 'open-blocks'], ['open-assets', 'OpenAssets', 'open-assets'], ['open-managers', 'OpenManagers', 'open-managers'], ['component-select', 'SelectComponent', 'select-comp'], ['component-outline', 'SwitchVisibility', 'sw-visibility'], ['component-offset', 'ShowOffset', 'show-offset'], ['component-move', 'MoveComponent', 'move-comp'], ['component-next', 'ComponentNext'], ['component-prev', 'ComponentPrev'], ['component-enter', 'ComponentEnter'], ['component-exit', 'ComponentExit', 'select-parent'], ['component-delete', 'ComponentDelete'], ['component-style-clear', 'ComponentStyleClear'], ['component-drag', 'ComponentDrag'], ['open-hidden-options', 'OpenHiddenOptions', 'open-hidden-options']];
 
   // Need it here as it would be used below
   var add = function add(id, obj) {
@@ -27249,6 +27249,8 @@ var map = {
 	"./OpenAssets.js": "./src/commands/view/OpenAssets.js",
 	"./OpenBlocks": "./src/commands/view/OpenBlocks.js",
 	"./OpenBlocks.js": "./src/commands/view/OpenBlocks.js",
+	"./OpenHiddenOptions": "./src/commands/view/OpenHiddenOptions.js",
+	"./OpenHiddenOptions.js": "./src/commands/view/OpenHiddenOptions.js",
 	"./OpenLayers": "./src/commands/view/OpenLayers.js",
 	"./OpenLayers.js": "./src/commands/view/OpenLayers.js",
 	"./OpenManagers": "./src/commands/view/OpenManagers.js",
@@ -28900,6 +28902,33 @@ module.exports = {
   stop: function stop() {
     var blocks = this.blocks;
     blocks && (blocks.style.display = 'none');
+  }
+};
+
+/***/ }),
+
+/***/ "./src/commands/view/OpenHiddenOptions.js":
+/*!************************************************!*\
+  !*** ./src/commands/view/OpenHiddenOptions.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = {
+  run: function run(editor) {
+    var panels = editor.Panels;
+    if (panels) {
+      panels.getPanel('options-hidden').set('visible', true);
+    }
+  },
+  stop: function stop(editor) {
+    var panels = editor.Panels;
+    if (panels) {
+      panels.getPanel('options-hidden').set('visible', false);
+    }
   }
 };
 
@@ -31677,6 +31706,10 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 module.exports = _backbone2.default.Model.extend({
   idAttribute: 'name',
 
+  id: '',
+
+  className: '',
+
   defaults: {
     name: '',
 
@@ -31691,7 +31724,11 @@ module.exports = _backbone2.default.Model.extend({
     widthMedia: null,
 
     // Setup the order of media queries
-    priority: null
+    priority: null,
+
+    className: '',
+
+    active: false
   },
 
   initialize: function initialize() {
@@ -31704,6 +31741,8 @@ module.exports = _backbone2.default.Model.extend({
     toCheck.forEach(function (prop) {
       return _this.checkUnit(prop);
     });
+    this.id = this.get('name').toLowerCase().replace(/ /g, '-');
+    this.className = this.get('className');
   },
   checkUnit: function checkUnit(prop) {
     var pr = this.get(prop) || '';
@@ -31768,7 +31807,7 @@ var _backbone2 = _interopRequireDefault(_backbone);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = _backbone2.default.View.extend({
-  template: _underscore2.default.template('\n    <div class="<%= ppfx %>device-label"><%= deviceLabel %></div>\n    <div class="<%= ppfx %>field <%= ppfx %>select">\n      <span id="<%= ppfx %>input-holder">\n        <select class="<%= ppfx %>devices"></select>\n      </span>\n      <div class="<%= ppfx %>sel-arrow">\n        <div class="<%= ppfx %>d-s-arrow"></div>\n      </div>\n    </div>\n    <button style="display:none" class="<%= ppfx %>add-trasp">+</button>'),
+  template: _underscore2.default.template('\n    <div class="<%= ppfx %>device-label"><%= deviceLabel %></div>\n    <div class="<%= ppfx %>field <%= ppfx %>select">\n      <span id="<%= ppfx %>input-holder">\n        <div class="<%= ppfx %>devices"></div>\n      </span>\n    </div>\n    <button style="display:none" class="<%= ppfx %>add-trasp">+</button>'),
 
   events: {
     change: 'updateDevice'
@@ -31796,11 +31835,10 @@ module.exports = _backbone2.default.View.extend({
    * Update device of the editor
    * @private
    */
-  updateDevice: function updateDevice() {
+  updateDevice: function updateDevice(e) {
     var em = this.em;
     if (em) {
-      var devEl = this.devicesEl;
-      var val = devEl ? devEl.val() : '';
+      var val = e.target ? e.target.value : '';
       em.set('device', val);
     }
   },
@@ -31816,7 +31854,7 @@ module.exports = _backbone2.default.View.extend({
     if (em && em.getDeviceModel && devEl) {
       var device = em.getDeviceModel();
       var name = device ? device.get('name') : '';
-      devEl.val(name);
+      devEl.find('input[value="' + name + '"]').checked = true;
     }
   },
 
@@ -31827,10 +31865,14 @@ module.exports = _backbone2.default.View.extend({
    * @private
    */
   getOptions: function getOptions() {
+    var _this = this;
+
     var result = '';
     this.collection.each(function (device) {
-      var name = device.get('name');
-      result += '<option value="' + name + '">' + name + '</option>';
+      var id = device.id,
+          className = device.className;
+
+      result += '\n        <div class="' + _this.ppfx + 'radio-item">\n          <input id="' + id + '" class="' + _this.ppfx + 'radio" \n          type="radio" \n          name="device" \n          value="' + device.get('name') + '" \n          ' + (device.get('active') ? ' checked' : '') + '>\n          <label class="' + _this.ppfx + 'radio-item-label ' + className + '" for="' + id + '"></label>\n        </div>\n      ';
     });
     return result;
   },
@@ -37811,20 +37853,20 @@ module.exports = {
   //Configurations for Device Manager
   deviceManager: {
     devices: [{
+      active: true,
       name: 'Desktop',
-      width: ''
+      width: '',
+      className: 'far fa-desktop'
     }, {
       name: 'Tablet',
       width: '768px',
-      widthMedia: '992px'
-    }, {
-      name: 'Mobile landscape',
-      width: '568px',
-      widthMedia: '768px'
+      widthMedia: '992px',
+      className: 'far fa-tablet-alt'
     }, {
       name: 'Mobile portrait',
       width: '320px',
-      widthMedia: '480px'
+      widthMedia: '480px',
+      className: 'far fa-mobile-alt'
     }]
   },
 
@@ -41069,29 +41111,26 @@ module.exports = {
   }, {
     id: 'options',
     buttons: [{
-      active: true,
-      id: swv,
-      className: 'far fa-square',
-      command: swv,
-      context: swv,
-      attributes: { title: 'View components' }
-    }, {
-      id: prv,
-      className: 'far fa-eye',
-      command: prv,
-      context: prv,
-      attributes: { title: 'Preview' }
-    }, {
-      id: ful,
-      className: 'far fa-arrows-alt',
-      command: ful,
-      context: ful,
-      attributes: { title: 'Fullscreen' }
-    }, {
-      id: expt,
-      className: 'far fa-code',
+      id: 'undo',
+      className: 'fas fa-undo-alt',
       command: expt,
       attributes: { title: 'View code' }
+    }, {
+      id: 'redo',
+      className: 'fas fa-redo-alt',
+      command: expt,
+      attributes: { title: 'View code' }
+    }, {
+      id: expt,
+      className: 'far fa-save',
+      command: expt,
+      attributes: { title: 'View code' }
+    }, {
+      id: 'show',
+      className: 'far fa-ellipsis-v',
+      command: 'open-hidden-options',
+      constent: 'show-context',
+      attributes: { title: 'More options' }
     }]
   }, {
     id: 'views',
@@ -41108,6 +41147,32 @@ module.exports = {
       command: obl,
       togglable: 0,
       attributes: { title: 'Open Blocks' }
+    }]
+  }, {
+    id: 'options-hidden',
+    visible: 0,
+    autoHide: true,
+    buttons: [{
+      id: ful,
+      className: 'far fa-expand',
+      command: ful,
+      context: ful,
+      label: 'Expand view',
+      attributes: { title: 'Fullscreen' }
+    }, {
+      id: 'import-mjml',
+      className: 'far fa-code',
+      command: 'import-mjml',
+      context: 'import-mjml',
+      label: 'Import MJML',
+      attributes: { title: 'Import MJML' }
+    }, {
+      id: 'export-mjml',
+      className: 'far fa-download',
+      command: 'export-mjml',
+      context: 'export-mjml',
+      label: 'Export MJML',
+      attributes: { title: 'Export MJML' }
     }]
   }],
 
@@ -41528,7 +41593,8 @@ module.exports = Backbone.Model.extend({
     content: '',
     visible: true,
     buttons: [],
-    attributes: {}
+    attributes: {},
+    autoHide: false
   },
 
   initialize: function initialize(options) {
@@ -41881,6 +41947,7 @@ module.exports = Backbone.View.extend({
     this.listenTo(model, 'change:content', this.updateContent);
     this.listenTo(model, 'change:visible', this.toggleVisible);
     model.view = this;
+    this.toggleVisible();
   },
 
 

@@ -32,6 +32,9 @@
       width: 32px;
       line-height: 32px;
       background-color: white;
+      &:hover {
+        background-color: $panelBg;
+      }
     }
 
     input:checked + label {

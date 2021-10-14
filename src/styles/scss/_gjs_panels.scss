@@ -23,6 +23,7 @@
     justify-content: center;
     height: 100%;
     color: $iconGrayDk;
+    gap: 16px;
   }
 
   &btn {
@@ -36,6 +37,10 @@
     border-radius: 4px;
     position: relative;
     cursor: pointer;
+
+    &:hover {
+      background-color: $panelBg;
+    }
 
     &.#{$pn-prefix}active {
       background-color: $panelBg;

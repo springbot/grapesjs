@@ -73,9 +73,9 @@ module.exports = Backbone.View.extend({
           name="device" 
           value="${device.get('name')}" 
           ${device.get('active') ? ' checked' : ''}>
-          <label class="${
-            this.ppfx
-          }radio-item-label ${className}" for="${id}"></label>
+          <label class="${this.ppfx}radio-item-label ${className}" 
+          for="${id}"
+          title="${device.get('name')}"></label>
         </div>
       `;
     });
