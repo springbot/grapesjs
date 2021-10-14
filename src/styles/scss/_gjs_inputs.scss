@@ -231,6 +231,8 @@
     height: 14px;
     line-height: 14px;
     padding: 9px;
+    margin: 0;
+    font-size: inherit;
   }
 
   input:checked + .#{$app-prefix}radio-item-label {

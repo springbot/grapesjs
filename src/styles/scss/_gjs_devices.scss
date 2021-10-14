@@ -24,7 +24,7 @@
     font-size: 20px;
     border-radius: 4px;
 
-    label {
+    &-label {
       padding: 0;
       border: none;
       border-radius: 4px;
@@ -37,7 +37,7 @@
       }
     }
 
-    input:checked + label {
+    input:checked + .#{$app-prefix}radio-item-label {
       color: $colorBlue;
       background-color: $panelBg;
       border: none;

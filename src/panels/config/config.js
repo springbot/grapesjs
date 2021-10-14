@@ -18,29 +18,14 @@ module.exports = {
       id: 'options',
       buttons: [
         {
-          id: 'undo',
-          className: 'fas fa-undo-alt',
-          command: expt,
-          attributes: { title: 'View code' }
-        },
-        {
-          id: 'redo',
-          className: 'fas fa-redo-alt',
-          command: expt,
-          attributes: { title: 'View code' }
-        },
-        {
-          id: expt,
-          className: 'far fa-save',
-          command: expt,
-          attributes: { title: 'View code' }
-        },
-        {
           id: 'show',
           className: 'far fa-ellipsis-v',
           command: 'open-hidden-options',
           constent: 'show-context',
-          attributes: { title: 'More options' }
+          attributes: {
+            title: 'More options',
+            style: 'order: 100;'
+          }
         }
       ]
     },
