@@ -1,20 +1,48 @@
-.#{$app-prefix}devices-c {
+.#{$pn-prefix}devices-c {
+  background-color: transparent;
   display: flex;
   align-items: center;
-  padding: 3px;
+  padding-left: 20px;
+}
 
-  .#{$app-prefix}device-label {
-    flex-grow: 2;
-    text-align: left;
-    margin-right: 10px;
+.#{$app-prefix}devices-c {
+
+  .#{$app-prefix}devices {
+    display: flex;
+    gap: 20px;
   }
-
-  .#{$app-prefix}select {
-    flex-grow: 20;
+  .#{$app-prefix}device-label {
+    display: none;
   }
 
   .#{$app-prefix}add-trasp {
     flex-grow: 1;
     margin-left: 5px;
+  }
+
+  .#{$app-prefix}radio-item {
+    font-size: 20px;
+    border-radius: 4px;
+
+    &-label {
+      padding: 0;
+      border: none;
+      border-radius: 4px;
+      height: 32px;
+      width: 32px;
+      line-height: 32px;
+      background-color: white;
+      &:hover {
+        background-color: $panelBg;
+      }
+    }
+
+    input:checked + .#{$app-prefix}radio-item-label {
+      color: $colorBlue;
+      background-color: $panelBg;
+      border: none;
+      box-shadow: none;
+      filter: none;
+    }
   }
 }

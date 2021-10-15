@@ -6,11 +6,8 @@ module.exports = Backbone.View.extend({
     <div class="<%= ppfx %>device-label"><%= deviceLabel %></div>
     <div class="<%= ppfx %>field <%= ppfx %>select">
       <span id="<%= ppfx %>input-holder">
-        <select class="<%= ppfx %>devices"></select>
+        <div class="<%= ppfx %>devices"></div>
       </span>
-      <div class="<%= ppfx %>sel-arrow">
-        <div class="<%= ppfx %>d-s-arrow"></div>
-      </div>
     </div>
     <button style="display:none" class="<%= ppfx %>add-trasp">+</button>`),
 
@@ -38,11 +35,10 @@ module.exports = Backbone.View.extend({
    * Update device of the editor
    * @private
    */
-  updateDevice() {
+  updateDevice(e) {
     var em = this.em;
     if (em) {
-      var devEl = this.devicesEl;
-      var val = devEl ? devEl.val() : '';
+      var val = e.target ? e.target.value : '';
       em.set('device', val);
     }
   },
@@ -57,7 +53,7 @@ module.exports = Backbone.View.extend({
     if (em && em.getDeviceModel && devEl) {
       var device = em.getDeviceModel();
       var name = device ? device.get('name') : '';
-      devEl.val(name);
+      devEl.find(`input[value="${name}"]`).checked = true;
     }
   },
 
@@ -69,8 +65,19 @@ module.exports = Backbone.View.extend({
   getOptions() {
     var result = '';
     this.collection.each(device => {
-      var name = device.get('name');
-      result += '<option value="' + name + '">' + name + '</option>';
+      const { id, className } = device;
+      result +=
+        `<div class="${this.ppfx}radio-item">` +
+        `<input id="${id}" class="${
+          this.ppfx
+        }radio" type="radio" name="device" value="${device.get('name')}"` +
+        `${device.get('active') ? ' checked' : ''}>` +
+        `<label class="${
+          this.ppfx
+        }radio-item-label ${className}" for="${id}" title="${device.get(
+          'name'
+        )}"></label>` +
+        `</div>`;
     });
     return result;
   },

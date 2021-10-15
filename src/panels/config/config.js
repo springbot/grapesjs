@@ -18,32 +18,14 @@ module.exports = {
       id: 'options',
       buttons: [
         {
-          active: true,
-          id: swv,
-          className: 'far fa-square',
-          command: swv,
-          context: swv,
-          attributes: { title: 'View components' }
-        },
-        {
-          id: prv,
-          className: 'far fa-eye',
-          command: prv,
-          context: prv,
-          attributes: { title: 'Preview' }
-        },
-        {
-          id: ful,
-          className: 'far fa-arrows-alt',
-          command: ful,
-          context: ful,
-          attributes: { title: 'Fullscreen' }
-        },
-        {
-          id: expt,
-          className: 'far fa-code',
-          command: expt,
-          attributes: { title: 'View code' }
+          id: 'show',
+          className: 'far fa-ellipsis-v',
+          command: 'open-hidden-options',
+          context: 'show-context',
+          attributes: {
+            title: 'More options',
+            style: 'order: 100;'
+          }
         }
       ]
     },
@@ -64,6 +46,36 @@ module.exports = {
           command: obl,
           togglable: 0,
           attributes: { title: 'Open Blocks' }
+        }
+      ]
+    },
+    {
+      id: 'options-hidden',
+      visible: 0,
+      buttons: [
+        {
+          id: ful,
+          className: 'far fa-expand',
+          command: ful,
+          context: ful,
+          label: 'Expand view',
+          attributes: { title: 'Fullscreen' }
+        },
+        {
+          id: 'import-mjml',
+          className: 'far fa-code',
+          command: 'import-mjml',
+          context: 'import-mjml',
+          label: 'Import MJML',
+          attributes: { title: 'Import MJML' }
+        },
+        {
+          id: 'export-mjml',
+          className: 'far fa-download',
+          command: 'export-mjml',
+          context: 'export-mjml',
+          label: 'Export MJML',
+          attributes: { title: 'Export MJML' }
         }
       ]
     }

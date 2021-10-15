@@ -15,6 +15,7 @@ module.exports = Backbone.View.extend({
     this.listenTo(model, 'change:content', this.updateContent);
     this.listenTo(model, 'change:visible', this.toggleVisible);
     model.view = this;
+    this.toggleVisible();
   },
 
   /**

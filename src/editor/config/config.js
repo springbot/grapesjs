@@ -186,23 +186,22 @@ module.exports = {
   deviceManager: {
     devices: [
       {
+        active: true,
         name: 'Desktop',
-        width: ''
+        width: '',
+        className: 'far fa-desktop'
       },
       {
         name: 'Tablet',
         width: '768px',
-        widthMedia: '992px'
-      },
-      {
-        name: 'Mobile landscape',
-        width: '568px',
-        widthMedia: '768px'
+        widthMedia: '992px',
+        className: 'far fa-tablet-alt'
       },
       {
         name: 'Mobile portrait',
         width: '320px',
-        widthMedia: '480px'
+        widthMedia: '480px',
+        className: 'far fa-mobile-alt'
       }
     ]
   },
