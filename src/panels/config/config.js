@@ -21,7 +21,7 @@ module.exports = {
           id: 'show',
           className: 'far fa-ellipsis-v',
           command: 'open-hidden-options',
-          constent: 'show-context',
+          context: 'show-context',
           attributes: {
             title: 'More options',
             style: 'order: 100;'
@@ -52,7 +52,6 @@ module.exports = {
     {
       id: 'options-hidden',
       visible: 0,
-      autoHide: true,
       buttons: [
         {
           id: ful,

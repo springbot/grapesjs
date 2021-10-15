@@ -28917,12 +28917,32 @@ module.exports = {
 "use strict";
 
 
+var Backbone = __webpack_require__(/*! backbone */ "./node_modules/backbone/backbone.js");
+var $ = Backbone.$;
+
 module.exports = {
-  run: function run(editor) {
+  run: function run(editor, sender) {
     var panels = editor.Panels;
     if (panels) {
       panels.getPanel('options-hidden').set('visible', true);
+      this.setupDeactivate(editor, sender);
     }
+  },
+  setupDeactivate: function setupDeactivate(editor, sender) {
+    var _this = this;
+
+    editor.once('component:selected', function () {
+      return _this.autoDeactivate(sender);
+    });
+    setTimeout(function () {
+      $('body').one('click', function () {
+        return _this.autoDeactivate(sender);
+      });
+    }, 100);
+  },
+  autoDeactivate: function autoDeactivate(sender) {
+    $('body').off('click');
+    sender.set('active', false);
   },
   stop: function stop(editor) {
     var panels = editor.Panels;
@@ -31872,7 +31892,7 @@ module.exports = _backbone2.default.View.extend({
       var id = device.id,
           className = device.className;
 
-      result += '\n        <div class="' + _this.ppfx + 'radio-item">\n          <input id="' + id + '" class="' + _this.ppfx + 'radio" \n          type="radio" \n          name="device" \n          value="' + device.get('name') + '" \n          ' + (device.get('active') ? ' checked' : '') + '>\n          <label class="' + _this.ppfx + 'radio-item-label ' + className + '" for="' + id + '"></label>\n        </div>\n      ';
+      result += '\n        <div class="' + _this.ppfx + 'radio-item">\n          <input id="' + id + '" class="' + _this.ppfx + 'radio" \n          type="radio" \n          name="device" \n          value="' + device.get('name') + '" \n          ' + (device.get('active') ? ' checked' : '') + '>\n          <label class="' + _this.ppfx + 'radio-item-label ' + className + '" \n          for="' + id + '"\n          title="' + device.get('name') + '"></label>\n        </div>\n      ';
     });
     return result;
   },
@@ -41111,26 +41131,14 @@ module.exports = {
   }, {
     id: 'options',
     buttons: [{
-      id: 'undo',
-      className: 'fas fa-undo-alt',
-      command: expt,
-      attributes: { title: 'View code' }
-    }, {
-      id: 'redo',
-      className: 'fas fa-redo-alt',
-      command: expt,
-      attributes: { title: 'View code' }
-    }, {
-      id: expt,
-      className: 'far fa-save',
-      command: expt,
-      attributes: { title: 'View code' }
-    }, {
       id: 'show',
       className: 'far fa-ellipsis-v',
       command: 'open-hidden-options',
-      constent: 'show-context',
-      attributes: { title: 'More options' }
+      context: 'show-context',
+      attributes: {
+        title: 'More options',
+        style: 'order: 100;'
+      }
     }]
   }, {
     id: 'views',
@@ -41151,7 +41159,6 @@ module.exports = {
   }, {
     id: 'options-hidden',
     visible: 0,
-    autoHide: true,
     buttons: [{
       id: ful,
       className: 'far fa-expand',
@@ -41593,8 +41600,7 @@ module.exports = Backbone.Model.extend({
     content: '',
     visible: true,
     buttons: [],
-    attributes: {},
-    autoHide: false
+    attributes: {}
   },
 
   initialize: function initialize(options) {
