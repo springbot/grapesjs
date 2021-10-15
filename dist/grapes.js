@@ -31892,7 +31892,7 @@ module.exports = _backbone2.default.View.extend({
       var id = device.id,
           className = device.className;
 
-      result += '\n        <div class="' + _this.ppfx + 'radio-item">\n          <input id="' + id + '" class="' + _this.ppfx + 'radio" \n          type="radio" \n          name="device" \n          value="' + device.get('name') + '" \n          ' + (device.get('active') ? ' checked' : '') + '>\n          <label class="' + _this.ppfx + 'radio-item-label ' + className + '" \n          for="' + id + '"\n          title="' + device.get('name') + '"></label>\n        </div>\n      ';
+      result += '<div class="' + _this.ppfx + 'radio-item">' + ('<input id="' + id + '" class="' + _this.ppfx + 'radio" type="radio" name="device" value="' + device.get('name') + '"') + ((device.get('active') ? ' checked' : '') + '>') + ('<label class="' + _this.ppfx + 'radio-item-label ' + className + '" for="' + id + '" title="' + device.get('name') + '"></label>') + '</div>';
     });
     return result;
   },
