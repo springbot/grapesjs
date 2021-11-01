@@ -85,7 +85,7 @@ $prefix: $app-prefix;
 $colorsAll: (one, $primaryColor),
   (two, $secondaryColor),
   (three, $tertiaryColor),
-  (four, $quaternaryColor),
+  (four, $textGray),
   (danger, $colorRed);
 
 .#{$prefix} {

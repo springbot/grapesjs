@@ -215,43 +215,30 @@ module.exports = {
         open: false,
         buildProps: [
           'size',
-          'container-padding',
           'link-padding',
-          'section-padding',
-          'align-button',
-          'align-content',
-          'align-image'
+          'align-links',
+          'padding',
+          'align',
+          'ico-padding',
+          'text-align'
         ]
       },
       {
         name: 'Text editor',
         icon: 'far fa-edit',
         open: false,
-        buildProps: ['font-styles', 'link-styles', 'background-image']
+        buildProps: ['font-styles', 'link-styles']
       },
       {
         name: 'Borders & backgrounds',
         icon: 'far fa-border-inner',
         open: false,
         buildProps: [
-          'button-color',
-          'button-corner-radius',
-          'button-border',
-          'divider-style',
-          'image-corner-radius',
-          'image-border',
-          'container-background',
-          'container-background-color',
-          'container-corner-radius',
-          'container-border',
-          'section-background',
-          'section-corner-radius',
-          'section-border',
-          'icon-color',
-          'icon-corner-radius',
-          'column-color',
-          'column-corner-radius',
-          'column-border-style'
+          'background',
+          'border-radius',
+          'border',
+          'border-detached',
+          'container-background'
         ]
       }
     ]

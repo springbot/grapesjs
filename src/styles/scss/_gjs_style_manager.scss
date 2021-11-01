@@ -254,14 +254,11 @@
   .#{$sm-prefix}property {
     box-sizing: border-box;
     float: left;
-    width: 50%;
     padding: 0;
-    flex: 1 0 auto;
-    
-    &.#{$sm-prefix}composite {
-      .#{$sm-prefix}property {
-        flex: 1 0 100px;
-      }
+    flex: 0 0 116px;
+
+    &--full {
+      flex: 1 0 auto;
     }
 
     &--full,
@@ -272,6 +269,7 @@
     &.#{$sm-prefix}slider,
     &.#{$sm-prefix}color {
       width: 100%;
+      flex: 1 0 auto;
     }
 
     .#{$sm-prefix}btn {
@@ -414,6 +412,13 @@
     }
 
     .#{$app-prefix}radio-item {
+      .#{$app-prefix}radio-item-label {
+        pointer-events: all;
+        box-sizing: border-box;
+        position: relative;
+        height: auto;
+        width: 100%;
+      }
       &:first-child > .#{$app-prefix}radio-item-label {
         border: none;
         border-radius: 4px 0 0 4px;
@@ -541,15 +546,6 @@
     &>*{
       padding: 9px 0;
     }
-  }
-}
-
-##{$sm-prefix}font-styles,##{$sm-prefix}link-styles {
-  ##{$sm-prefix}font-family,  ##{$sm-prefix}color, ##{$sm-prefix}text-decoration {
-    flex: 1 0 150px;
-  }
-  ##{$sm-prefix}line-height {
-    flex: 0 0 50%;
   }
 }
 

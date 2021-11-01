@@ -61,8 +61,8 @@ $leftWidth:         256px !default;
 $headerHeight:      48px !default;
 
 /* Color Helpers */
-$colorHighlight:    #71b7f1 !default;
-$colorWarn:         #ffca6f !default;
+$colorHighlight:    $textGray !default;
+$colorWarn:         $textGray !default;
 
 /* Canvas */
 $hndlMargin:        -5px !default;
