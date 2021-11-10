@@ -39617,7 +39617,7 @@ module.exports = function () {
     plugins: plugins,
 
     // Will be replaced on build
-    version: '0.14.64',
+    version: '0.14.65',
 
     /**
      * Initialize the editor with passed options
@@ -49797,7 +49797,9 @@ module.exports = {
   optionsTarget: [{ value: '', name: 'This window' }, { value: '_blank', name: 'New window' }],
 
   // Text to show in case no element selected
-  textNoElement: ''
+  textNoElement: '',
+
+  class: ''
 };
 
 /***/ }),
@@ -50447,6 +50449,126 @@ module.exports = TraitView.extend({
 
 /***/ }),
 
+/***/ "./src/trait_manager/view/TraitMultiselectView.js":
+/*!********************************************************!*\
+  !*** ./src/trait_manager/view/TraitMultiselectView.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var TraitView = __webpack_require__(/*! ./TraitView */ "./src/trait_manager/view/TraitView.js");
+var $ = __webpack_require__(/*! backbone */ "./node_modules/backbone/backbone.js").$;
+
+module.exports = TraitView.extend({
+  events: {
+    change: 'onChange',
+    'click .gjs-selected-option': 'removeFromSelected'
+  },
+  initialize: function initialize(o) {
+    TraitView.prototype.initialize.apply(this, arguments);
+    var ppfx = this.ppfx,
+        inputhClass = this.inputhClass,
+        fieldClass = this.fieldClass,
+        model = this.model;
+
+    this.listenTo(model, 'change:options', this.render);
+    this.tmpl = '<div class="' + fieldClass + '">\n      <div class="' + inputhClass + '" style="min-height: 32px;"></div>\n      <div class="' + ppfx + 'sel-arrow">\n        <div class="' + ppfx + 'd-s-arrow">\n          <i class="fas fa-caret-down"></i>\n        </div>\n      </div>\n    </div>';
+  },
+  formatOptions: function formatOptions(options) {
+    return options.map(function (option) {
+      var attrs = '';
+      var name = void 0,
+          value = void 0,
+          style = void 0;
+
+      if (typeof option === "string") {
+        name = option;
+        value = option;
+      } else {
+        name = option.name ? option.name : option.value;
+        value = ('' + (option.value === undefined ? option.id : option.value)).replace(/"/g, '&quot;');
+        style = option.style ? option.style.replace(/"/g, '&quot;') : '';
+        attrs += style ? ' style="' + style + '"' : '';
+      }
+      return { name: name, value: value, attrs: attrs };
+    });
+  },
+
+
+  // returns array of selected
+  getSelected: function getSelected() {
+    return this.model.getTargetValue() || this.model.get('value');
+  },
+  getFormattedSelected: function getFormattedSelected() {
+    return this.formatOptions(this.getSelected());
+  },
+  getCurrentOptions: function getCurrentOptions() {
+    var options = this.model.get('options') || [];
+    var selected = this.getSelected();
+    return this.formatOptions(options).filter(function (option) {
+      return !selected.includes(option.value);
+    });
+  },
+  selectedEl: function selectedEl() {
+    var selectedContainer = $('<div class="selected-options"></div>');
+    this.getFormattedSelected().forEach(function (option) {
+      var btn = document.createElement('div');
+      btn.value = option.value;
+      btn.className = "gjs-selected-option";
+      btn.innerHTML = option.name + ' <i class="far fa-times-circle"></i>';
+
+      selectedContainer.append(btn);
+    });
+    return selectedContainer;
+  },
+
+
+  /**
+   * Returns input element
+   * @return {HTMLElement}
+   * @private
+   */
+  getInputEl: function getInputEl() {
+    var _this = this;
+
+    var model = this.model;
+
+
+    this.$container = $("<div></div>");
+    this.$input = $('<select></select>');
+    this.$input.appendTo(this.$container);
+
+    this.$container.append(this.selectedEl());
+    this.$input.append($('<option value="-999" selected></option>'));
+    this.getCurrentOptions().forEach(function (option) {
+      var opt = $('<option class="option" value="' + option.value + '"' + option.attrs + '>' + option.name + '</option>');
+      _this.$input.append(opt);
+    });
+
+    return this.$container.get(0);
+  },
+  removeFromSelected: function removeFromSelected(event) {
+    var value = event.target.value;
+    this.model.set('value', this.getSelected().filter(function (s) {
+      return s != value;
+    }));
+    this.render();
+  },
+  onChange: function onChange(e) {
+    var selected = this.getSelected();
+    if (e.srcElement.value != -999 && !selected.includes(e.srcElement.value)) {
+      selected.push(e.srcElement.value);
+    }
+    this.model.set('value', selected);
+    this.render();
+  }
+});
+
+/***/ }),
+
 /***/ "./src/trait_manager/view/TraitNumberView.js":
 /*!***************************************************!*\
   !*** ./src/trait_manager/view/TraitNumberView.js ***!
@@ -50611,7 +50733,7 @@ module.exports = Backbone.View.extend({
     this.pfx = this.config.stylePrefix || '';
     this.ppfx = this.config.pStylePrefix || '';
     this.target = target;
-    this.className = this.pfx + 'trait';
+    this.className = this.pfx + 'trait ' + this.pfx + name;
     this.labelClass = this.ppfx + 'label';
     this.fieldClass = this.ppfx + 'field ' + this.ppfx + 'field-' + model.get('type');
     this.inputhClass = this.ppfx + 'input-holder';
@@ -50770,6 +50892,7 @@ module.exports = Backbone.View.extend({
 var DomainViews = __webpack_require__(/*! domain_abstract/view/DomainViews */ "./src/domain_abstract/view/DomainViews.js");
 var TraitView = __webpack_require__(/*! ./TraitView */ "./src/trait_manager/view/TraitView.js");
 var TraitSelectView = __webpack_require__(/*! ./TraitSelectView */ "./src/trait_manager/view/TraitSelectView.js");
+var TraitMultiselectView = __webpack_require__(/*! ./TraitMultiselectView */ "./src/trait_manager/view/TraitMultiselectView.js");
 var TraitCheckboxView = __webpack_require__(/*! ./TraitCheckboxView */ "./src/trait_manager/view/TraitCheckboxView.js");
 var TraitNumberView = __webpack_require__(/*! ./TraitNumberView */ "./src/trait_manager/view/TraitNumberView.js");
 var TraitColorView = __webpack_require__(/*! ./TraitColorView */ "./src/trait_manager/view/TraitColorView.js");
@@ -50782,6 +50905,7 @@ module.exports = DomainViews.extend({
     text: TraitView,
     number: TraitNumberView,
     select: TraitSelectView,
+    multiselect: TraitMultiselectView,
     checkbox: TraitCheckboxView,
     color: TraitColorView,
     button: TraitButtonView
@@ -50834,7 +50958,7 @@ module.exports = DomainViews.extend({
     this.$el.append(this.managerLabel.render().el);
 
     var ManagerLabel = document.createElement('div');
-    ManagerLabel.className = this.pfx + 'traits-container';
+    ManagerLabel.className = this.pfx + 'traits-container ' + this.config.class;
 
     if (this.collection.length) this.collection.each(function (model) {
       this.add(model, ManagerLabel);

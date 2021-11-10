@@ -1,6 +1,7 @@
 const DomainViews = require('domain_abstract/view/DomainViews');
 const TraitView = require('./TraitView');
 const TraitSelectView = require('./TraitSelectView');
+const TraitMultiselectView = require('./TraitMultiselectView');
 const TraitCheckboxView = require('./TraitCheckboxView');
 const TraitNumberView = require('./TraitNumberView');
 const TraitColorView = require('./TraitColorView');
@@ -13,6 +14,7 @@ module.exports = DomainViews.extend({
     text: TraitView,
     number: TraitNumberView,
     select: TraitSelectView,
+    multiselect: TraitMultiselectView,
     checkbox: TraitCheckboxView,
     color: TraitColorView,
     button: TraitButtonView
@@ -68,7 +70,7 @@ module.exports = DomainViews.extend({
     this.$el.append(this.managerLabel.render().el);
 
     var ManagerLabel = document.createElement('div');
-    ManagerLabel.className = `${this.pfx}traits-container`;
+    ManagerLabel.className = `${this.pfx}traits-container ${this.config.class}`;
 
     if (this.collection.length)
       this.collection.each(function(model) {
