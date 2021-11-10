@@ -58,7 +58,7 @@ module.exports = TraitView.extend({
   },
 
   selectedEl() {
-    const selectedContainer = $(`<div class="selected-options"></div>`);
+    const selectedContainer = $(`<div class="gjs-selected-options"></div>`);
     this.getFormattedSelected().forEach(option => {
       const btn = document.createElement('div');
       btn.value = option.value;
