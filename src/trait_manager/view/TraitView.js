@@ -61,6 +61,7 @@ module.exports = Backbone.View.extend({
     const mod = this.model;
     const trg = this.target;
     const name = mod.get('name');
+    console.log('????');
 
     if (opts.fromTarget) {
       this.setInputValue(mod.get('value'));
@@ -137,7 +138,6 @@ module.exports = Backbone.View.extend({
     const model = this.model;
     const target = this.target;
     const name = model.get('name');
-
     if (model.get('changeProp')) {
       value = target.get(name);
     } else {

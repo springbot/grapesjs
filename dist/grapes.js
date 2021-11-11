@@ -50327,7 +50327,6 @@ module.exports = TraitView.extend({
    * @private
    */
   onChange: function onChange() {
-    console.log('AHHH');
     var value = this.getInputEl().checked;
     this.model.set('value', this.getCheckedValue(value));
   },
@@ -50463,10 +50462,6 @@ var TraitView = __webpack_require__(/*! ./TraitView */ "./src/trait_manager/view
 var $ = __webpack_require__(/*! backbone */ "./node_modules/backbone/backbone.js").$;
 
 module.exports = TraitView.extend({
-  events: {
-    change: 'onChange',
-    'click .gjs-selected-option': 'removeFromSelected'
-  },
   initialize: function initialize(o) {
     TraitView.prototype.initialize.apply(this, arguments);
     var ppfx = this.ppfx,
@@ -50484,7 +50479,7 @@ module.exports = TraitView.extend({
           value = void 0,
           style = void 0;
 
-      if (typeof option === "string") {
+      if (typeof option === 'string') {
         name = option;
         value = option;
       } else {
@@ -50512,17 +50507,46 @@ module.exports = TraitView.extend({
       return !selected.includes(option.value);
     });
   },
-  selectedEl: function selectedEl() {
-    var selectedContainer = $('<div class="selected-options"></div>');
+  renderSelected: function renderSelected() {
+    var _this = this;
+
+    if (!this.$selectedContainer) {
+      this.$selectedContainer = $('<div class="gjs-selected-options"></div>');
+      this.$container.append(this.$selectedContainer);
+    } else {
+      while (this.$selectedContainer.get(0).firstChild) {
+        this.$selectedContainer.get(0).removeChild(this.$selectedContainer.get(0).firstChild);
+      }
+    }
     this.getFormattedSelected().forEach(function (option) {
       var btn = document.createElement('div');
       btn.value = option.value;
-      btn.className = "gjs-selected-option";
+      btn.className = 'gjs-selected-option';
       btn.innerHTML = option.name + ' <i class="far fa-times-circle"></i>';
+      btn.onclick = function () {
+        return _this.removeFromSelected(option.value);
+      };
 
-      selectedContainer.append(btn);
+      _this.$selectedContainer.append(btn);
     });
-    return selectedContainer;
+    return this.$selectedContainer;
+  },
+  renderSelect: function renderSelect() {
+    var _this2 = this;
+
+    if (!this.$select) {
+      this.$select = $('<select></select>');
+      this.$select.appendTo(this.$container);
+    } else {
+      while (this.$select.get(0).firstChild) {
+        this.$select.get(0).removeChild(this.$select.get(0).firstChild);
+      }
+    }
+    this.$select.append($('<option value="-999" selected></option>'));
+    this.getCurrentOptions().forEach(function (option) {
+      var opt = $('<option class="option" value="' + option.value + '"' + option.attrs + '>' + option.name + '</option>');
+      _this2.$select.append(opt);
+    });
   },
 
 
@@ -50532,38 +50556,27 @@ module.exports = TraitView.extend({
    * @private
    */
   getInputEl: function getInputEl() {
-    var _this = this;
-
-    var model = this.model;
-
-
-    this.$container = $("<div></div>");
-    this.$input = $('<select></select>');
-    this.$input.appendTo(this.$container);
-
-    this.$container.append(this.selectedEl());
-    this.$input.append($('<option value="-999" selected></option>'));
-    this.getCurrentOptions().forEach(function (option) {
-      var opt = $('<option class="option" value="' + option.value + '"' + option.attrs + '>' + option.name + '</option>');
-      _this.$input.append(opt);
-    });
+    this.$container = $('<div></div>');
+    this.renderSelect();
+    this.renderSelected();
 
     return this.$container.get(0);
   },
-  removeFromSelected: function removeFromSelected(event) {
-    var value = event.target.value;
-    this.model.set('value', this.getSelected().filter(function (s) {
+  removeFromSelected: function removeFromSelected(value) {
+    this.model.setValueFromInput(this.getSelected().filter(function (s) {
       return s != value;
     }));
-    this.render();
+    this.renderSelect();
+    this.renderSelected();
   },
   onChange: function onChange(e) {
     var selected = this.getSelected();
     if (e.srcElement.value != -999 && !selected.includes(e.srcElement.value)) {
       selected.push(e.srcElement.value);
     }
-    this.model.set('value', selected);
-    this.render();
+    this.model.setValueFromInput(selected);
+    this.renderSelect();
+    this.renderSelected();
   }
 });
 
@@ -50769,6 +50782,7 @@ module.exports = Backbone.View.extend({
     var mod = this.model;
     var trg = this.target;
     var name = mod.get('name');
+    console.log("????");
 
     if (opts.fromTarget) {
       this.setInputValue(mod.get('value'));
@@ -50842,7 +50856,6 @@ module.exports = Backbone.View.extend({
     var model = this.model;
     var target = this.target;
     var name = model.get('name');
-
     if (model.get('changeProp')) {
       value = target.get(name);
     } else {

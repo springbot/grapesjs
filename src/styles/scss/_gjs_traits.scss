@@ -107,6 +107,7 @@
       visibility: hidden;
     }
     .#{$app-prefix}selected-option {
+      line-height: 14px;
       background-color: #E3E6E8;
       border-radius: 4px;
       padding: 4px;

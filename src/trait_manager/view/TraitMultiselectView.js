@@ -2,10 +2,6 @@ const TraitView = require('./TraitView');
 const $ = require('backbone').$;
 
 module.exports = TraitView.extend({
-  events: {
-    change: 'onChange',
-    'click .gjs-selected-option': 'removeFromSelected'
-  },
   initialize(o) {
     TraitView.prototype.initialize.apply(this, arguments);
     const { ppfx, inputhClass, fieldClass, model } = this;
@@ -57,17 +53,47 @@ module.exports = TraitView.extend({
     );
   },
 
-  selectedEl() {
-    const selectedContainer = $(`<div class="gjs-selected-options"></div>`);
+  renderSelected() {
+    if (!this.$selectedContainer) {
+      this.$selectedContainer = $(`<div class="gjs-selected-options"></div>`);
+      this.$container.append(this.$selectedContainer);
+    } else {
+      while (this.$selectedContainer.get(0).firstChild) {
+        this.$selectedContainer
+          .get(0)
+          .removeChild(this.$selectedContainer.get(0).firstChild);
+      }
+    }
     this.getFormattedSelected().forEach(option => {
       const btn = document.createElement('div');
       btn.value = option.value;
       btn.className = 'gjs-selected-option';
       btn.innerHTML = `${option.name} <i class="far fa-times-circle"></i>`;
+      btn.onclick = () => this.removeFromSelected(option.value);
 
-      selectedContainer.append(btn);
+      this.$selectedContainer.append(btn);
     });
-    return selectedContainer;
+    return this.$selectedContainer;
+  },
+
+  renderSelect() {
+    if (!this.$select) {
+      this.$select = $('<select></select>');
+      this.$select.appendTo(this.$container);
+    } else {
+      while (this.$select.get(0).firstChild) {
+        this.$select.get(0).removeChild(this.$select.get(0).firstChild);
+      }
+    }
+    this.$select.append($('<option value="-999" selected></option>'));
+    this.getCurrentOptions().forEach(option => {
+      let opt = $(
+        `<option class="option" value="${option.value}"${option.attrs}>${
+          option.name
+        }</option>`
+      );
+      this.$select.append(opt);
+    });
   },
 
   /**
@@ -76,30 +102,17 @@ module.exports = TraitView.extend({
    * @private
    */
   getInputEl() {
-    const { model } = this;
-
     this.$container = $('<div></div>');
-    this.$input = $('<select></select>');
-    this.$input.appendTo(this.$container);
-
-    this.$container.append(this.selectedEl());
-    this.$input.append($('<option value="-999" selected></option>'));
-    this.getCurrentOptions().forEach(option => {
-      let opt = $(
-        `<option class="option" value="${option.value}"${option.attrs}>${
-          option.name
-        }</option>`
-      );
-      this.$input.append(opt);
-    });
+    this.renderSelect();
+    this.renderSelected();
 
     return this.$container.get(0);
   },
 
-  removeFromSelected(event) {
-    const value = event.target.value;
-    this.model.set('value', this.getSelected().filter(s => s != value));
-    this.render();
+  removeFromSelected(value) {
+    this.model.setValueFromInput(this.getSelected().filter(s => s != value));
+    this.renderSelect();
+    this.renderSelected();
   },
 
   onChange(e) {
@@ -107,7 +120,8 @@ module.exports = TraitView.extend({
     if (e.srcElement.value != -999 && !selected.includes(e.srcElement.value)) {
       selected.push(e.srcElement.value);
     }
-    this.model.set('value', selected);
-    this.render();
+    this.model.setValueFromInput(selected);
+    this.renderSelect();
+    this.renderSelected();
   }
 });
