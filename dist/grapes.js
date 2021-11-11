@@ -50631,7 +50631,7 @@ module.exports = Backbone.View.extend({
     this.pfx = this.config.stylePrefix || '';
     this.ppfx = this.config.pStylePrefix || '';
     this.target = target;
-    this.className = this.pfx + 'trait';
+    this.className = this.pfx + 'trait ' + this.pfx + name;
     this.labelClass = this.ppfx + 'label';
     this.fieldClass = this.ppfx + 'field ' + this.ppfx + 'field-' + model.get('type');
     this.inputhClass = this.ppfx + 'input-holder';
@@ -50854,7 +50854,7 @@ module.exports = DomainViews.extend({
     this.$el.append(this.managerLabel.render().el);
 
     var ManagerLabel = document.createElement('div');
-    ManagerLabel.className = this.pfx + 'traits-container';
+    ManagerLabel.className = this.pfx + 'traits-container ' + (this.config.class ? this.config.class : '');
 
     if (this.collection.length) this.collection.each(function (model) {
       this.add(model, ManagerLabel);
