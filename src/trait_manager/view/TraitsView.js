@@ -70,7 +70,9 @@ module.exports = DomainViews.extend({
     this.$el.append(this.managerLabel.render().el);
 
     var ManagerLabel = document.createElement('div');
-    ManagerLabel.className = `${this.pfx}traits-container ${this.config.class}`;
+    ManagerLabel.className = `${this.pfx}traits-container ${
+      this.config.class ? this.config.class : ''
+    }`;
 
     if (this.collection.length)
       this.collection.each(function(model) {

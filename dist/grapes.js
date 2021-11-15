@@ -37896,17 +37896,17 @@ module.exports = {
       name: 'Size & positioning',
       icon: 'far fa-object-group',
       open: false,
-      buildProps: ['size', 'container-padding', 'link-padding', 'section-padding', 'align-button', 'align-content', 'align-image']
+      buildProps: ['size', 'link-padding', 'align-links', 'padding', 'align', 'ico-padding', 'text-align']
     }, {
       name: 'Text editor',
       icon: 'far fa-edit',
       open: false,
-      buildProps: ['font-styles', 'link-styles', 'background-image']
+      buildProps: ['font-styles', 'link-styles']
     }, {
       name: 'Borders & backgrounds',
       icon: 'far fa-border-inner',
       open: false,
-      buildProps: ['button-color', 'button-corner-radius', 'button-border', 'divider-style', 'image-corner-radius', 'image-border', 'container-background', 'container-background-color', 'container-corner-radius', 'container-border', 'section-background', 'section-corner-radius', 'section-border', 'icon-color', 'icon-corner-radius', 'column-color', 'column-corner-radius', 'column-border-style']
+      buildProps: ['background', 'border-radius', 'border', 'border-detached', 'container-background']
     }]
   },
 
@@ -46510,76 +46510,47 @@ module.exports = function () {
         var prop = props[i];
         obj.property = prop;
 
+        if (prop === 'border-side-toggles') {
+          obj.type = 'toggles';
+          obj.defaults = '';
+          obj.baseStyle = 'border';
+          obj.list = [{
+            value: 'border-top',
+            name: 'border-top',
+            className: 'far fa-border-top'
+          }, {
+            value: 'border-right',
+            name: 'border-right',
+            className: 'far fa-border-right'
+          }, {
+            value: 'border-bottom',
+            name: 'border-bottom',
+            className: 'far fa-border-bottom'
+          }, {
+            value: 'border-left',
+            name: 'border-left',
+            className: 'far fa-border-left'
+          }];
+        }
+
         // Property
-        // Styling is based on obj.property, so need to change the custom name back to actual prop being styled
         switch (prop) {
-          case 'button-corner-radius':
-          case 'image-corner-radius':
-          case 'container-corner-radius':
-          case 'section-corner-radius':
-          case 'icon-corner-radius':
-          case 'column-corner-radius':
           case 'border-radius-c':
             obj.property = 'border-radius';
             break;
-          case 'align-content':
-          case 'align-button':
-          case 'align-image':
-            obj.property = 'text-align';
-            break;
-          case 'container-padding':
-          case 'section-padding':
-          case 'link-padding':
-            obj.property = 'padding';
-            break;
-          case 'button-color':
-          case 'container-background-color':
-          case 'column-color':
-            obj.property = 'background-color';
-            break;
-          case 'icon-color':
-            obj.property = 'color';
-            break;
-          case 'button-border':
-          case 'divider-style':
-          case 'image-border':
-          case 'container-border':
-          case 'section-border':
-          case 'column-border-style':
-            obj.property = 'border';
-            break;
         }
 
-        // Name
         switch (prop) {
-          case 'button-color':
-          case 'button-corner-radius':
-          case 'button-border':
-          case 'divider-style':
-          case 'image-corner-radius':
-          case 'image-border':
-          case 'container-background':
-          case 'container-corner-radius':
-          case 'container-border':
-          case 'section-background':
-          case 'section-corner-radius':
-          case 'section-border':
-          case 'icon-color':
-          case 'icon-corner-radius':
-          case 'column-color':
-          case 'column-corner-radius':
-          case 'column-border-style':
-          case 'align-content':
-          case 'align-button':
-          case 'align-image':
-          case 'container-padding':
-          case 'section-padding':
-          case 'link-padding':
-            var name = prop.split('-').join(' ');
-            obj.name = name.charAt(0).toUpperCase() + name.slice(1);
-            break;
-          case 'container-background-color':
-            obj.name = 'Container color';
+          case 'font-family':
+          case 'link-font-family':
+          case 'text-decoration':
+          case 'link-text-decoration':
+          case 'color':
+          case 'link-text-color':
+          case 'border-radius':
+          case 'border-color':
+          case 'border-side-toggles':
+            obj.full = true;
             break;
         }
 
@@ -46593,7 +46564,16 @@ module.exports = function () {
           case 'padding-right':
           case 'padding-bottom':
           case 'padding-left':
+          case 'ico-padding-top':
+          case 'ico-padding-right':
+          case 'ico-padding-bottom':
+          case 'ico-padding-left':
+          case 'link-padding-top':
+          case 'link-padding-right':
+          case 'link-padding-bottom':
+          case 'link-padding-left':
           case 'width':
+          case 'icon-size':
           case 'max-width':
           case 'min-width':
           case 'height':
@@ -46603,10 +46583,12 @@ module.exports = function () {
             obj.fixedValues = ['initial', 'inherit', 'auto'];
             break;
           case 'font-size':
+          case 'link-font-size':
             obj.fixedValues = ['medium', 'xx-small', 'x-small', 'small', 'large', 'x-large', 'xx-large', 'smaller', 'larger', 'length', 'initial', 'inherit'];
             break;
           case 'letter-spacing':
           case 'line-height':
+          case 'link-line-height':
             obj.fixedValues = ['normal', 'initial', 'inherit'];
             break;
         }
@@ -46615,11 +46597,11 @@ module.exports = function () {
         switch (prop) {
           case 'float':
           case 'position':
-          case 'align-button':
-          case 'align-content':
-          case 'align-image':
           case 'text-align':
+          case 'align':
+          case 'align-links':
           case 'text-decoration':
+          case 'link-text-decoration':
             obj.type = 'radio';
             break;
           case 'display':
@@ -46629,7 +46611,9 @@ module.exports = function () {
           case 'align-items':
           case 'align-self':
           case 'font-family':
+          case 'link-font-family':
           case 'font-weight':
+          case 'link-font-weight':
           case 'border-style':
           case 'box-shadow-type':
           case 'background-repeat':
@@ -46656,15 +46640,26 @@ module.exports = function () {
           case 'padding-right':
           case 'padding-bottom':
           case 'padding-left':
+          case 'ico-padding-top':
+          case 'ico-padding-right':
+          case 'ico-padding-bottom':
+          case 'ico-padding-left':
+          case 'link-padding-top':
+          case 'link-padding-right':
+          case 'link-padding-bottom':
+          case 'link-padding-left':
           case 'min-height':
           case 'min-width':
           case 'max-height':
           case 'max-width':
           case 'width':
+          case 'icon-size':
           case 'height':
           case 'font-size':
+          case 'link-font-size':
           case 'letter-spacing':
           case 'line-height':
+          case 'link-line-height':
           case 'text-shadow-h':
           case 'text-shadow-v':
           case 'text-shadow-blur':
@@ -46697,47 +46692,34 @@ module.exports = function () {
           case 'section-padding':
           case 'link-padding':
           case 'padding':
+          case 'ico-padding':
           case 'border-radius':
-          case 'button-corner-radius':
-          case 'image-corner-radius':
-          case 'container-corner-radius':
-          case 'section-corner-radius':
-          case 'column-corner-radius':
-          case 'icon-corner-radius':
-          case 'button-border':
-          case 'image-border':
-          case 'divider-style':
-          case 'container-border':
-          case 'column-border-style':
-          case 'section-border':
           case 'border':
+          case 'border-detached':
           case 'size':
-          case 'button-size':
           case 'transform':
           case 'font-styles':
           case 'link-styles':
+          case 'background':
           case 'container-background':
-          case 'section-background':
             obj.type = 'composite';
             break;
           case 'color':
+          case 'link-text-color':
           case 'text-shadow-color':
           case 'background-color':
           case 'border-color':
           case 'box-shadow-color':
-          case 'button-color':
           case 'container-background-color':
-          case 'icon-color':
-          case 'column-color':
             obj.type = 'color';
             break;
           case 'text-shadow':
           case 'box-shadow':
-          case 'background':
           case 'transition':
             obj.type = 'stack';
             break;
           case 'background-image':
+          case 'background-url':
             obj.type = 'file';
             break;
         }
@@ -46752,6 +46734,7 @@ module.exports = function () {
           case 'float':
           case 'background-color':
           case 'background-image':
+          case 'background-url':
           case 'text-shadow':
             obj.defaults = 'none';
             break;
@@ -46788,6 +46771,14 @@ module.exports = function () {
           case 'padding-right':
           case 'padding-bottom':
           case 'padding-left':
+          case 'ico-padding-top':
+          case 'ico-padding-right':
+          case 'ico-padding-bottom':
+          case 'ico-padding-left':
+          case 'link-padding-top':
+          case 'link-padding-right':
+          case 'link-padding-bottom':
+          case 'link-padding-left':
           case 'text-shadow-h':
           case 'text-shadow-v':
           case 'text-shadow-blur':
@@ -46801,6 +46792,7 @@ module.exports = function () {
           case 'transform-rotate-z':
           case 'order':
           case 'flex-grow':
+          case 'border-width':
             obj.defaults = 0;
             break;
           case 'border-top-left-radius':
@@ -46823,6 +46815,7 @@ module.exports = function () {
           case 'max-height':
           case 'max-width':
           case 'width':
+          case 'icon-size':
           case 'height':
           case 'background-size':
           case 'cursor':
@@ -46830,30 +46823,32 @@ module.exports = function () {
             obj.defaults = 'auto';
             break;
           case 'font-family':
+          case 'link-font-family':
             obj.defaults = 'Arial, Helvetica, sans-serif';
             break;
           case 'font-size':
-          case 'border-width':
+          case 'link-font-size':
             obj.defaults = 'medium';
             break;
           case 'font-weight':
+          case 'link-font-weight':
             obj.defaults = '400';
             break;
           case 'letter-spacing':
           case 'line-height':
+          case 'link-line-height':
             obj.defaults = 'normal';
             break;
           case 'color':
+          case 'link-text-color':
           case 'text-shadow-color':
           case 'border-color':
           case 'box-shadow-color':
-          case 'icon-color':
             obj.defaults = 'black';
             break;
-          case 'align-button':
-          case 'align-content':
-          case 'align-image':
           case 'text-align':
+          case 'align':
+          case 'align-links':
             obj.defaults = 'left';
             break;
           case 'border-style':
@@ -46917,7 +46912,17 @@ module.exports = function () {
           case 'margin-top':
           case 'margin-bottom':
           case 'padding-top':
+          case 'padding-right':
           case 'padding-bottom':
+          case 'padding-left':
+          case 'ico-padding-top':
+          case 'ico-padding-right':
+          case 'ico-padding-bottom':
+          case 'ico-padding-left':
+          case 'link-padding-top':
+          case 'link-padding-right':
+          case 'link-padding-bottom':
+          case 'link-padding-left':
           case 'min-height':
           case 'max-height':
           case 'height':
@@ -46925,11 +46930,10 @@ module.exports = function () {
           case 'left':
           case 'margin-right':
           case 'margin-left':
-          case 'padding-right':
-          case 'padding-left':
           case 'min-width':
           case 'max-width':
           case 'width':
+          case 'icon-size':
           case 'flex-basis':
           case 'text-shadow-v':
           case 'text-shadow-h':
@@ -46942,8 +46946,10 @@ module.exports = function () {
           case 'box-shadow-h':
           case 'box-shadow-v':
           case 'font-size':
+          case 'link-font-size':
           case 'letter-spacing':
           case 'line-height':
+          case 'link-line-height':
           case 'border-width':
           case 'box-shadow-blur':
           case 'box-shadow-spread':
@@ -46966,13 +46972,23 @@ module.exports = function () {
           case 'padding-right':
           case 'padding-bottom':
           case 'padding-left':
+          case 'ico-padding-top':
+          case 'ico-padding-right':
+          case 'ico-padding-bottom':
+          case 'ico-padding-left':
+          case 'link-padding-top':
+          case 'link-padding-right':
+          case 'link-padding-bottom':
+          case 'link-padding-left':
           case 'min-height':
           case 'min-width':
           case 'max-height':
           case 'max-width':
           case 'width':
+          case 'icon-size':
           case 'height':
           case 'font-size':
+          case 'link-font-size':
           case 'text-shadow-blur':
           case 'border-radius-c':
           case 'border-top-left-radius':
@@ -46999,11 +47015,13 @@ module.exports = function () {
 
         // Detached
         switch (prop) {
+          case 'size':
           case 'font-styles':
           case 'link-styles':
-          case 'background':
-          case 'container-background':
-          case 'section-background':
+          case 'border-detached':
+          case 'padding':
+          case 'ico-padding':
+          case 'link-padding':
             obj.detached = true;
             break;
         }
@@ -47036,24 +47054,35 @@ module.exports = function () {
         // Icons
         switch (prop) {
           case 'padding-left':
+          case 'ico-padding-left':
+          case 'link-padding-left':
             obj.icon = 'far fa-arrow-to-left';
             break;
           case 'padding-right':
+          case 'ico-padding-right':
+          case 'link-padding-right':
             obj.icon = 'far fa-arrow-to-right';
             break;
           case 'padding-top':
+          case 'ico-padding-top':
+          case 'link-padding-top':
             obj.icon = 'far fa-arrow-to-top';
             break;
           case 'padding-bottom':
+          case 'ico-padding-bottom':
+          case 'link-padding-bottom':
             obj.icon = 'far fa-arrow-to-bottom';
             break;
           case 'font-weight':
+          case 'link-font-weight':
             obj.icon = 'far fa-text-width';
             break;
           case 'font-size':
+          case 'link-font-size':
             obj.icon = 'far fa-text-size';
             break;
           case 'line-height':
+          case 'link-line-height':
             obj.icon = 'far fa-line-height';
             break;
           case 'border-style':
@@ -47075,6 +47104,7 @@ module.exports = function () {
         // TextLabels
         switch (prop) {
           case 'width':
+          case 'icon-size':
             obj.textLabel = 'W';
             break;
           case 'height':
@@ -47109,6 +47139,7 @@ module.exports = function () {
             obj.list = [{ value: 'static' }, { value: 'relative' }, { value: 'absolute' }, { value: 'fixed' }];
             break;
           case 'font-family':
+          case 'link-font-family':
             var ss = ', sans-serif';
             var fonts = ['Arial, Helvetica' + ss, 'Arial Black, Gadget' + ss, 'Brush Script MT' + ss, 'Comic Sans MS, cursive' + ss, 'Courier New, Courier, monospace', 'Georgia, serif', 'Helvetica, serif', 'Impact, Charcoal' + ss, 'Lucida Sans Unicode, Lucida Grande' + ss, 'Tahoma, Geneva' + ss, 'Times New Roman, Times, serif', 'Trebuchet MS, Helvetica' + ss, 'Verdana, Geneva' + ss];
             obj.list = [];
@@ -47120,15 +47151,13 @@ module.exports = function () {
             }
             break;
           case 'font-weight':
+          case 'link-font-weight':
             obj.list = [{ value: '100', name: 'Thin' }, { value: '200', name: 'Extra-Light' }, { value: '300', name: 'Light' }, { value: '400', name: 'Normal' }, { value: '500', name: 'Medium' }, { value: '600', name: 'Semi-Bold' }, { value: '700', name: 'Bold' }, { value: '800', name: 'Extra-Bold' }, { value: '900', name: 'Ultra-Bold' }];
             break;
-          case 'align-button':
-          case 'align-content':
           case 'text-align':
-            obj.list = [{ value: 'left', icon: 'far fa-align-left' }, { value: 'center', icon: 'far fa-align-center' }, { value: 'right', icon: 'far fa-align-right' }];
-            break;
-          case 'align-image':
-            obj.list = [{ value: 'left', icon: 'far fa-align-left' }, { value: 'center', icon: 'far fa-align-center' }, { value: 'right', icon: 'far fa-align-right' }, { value: 'justify', icon: 'far fa-align-justify' }];
+          case 'align':
+          case 'align-links':
+            obj.list = [{ value: 'left', className: 'far fa-align-left' }, { value: 'center', className: 'far fa-align-center' }, { value: 'right', className: 'far fa-align-right' }, { value: 'justify', className: 'far fa-align-justify' }];
             break;
           case 'border-style':
             obj.list = [{ value: 'none' }, { value: 'solid' }, { value: 'dotted' }, { value: 'dashed' }, { value: 'double' }, { value: 'groove' }, { value: 'ridge' }, { value: 'inset' }, { value: 'outset' }];
@@ -47163,7 +47192,8 @@ module.exports = function () {
             obj.list = [{ value: 'visible' }, { value: 'hidden' }, { value: 'scroll' }, { value: 'auto' }];
             break;
           case 'text-decoration':
-            obj.list = [{ value: 'none', icon: 'far fa-times' }, { value: 'line-through', icon: 'far fa-strikethrough' }, { value: 'underline', icon: 'far fa-underline' }];
+          case 'link-text-decoration':
+            obj.list = [{ value: 'none', className: 'far fa-times' }, { value: 'line-through', className: 'far fa-strikethrough' }, { value: 'underline', className: 'far fa-underline' }];
         }
 
         // Properties
@@ -47171,30 +47201,22 @@ module.exports = function () {
           case 'margin':
             obj.properties = this.build(['margin-top', 'margin-right', 'margin-bottom', 'margin-left']);
             break;
-          case 'container-padding':
-          case 'section-padding':
-          case 'link-padding':
           case 'padding':
             obj.properties = this.build(['padding-top', 'padding-right', 'padding-bottom', 'padding-left']);
+            break;
+          case 'ico-padding':
+            obj.properties = this.build(['ico-padding-top', 'ico-padding-right', 'ico-padding-bottom', 'ico-padding-left']);
+            break;
+          case 'link-padding':
+            obj.properties = this.build(['link-padding-top', 'link-padding-right', 'link-padding-bottom', 'link-padding-left']);
             break;
           case 'text-shadow':
             obj.properties = this.build(['text-shadow-h', 'text-shadow-v', 'text-shadow-blur', 'text-shadow-color']);
             break;
-          case 'button-border':
-          case 'image-border':
-          case 'container-border':
-          case 'section-border':
-          case 'divider-style':
-          case 'column-border-style':
           case 'border':
-            obj.properties = this.build(['border-width', 'border-style', 'border-color']);
+          case 'border-detached':
+            obj.properties = this.build(['border-width', 'border-style', 'border-color', 'border-side-toggles']);
             break;
-          case 'button-corner-radius':
-          case 'image-corner-radius':
-          case 'container-corner-radius':
-          case 'section-corner-radius':
-          case 'icon-corner-radius':
-          case 'column-corner-radius':
           case 'border-radius':
             obj.properties = this.build(['border-top-left-radius', 'border-top-right-radius', 'border-bottom-left-radius', 'border-bottom-right-radius']);
             break;
@@ -47202,15 +47224,13 @@ module.exports = function () {
             obj.properties = this.build(['box-shadow-h', 'box-shadow-v', 'box-shadow-blur', 'box-shadow-spread', 'box-shadow-color', 'box-shadow-type']);
             break;
           case 'background':
-            obj.properties = this.build(['background-image', 'background-repeat', 'background-position', 'background-attachment', 'background-size']);
+            obj.properties = this.build(['background-color', 'background-url']);
             break;
           case 'container-background':
-          case 'section-background':
-            obj.properties = this.build(['background-color', 'background-image']);
+            obj.properties = this.build(['container-background-color', 'background-url']);
             break;
-          case 'button-size':
           case 'size':
-            obj.properties = this.build(['width', 'height']);
+            obj.properties = this.build(['width', 'height', 'icon-size']);
             break;
           case 'transition':
             obj.properties = this.build(['transition-property', 'transition-duration', 'transition-timing-function']);
@@ -47219,9 +47239,10 @@ module.exports = function () {
             obj.properties = this.build(['transform-rotate-x', 'transform-rotate-y', 'transform-rotate-z', 'transform-scale-x', 'transform-scale-y', 'transform-scale-z']);
             break;
           case 'link-styles':
+            obj.properties = this.build(['link-font-family', 'link-font-weight', 'link-font-size', 'link-text-color', 'link-line-height', 'link-text-decoration']);
+            break;
           case 'font-styles':
             obj.properties = this.build(['font-family', 'font-weight', 'font-size', 'color', 'line-height', 'text-decoration']);
-
             break;
         }
 
@@ -50782,7 +50803,7 @@ module.exports = Backbone.View.extend({
     var mod = this.model;
     var trg = this.target;
     var name = mod.get('name');
-    console.log("????");
+    console.log('????');
 
     if (opts.fromTarget) {
       this.setInputValue(mod.get('value'));
@@ -50971,7 +50992,7 @@ module.exports = DomainViews.extend({
     this.$el.append(this.managerLabel.render().el);
 
     var ManagerLabel = document.createElement('div');
-    ManagerLabel.className = this.pfx + 'traits-container ' + this.config.class;
+    ManagerLabel.className = this.pfx + 'traits-container ' + (this.config.class ? this.config.class : '');
 
     if (this.collection.length) this.collection.each(function (model) {
       this.add(model, ManagerLabel);
