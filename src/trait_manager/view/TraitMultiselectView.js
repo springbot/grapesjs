@@ -42,7 +42,11 @@ module.exports = TraitView.extend({
   },
 
   getFormattedSelected() {
-    return this.formatOptions(this.getSelected());
+    const selectedVals = this.getSelected();
+    const options = this.formatOptions(this.model.get('options') || []);
+    return selectedVals.map(val => {
+      return options.find(opt => opt.value == val);
+    });
   },
 
   getCurrentOptions() {

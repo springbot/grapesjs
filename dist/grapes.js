@@ -50519,7 +50519,13 @@ module.exports = TraitView.extend({
     return this.model.getTargetValue() || this.model.get('value');
   },
   getFormattedSelected: function getFormattedSelected() {
-    return this.formatOptions(this.getSelected());
+    var selectedVals = this.getSelected();
+    var options = this.formatOptions(this.model.get('options') || []);
+    return selectedVals.map(function (val) {
+      return options.find(function (opt) {
+        return opt.value == val;
+      });
+    });
   },
   getCurrentOptions: function getCurrentOptions() {
     var options = this.model.get('options') || [];
