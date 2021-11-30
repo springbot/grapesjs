@@ -49818,7 +49818,9 @@ module.exports = {
   optionsTarget: [{ value: '', name: 'This window' }, { value: '_blank', name: 'New window' }],
 
   // Text to show in case no element selected
-  textNoElement: ''
+  textNoElement: '',
+
+  class: ''
 };
 
 /***/ }),
@@ -50467,6 +50469,146 @@ module.exports = TraitView.extend({
 
 /***/ }),
 
+/***/ "./src/trait_manager/view/TraitMultiselectView.js":
+/*!********************************************************!*\
+  !*** ./src/trait_manager/view/TraitMultiselectView.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var TraitView = __webpack_require__(/*! ./TraitView */ "./src/trait_manager/view/TraitView.js");
+var $ = __webpack_require__(/*! backbone */ "./node_modules/backbone/backbone.js").$;
+
+module.exports = TraitView.extend({
+  initialize: function initialize(o) {
+    TraitView.prototype.initialize.apply(this, arguments);
+    var ppfx = this.ppfx,
+        inputhClass = this.inputhClass,
+        fieldClass = this.fieldClass,
+        model = this.model;
+
+    this.listenTo(model, 'change:options', this.render);
+    this.tmpl = '<div class="' + fieldClass + '">\n      <div class="' + inputhClass + '" style="min-height: 32px;"></div>\n      <div class="' + ppfx + 'sel-arrow">\n        <div class="' + ppfx + 'd-s-arrow">\n          <i class="fas fa-caret-down"></i>\n        </div>\n      </div>\n    </div>';
+  },
+  formatOptions: function formatOptions(options) {
+    return options.map(function (option) {
+      var attrs = '';
+      var name = void 0,
+          value = void 0,
+          style = void 0;
+
+      if (typeof option === 'string') {
+        name = option;
+        value = option;
+      } else {
+        name = option.name ? option.name : option.value;
+        value = ('' + (option.value === undefined ? option.id : option.value)).replace(/"/g, '&quot;');
+        style = option.style ? option.style.replace(/"/g, '&quot;') : '';
+        attrs += style ? ' style="' + style + '"' : '';
+      }
+      return { name: name, value: value, attrs: attrs };
+    });
+  },
+
+
+  // returns array of selected
+  getSelected: function getSelected() {
+    return this.model.getTargetValue() || this.model.get('value');
+  },
+  getFormattedSelected: function getFormattedSelected() {
+    var selectedVals = this.getSelected();
+    var options = this.formatOptions(this.model.get('options') || []);
+    return selectedVals.map(function (val) {
+      return options.find(function (opt) {
+        return opt.value == val;
+      });
+    });
+  },
+  getCurrentOptions: function getCurrentOptions() {
+    var options = this.model.get('options') || [];
+    var selected = this.getSelected();
+    return this.formatOptions(options).filter(function (option) {
+      return !selected.includes(option.value);
+    });
+  },
+  renderSelected: function renderSelected() {
+    var _this = this;
+
+    if (!this.$selectedContainer) {
+      this.$selectedContainer = $('<div class="gjs-selected-options"></div>');
+      this.$container.append(this.$selectedContainer);
+    } else {
+      while (this.$selectedContainer.get(0).firstChild) {
+        this.$selectedContainer.get(0).removeChild(this.$selectedContainer.get(0).firstChild);
+      }
+    }
+    this.getFormattedSelected().forEach(function (option) {
+      var btn = document.createElement('div');
+      btn.value = option.value;
+      btn.className = 'gjs-selected-option';
+      btn.innerHTML = option.name + ' <i class="far fa-times-circle"></i>';
+      btn.onclick = function () {
+        return _this.removeFromSelected(option.value);
+      };
+
+      _this.$selectedContainer.append(btn);
+    });
+    return this.$selectedContainer;
+  },
+  renderSelect: function renderSelect() {
+    var _this2 = this;
+
+    if (!this.$select) {
+      this.$select = $('<select></select>');
+      this.$select.appendTo(this.$container);
+    } else {
+      while (this.$select.get(0).firstChild) {
+        this.$select.get(0).removeChild(this.$select.get(0).firstChild);
+      }
+    }
+    this.$select.append($('<option value="-999" selected></option>'));
+    this.getCurrentOptions().forEach(function (option) {
+      var opt = $('<option class="option" value="' + option.value + '"' + option.attrs + '>' + option.name + '</option>');
+      _this2.$select.append(opt);
+    });
+  },
+
+
+  /**
+   * Returns input element
+   * @return {HTMLElement}
+   * @private
+   */
+  getInputEl: function getInputEl() {
+    this.$container = $('<div></div>');
+    this.renderSelect();
+    this.renderSelected();
+
+    return this.$container.get(0);
+  },
+  removeFromSelected: function removeFromSelected(value) {
+    this.model.setValueFromInput(this.getSelected().filter(function (s) {
+      return s != value;
+    }));
+    this.renderSelect();
+    this.renderSelected();
+  },
+  onChange: function onChange(e) {
+    var selected = this.getSelected();
+    if (e.srcElement.value != -999 && !selected.includes(e.srcElement.value)) {
+      selected.push(e.srcElement.value);
+    }
+    this.model.setValueFromInput(selected);
+    this.renderSelect();
+    this.renderSelected();
+  }
+});
+
+/***/ }),
+
 /***/ "./src/trait_manager/view/TraitNumberView.js":
 /*!***************************************************!*\
   !*** ./src/trait_manager/view/TraitNumberView.js ***!
@@ -50740,7 +50882,6 @@ module.exports = Backbone.View.extend({
     var model = this.model;
     var target = this.target;
     var name = model.get('name');
-
     if (model.get('changeProp')) {
       value = target.get(name);
     } else {
@@ -50790,6 +50931,7 @@ module.exports = Backbone.View.extend({
 var DomainViews = __webpack_require__(/*! domain_abstract/view/DomainViews */ "./src/domain_abstract/view/DomainViews.js");
 var TraitView = __webpack_require__(/*! ./TraitView */ "./src/trait_manager/view/TraitView.js");
 var TraitSelectView = __webpack_require__(/*! ./TraitSelectView */ "./src/trait_manager/view/TraitSelectView.js");
+var TraitMultiselectView = __webpack_require__(/*! ./TraitMultiselectView */ "./src/trait_manager/view/TraitMultiselectView.js");
 var TraitCheckboxView = __webpack_require__(/*! ./TraitCheckboxView */ "./src/trait_manager/view/TraitCheckboxView.js");
 var TraitNumberView = __webpack_require__(/*! ./TraitNumberView */ "./src/trait_manager/view/TraitNumberView.js");
 var TraitColorView = __webpack_require__(/*! ./TraitColorView */ "./src/trait_manager/view/TraitColorView.js");
@@ -50802,6 +50944,7 @@ module.exports = DomainViews.extend({
     text: TraitView,
     number: TraitNumberView,
     select: TraitSelectView,
+    multiselect: TraitMultiselectView,
     checkbox: TraitCheckboxView,
     color: TraitColorView,
     button: TraitButtonView

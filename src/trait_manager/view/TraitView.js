@@ -137,7 +137,6 @@ module.exports = Backbone.View.extend({
     const model = this.model;
     const target = this.target;
     const name = model.get('name');
-
     if (model.get('changeProp')) {
       value = target.get(name);
     } else {

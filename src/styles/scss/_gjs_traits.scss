@@ -88,5 +88,50 @@
       margin: 0;
     }
   }
-}
 
+  .#{$app-prefix}field-multiselect {
+    select {
+      height: 100%;
+      position: absolute;
+      min-height: 32px;
+    }
+    .#{$app-prefix}selected-options {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      width: fit-content;
+      z-index: 2;
+      column-gap: 6px;
+      row-gap: 4px;
+      padding: 4px;
+      margin-right: 24px;
+      visibility: hidden;
+    }
+    .#{$app-prefix}selected-option {
+      line-height: 14px;
+      background-color: #E3E6E8;
+      border-radius: 4px;
+      padding: 4px;
+      cursor: pointer;
+      box-sizing: border-box;
+      height: 24px;
+      visibility: visible;
+      user-select: none;
+
+      i {
+        pointer-events: none;
+      }
+      &:hover {
+        i {
+          color: $colorBlue;
+        }
+      }
+    }
+
+    .#{$app-prefix}d-s-arrow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

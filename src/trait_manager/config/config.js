@@ -20,5 +20,7 @@ module.exports = {
   ],
 
   // Text to show in case no element selected
-  textNoElement: ''
+  textNoElement: '',
+
+  class: ''
 };
