@@ -187,23 +187,37 @@
 
 /* ??? */
 .#{$app-prefix}field-checkbox {
+  .#{$app-prefix}chk-icon {
   box-sizing: border-box;
-  border: 2px solid white;
-  border-radius: 4px;
-  background-color: $iconBg;
-  box-shadow:0 0 4px 0 rgba(0, 0, 0, 0.09);
+  // border: 2px solid white;
+  border-radius: 8px;
+  background-color: #7F7F7F;
+  // box-shadow:0 0 4px 0 rgba(0, 0, 0, 0.09);
   padding: 0;
-  width: 24px;
-  height: 24px;
+  width: 25px;
+  height: 17px;
   display: block;
   cursor: pointer;
+  transition: background-color .1s;
 
-  input {
-    display: none;
+    i {
+      position: absolute;
+      height: 13px;
+      width: 13px;
+      border-radius: 50%;
+      background-color: white;
+      left: 2px;
+      margin-top: 2px;
+      transition: left .1s;
+    }
+
   }
 
   input:checked + .#{$app-prefix}chk-icon {
-    display:block;
+    background-color: #3EB049;
+    i {
+      left: 10px;
+    }
   }
 }
 .#{$app-prefix}radio-items {

@@ -4,8 +4,9 @@ import Backbone from 'backbone';
 module.exports = Backbone.View.extend({
   template: _.template(`
   <div class="<%= pfx %>title">
-    <i class="<%= pfx %>caret-icon"></i>
-    <%= label %>
+  <i class="<%= icon %> <%= pfx %>category-icon"></i>
+  <%= label %>
+  <i class="<%= pfx %>caret"></i>
   </div>
   <div class="<%= pfx %>blocks-c"></div>
   `),
@@ -16,9 +17,9 @@ module.exports = Backbone.View.extend({
     this.config = config;
     const pfx = this.config.pStylePrefix || '';
     this.pfx = pfx;
-    this.caretR = 'far fa-caret-right';
-    this.caretD = 'far fa-caret-down';
-    this.iconClass = `${pfx}caret-icon`;
+    this.caretU = 'fas fa-caret-up';
+    this.caretD = 'fas fa-caret-down';
+    this.iconClass = `${pfx}caret`;
     this.activeClass = `${pfx}open`;
     this.className = `${pfx}block-category`;
     this.events[`click .${pfx}title`] = 'toggle';
@@ -39,7 +40,7 @@ module.exports = Backbone.View.extend({
 
   close() {
     this.el.className = this.className;
-    this.getIconEl().className = `${this.iconClass} ${this.caretR}`;
+    this.getIconEl().className = `${this.iconClass} ${this.caretD}`;
     this.getBlocksEl().style.display = 'none';
   },
 
@@ -70,6 +71,7 @@ module.exports = Backbone.View.extend({
 
   render() {
     this.el.innerHTML = this.template({
+      icon: this.model.get('icon'),
       pfx: this.pfx,
       label: this.model.get('label')
     });

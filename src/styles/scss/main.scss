@@ -391,7 +391,7 @@ $colorsAll: (one, $primaryColor),
         color: white;
       }
     }
-    &>i {
+    &>i[class*="-caret"] {
       transform: scaleY(-1);
         color: $colorBlue;
     }
@@ -423,7 +423,7 @@ $colorsAll: (one, $primaryColor),
     margin: 1px 8px 1px 1px;
     background-color: $iconBg;
   }
-  [id*="-caret"] {
+  [id*="-caret"], [class*="-caret"] {
     float: right;
     padding-right: 16px;
     font-size: 14px;

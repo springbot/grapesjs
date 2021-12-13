@@ -24485,7 +24485,7 @@ var _backbone2 = _interopRequireDefault(_backbone);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 module.exports = _backbone2.default.View.extend({
-  template: _underscore2.default.template('\n  <div class="<%= pfx %>title">\n    <i class="<%= pfx %>caret-icon"></i>\n    <%= label %>\n  </div>\n  <div class="<%= pfx %>blocks-c"></div>\n  '),
+  template: _underscore2.default.template('\n  <div class="<%= pfx %>title">\n  <i class="<%= icon %> <%= pfx %>category-icon"></i>\n  <%= label %>\n  <i class="<%= pfx %>caret"></i>\n  </div>\n  <div class="<%= pfx %>blocks-c"></div>\n  '),
 
   events: {},
 
@@ -24496,9 +24496,9 @@ module.exports = _backbone2.default.View.extend({
     this.config = config;
     var pfx = this.config.pStylePrefix || '';
     this.pfx = pfx;
-    this.caretR = 'far fa-caret-right';
-    this.caretD = 'far fa-caret-down';
-    this.iconClass = pfx + 'caret-icon';
+    this.caretU = 'fas fa-caret-up';
+    this.caretD = 'fas fa-caret-down';
+    this.iconClass = pfx + 'caret';
     this.activeClass = pfx + 'open';
     this.className = pfx + 'block-category';
     this.events['click .' + pfx + 'title'] = 'toggle';
@@ -24515,7 +24515,7 @@ module.exports = _backbone2.default.View.extend({
   },
   close: function close() {
     this.el.className = this.className;
-    this.getIconEl().className = this.iconClass + ' ' + this.caretR;
+    this.getIconEl().className = this.iconClass + ' ' + this.caretD;
     this.getBlocksEl().style.display = 'none';
   },
   toggle: function toggle() {
@@ -24541,6 +24541,7 @@ module.exports = _backbone2.default.View.extend({
   },
   render: function render() {
     this.el.innerHTML = this.template({
+      icon: this.model.get('icon'),
       pfx: this.pfx,
       label: this.model.get('label')
     });
@@ -39617,7 +39618,7 @@ module.exports = function () {
     plugins: plugins,
 
     // Will be replaced on build
-    version: '0.14.65',
+    version: '0.14.66',
 
     /**
      * Initialize the editor with passed options
@@ -50339,7 +50340,7 @@ module.exports = TraitView.extend({
         fieldClass = this.fieldClass,
         inputhClass = this.inputhClass;
 
-    this.tmpl = '<div class="' + fieldClass + '">\n        <label class="' + inputhClass + '">\n          <div class="' + ppfx + 'chk-icon">\n            <i class="far fa-check"></i>\n          </div>\n        </label>\n      </div>';
+    this.tmpl = '<div class="' + fieldClass + '">\n        <label class="' + inputhClass + '">\n          <div class="' + ppfx + 'chk-icon">\n            <i></i>\n          </div>\n        </label>\n      </div>';
   },
 
 
