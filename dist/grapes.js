@@ -50517,7 +50517,8 @@ module.exports = TraitView.extend({
 
   // returns array of selected
   getSelected: function getSelected() {
-    return this.model.getTargetValue() || this.model.get('value');
+    var sel = this.model.getTargetValue() || this.model.get('value');
+    return !Array.isArray(sel) ? [] : sel;
   },
   getFormattedSelected: function getFormattedSelected() {
     var selectedVals = this.getSelected();

@@ -38,7 +38,8 @@ module.exports = TraitView.extend({
 
   // returns array of selected
   getSelected() {
-    return this.model.getTargetValue() || this.model.get('value');
+    const sel = this.model.getTargetValue() || this.model.get('value');
+    return !Array.isArray(sel) ? [] : sel;
   },
 
   getFormattedSelected() {
