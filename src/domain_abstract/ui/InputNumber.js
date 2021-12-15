@@ -15,7 +15,26 @@ module.exports = Input.extend({
 
   template() {
     const ppfx = this.ppfx;
+    const pfx = this.model.view.pfx;
+    const icon = this.model.get('icon');
+    const textLabel = this.model.get('textLabel');
+    let iconEl = '';
+    switch (icon) {
+      case '':
+      case undefined:
+        iconEl = `<div>${textLabel ? textLabel : ''}</div>`;
+        break;
+      case 'border-width':
+        iconEl = `<i class="fal fa-horizontal-rule fa-fw"></i>
+                  <i class="far fa-horizontal-rule fa-fw"></i>
+                  <i class="fas fa-horizontal-rule fa-fw"></i>`;
+        break;
+      default:
+        iconEl = `<i class="${icon}"></i>`;
+        break;
+    }
     return `
+      <div class="${pfx}icon">${iconEl}</div>
       <span class="${ppfx}input-holder"></span>
       <span class="${ppfx}field-units"></span>
       <div class="${ppfx}field-arrows" data-arrows>
@@ -32,7 +51,7 @@ module.exports = Input.extend({
 
   initialize(opts = {}) {
     Input.prototype.initialize.apply(this, arguments);
-    bindAll(this, 'moveIncrement', 'upIncrement');
+    bindAll(this, 'upIncrement');
     this.doc = document;
     this.listenTo(this.model, 'change:unit', this.handleModelChange);
   },
@@ -163,7 +182,6 @@ module.exports = Input.extend({
     var value = this.model.get('value');
     value = this.normalizeValue(value);
     this.current = { y: e.pageY, val: value };
-    on(this.doc, 'mousemove', this.moveIncrement);
     on(this.doc, 'mouseup', this.upIncrement);
   },
 
@@ -190,7 +208,6 @@ module.exports = Input.extend({
     const model = this.model;
     const step = model.get('step');
     off(this.doc, 'mouseup', this.upIncrement);
-    off(this.doc, 'mousemove', this.moveIncrement);
 
     if (this.prValue && this.moved) {
       var value = this.prValue - step;
