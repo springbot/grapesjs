@@ -113,6 +113,10 @@
     pointer-events: none;
   }
 
+  [class*='gjs'][class*='-sel-arrow'] {
+    color: $iconGrayDk;
+  }
+
   .#{$app-prefix}d-s-arrow {
     width: 100%;
     height: 100%;
@@ -125,13 +129,12 @@
 
   &-arrows {
     position: absolute;
-    cursor: ns-resize;
     margin: auto;
     height: 20px;
     width: 9px;
     z-index: 10;
     bottom: 0;
-    right: $inputPadding - 2px;
+    right: 10px;
     top: 0;
   }
 
@@ -283,17 +286,18 @@
   position: absolute;
   height: 0;
   width: 0;
-  border-left: 3px solid transparent;
+  border-left: 4px solid transparent;
   border-right: 4px solid transparent;
   border-top: 4px solid $arrowColor;
-  bottom: 4px;
+  bottom: 2px;
+  border-radius: 2px;
   cursor: pointer;
 }
 
 .#{$app-prefix}field-arrow-u {
   border-bottom: 4px solid $arrowColor;
   border-top: none;
-  top: 4px;
+  top: 2px;
 }
 
 .#{$app-prefix}field-select {

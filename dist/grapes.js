@@ -37366,7 +37366,23 @@ module.exports = Input.extend({
 
   template: function template() {
     var ppfx = this.ppfx;
-    return '\n      <span class="' + ppfx + 'input-holder"></span>\n      <span class="' + ppfx + 'field-units"></span>\n      <div class="' + ppfx + 'field-arrows" data-arrows>\n        <div class="' + ppfx + 'field-arrow-u" data-arrow-up></div>\n        <div class="' + ppfx + 'field-arrow-d" data-arrow-down></div>\n      </div>\n    ';
+    var pfx = this.model.view.pfx;
+    var icon = this.model.get('icon');
+    var textLabel = this.model.get('textLabel');
+    var iconEl = '';
+    switch (icon) {
+      case '':
+      case undefined:
+        iconEl = '<div>' + (textLabel ? textLabel : '') + '</div>';
+        break;
+      case 'border-width':
+        iconEl = '<i class="fal fa-horizontal-rule fa-fw"></i>\n                  <i class="far fa-horizontal-rule fa-fw"></i>\n                  <i class="fas fa-horizontal-rule fa-fw"></i>';
+        break;
+      default:
+        iconEl = '<i class="' + icon + '"></i>';
+        break;
+    }
+    return '\n      <div class="' + pfx + 'icon">' + iconEl + '</div>\n      <span class="' + ppfx + 'input-holder"></span>\n      <span class="' + ppfx + 'field-units"></span>\n      <div class="' + ppfx + 'field-arrows" data-arrows>\n        <div class="' + ppfx + 'field-arrow-u" data-arrow-up></div>\n        <div class="' + ppfx + 'field-arrow-d" data-arrow-down></div>\n      </div>\n    ';
   },
   inputClass: function inputClass() {
     var ppfx = this.ppfx;
@@ -37376,7 +37392,7 @@ module.exports = Input.extend({
     var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
     Input.prototype.initialize.apply(this, arguments);
-    (0, _underscore.bindAll)(this, 'moveIncrement', 'upIncrement');
+    (0, _underscore.bindAll)(this, 'upIncrement');
     this.doc = document;
     this.listenTo(this.model, 'change:unit', this.handleModelChange);
   },
@@ -37514,7 +37530,6 @@ module.exports = Input.extend({
     var value = this.model.get('value');
     value = this.normalizeValue(value);
     this.current = { y: e.pageY, val: value };
-    (0, _mixins.on)(this.doc, 'mousemove', this.moveIncrement);
     (0, _mixins.on)(this.doc, 'mouseup', this.upIncrement);
   },
 
@@ -37543,7 +37558,6 @@ module.exports = Input.extend({
     var model = this.model;
     var step = model.get('step');
     (0, _mixins.off)(this.doc, 'mouseup', this.upIncrement);
-    (0, _mixins.off)(this.doc, 'mousemove', this.moveIncrement);
 
     if (this.prValue && this.moved) {
       var value = this.prValue - step;
@@ -48405,25 +48419,7 @@ var timeout = void 0;
 
 module.exports = PropertyView.extend({
   templateInput: function templateInput() {
-    var pfx = this.pfx;
-    var ppfx = this.ppfx;
-    var icon = this.model.get('icon');
-    var textLabel = this.model.get('textLabel');
-    var iconEl = '';
-    switch (icon) {
-      case '':
-      case undefined:
-        iconEl = '<div>' + (textLabel ? textLabel : '') + '</div>';
-        break;
-      case 'border-width':
-        iconEl = '<i class="fal fa-horizontal-rule fa-fw"></i>\n                  <i class="far fa-horizontal-rule fa-fw"></i>\n                  <i class="fas fa-horizontal-rule fa-fw"></i>';
-        break;
-      default:
-        iconEl = '<i class="' + icon + '"></i>';
-        break;
-    }
-
-    return '<div class="' + ppfx + 'field ' + ppfx + 'field-integer">\n      <div class="' + pfx + 'icon">\n        ' + iconEl + '\n      </div>\n    </div>';
+    return '';
   },
   init: function init() {
     var model = this.model;
@@ -48443,8 +48439,8 @@ module.exports = PropertyView.extend({
       var input = this.model.input;
       input.ppfx = ppfx;
       input.render();
-      var fields = this.el.querySelector('.' + ppfx + 'field');
-      fields.appendChild(input.el.children[0]);
+      var fields = this.el.querySelector('.' + ppfx + 'fields');
+      fields.appendChild(input.el);
       this.$input = input.inputEl;
       this.unit = input.unitEl;
       this.$unit = $(this.unit);
