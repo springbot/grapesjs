@@ -5,6 +5,12 @@
 
 @import "gjs_variables.scss";
 
+@import "fontawesome";
+@import "solid";
+@import "regular";
+@import "light";
+@import "brands";
+
 @font-face {
   font-family: 'font3336';
   src: url('#{$fontPath}/#{$fontName}.eot?v=#{$fontV}');
