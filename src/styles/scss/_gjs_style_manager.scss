@@ -14,9 +14,11 @@
   }
 
   // Sector
+  &sectors {
+    background-color: #f2f2f2;
+  }
   &sector {
     clear: both;
-    font-weight: lighter;
     text-align: left;
 
     &-title {
@@ -25,39 +27,55 @@
       align-items: center;
     }
 
-    &-caret {
-      width: 17px;
-      height: 17px;
-      min-width: 17px;
-      transform: rotate(-90deg);
+    &-caret, &-icon {
+      width: 48px;
+      text-align: center;
+      color: #737373;
+      div {
+        margin: 16px 0;
+      }
+    }
+
+    &-icon {
+      background-color: #FAFAFA;
     }
 
     &-label {
-      margin-left: 5px;
+      margin-left: 8px;
+      flex-grow: 1;
+      color: #4A4A4A;
+      font-weight: bold;
     }
 
     &.#{$sm-prefix}open {
       @extend .#{$app-prefix}category-open;
-
+      .#{$sm-prefix}sector-icon {
+        background-color: #0092DB;
+        color: white;
+      }
       .#{$sm-prefix}sector-caret {
-        transform: none;
+        transform: scaleY(-1);
+        color: #0092DB;
       }
     }
   }
 
   &properties {
     font-size: $fontSizeS;
-    padding: 10px 5px;
+    padding: 16px 8px 24px 8px;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-end;
     box-sizing: border-box;
     width: 100%;
+    gap: 8px;
   }
   // Sector END
 
   &label {
-    margin: 5px 5px 3px 0;
+    font-size: 14px;
+    line-height: 16px;
+    margin: 16px 0 8px 0;
     display: flex;
     align-items: center;
   }
@@ -87,7 +105,7 @@
   input,
   select {
     background-color: transparent;
-    color: $mainLhlColor;
+    color: #4A4A4A;
     border: none;
     width: 100%;
   }
@@ -122,7 +140,7 @@
     right: 10px;
     top: 3px;
     font-size: 10px;
-    color: $mainLhlColor;
+    color: #737373;
     cursor: pointer;
   }
 
@@ -134,7 +152,7 @@
     position: absolute;
     right: 0;
     top: 0;
-    cursor: ns-resize;
+    //cursor: ns-resize;
   }
 
   .#{$sm-prefix}sel-arrow {
@@ -154,14 +172,14 @@
   }
 
   .#{$sm-prefix}u-arrow {
-    border-bottom: 4px solid $mainLhlColor;
+    border-bottom: 4px solid #737373;
     top: 4px;
   }
 
   .#{$clm-prefix}d-s-arrow,
   .#{$sm-prefix}d-arrow,
   .#{$sm-prefix}d-s-arrow {
-    border-top: 4px solid $mainLhlColor;
+    border-top: 4px solid #737373;
     bottom: 4px;
   }
 
@@ -179,13 +197,18 @@
     border: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 1px 1px 0 $mainLhColor;
     color: $mainLhlColor;
-    border-radius: 2px;
+    border-radius: 4px;
     box-sizing: border-box;
     padding: 0 5px;
   }
 
   &.#{$sm-prefix}composite {
-    border-radius: 2px;
+    .#{$sm-prefix}properties {
+      padding: 0;
+      .#{$sm-prefix}label {
+        display: none;
+      }
+    }
   }
 
   &.#{$sm-prefix}select {
@@ -198,11 +221,6 @@
 
   &.#{$sm-prefix}select option {
     padding: 3px 0;
-  }
-
-  &.#{$sm-prefix}composite {
-    background-color: $mainDklColor;
-    border: 1px solid rgba(0, 0, 0, 0.25);
   }
 
   &.#{$sm-prefix}list {
@@ -222,7 +240,9 @@
     }
 
     .#{$sm-prefix}radio:checked + label {
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: rgba(255,255,255,0.9);
+      filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.09));
+      box-shadow: #fff inset 0 0 0 1px;
     }
 
     .#{$sm-prefix}icon {
@@ -268,9 +288,9 @@
 .#{$sm-prefix}property {
   box-sizing: border-box;
   float: left;
-  width: 50%;
-  margin-bottom: 5px;
-  padding: 0 5px;
+  width: 116px;
+  margin: 0;
+  padding: 0;
 
   &--full,
   &.#{$sm-prefix}composite,
@@ -284,7 +304,7 @@
 
   .#{$sm-prefix}btn {
     background-color: lighten($mainDkColor, 13%);
-    border-radius: 2px;
+    border-radius: 4px;
     box-shadow: 1px 1px 0 lighten($mainDkColor, 2%), 1px 1px 0 lighten($mainDkColor, 17%) inset;
     padding: 5px;
     position: relative;
@@ -491,5 +511,37 @@
 
   &:hover {
     @include opacity(0.9);
+  }
+}
+
+.#{$sm-prefix}clear {
+  display: none;
+}
+
+.#{$sm-prefix}property__{
+  &border-top-left-radius .#{$app-prefix}icon>div {
+    transform: rotate(-45deg);
+  }
+  &border-top-right-radius .#{$app-prefix}icon>div {
+    transform: rotate(45deg);
+  }
+  &border-bottom-right-radius {
+    order: 4;
+    .#{$app-prefix}icon>div {
+      transform: rotate(135deg);
+    }
+  }
+  &border-bottom-left-radius .#{$app-prefix}icon>div {
+    transform: rotate(-135deg);
+  }
+
+  &border-width .#{$app-prefix}icon {
+    line-height: 4px;
+    padding: 10px 0;
+    &>* {
+      line-height: 4px;
+      padding: 0;
+      font-size: 12px;
+    }
   }
 }

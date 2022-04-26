@@ -14,7 +14,7 @@ export default TraitView.extend({
     return `<div class="${clsField}">
       <div data-input></div>
       <div class="${ppfx}sel-arrow">
-        <div class="${ppfx}d-s-arrow"></div>
+        <div class="fas fa-caret-down"></div>
       </div>
     </div>`;
   },
@@ -41,15 +41,11 @@ export default TraitView.extend({
           value = el;
         } else {
           name = el.name || el.label || el.value;
-          value = `${isUndefined(el.value) ? el.id : el.value}`.replace(
-            /"/g,
-            '&quot;'
-          );
+          value = `${isUndefined(el.value) ? el.id : el.value}`.replace(/"/g, '&quot;');
           style = el.style ? el.style.replace(/"/g, '&quot;') : '';
           attrs += style ? ` style="${style}"` : '';
         }
-        const resultName =
-          em.t(`traitManager.traits.options.${propName}.${value}`) || name;
+        const resultName = em.t(`traitManager.traits.options.${propName}.${value}`) || name;
         input += `<option value="${value}"${attrs}>${resultName}</option>`;
         values.push(value);
       });
@@ -62,5 +58,5 @@ export default TraitView.extend({
     }
 
     return this.$input.get(0);
-  }
+  },
 });

@@ -220,6 +220,11 @@ export default class Property extends View {
     this.createdEl && this.__destroyFn(this._getClbOpts());
     $el.empty().append(this.template(model));
     $el.find('[data-sm-label]').append(this.templateLabel(model));
+    if (model.get('noLabel')) {
+      $el.find('[data-sm-label]')[0].style.display = 'none';
+    } else {
+      $el.find('[data-sm-label]')[0].style.display = '';
+    }
     const create = this.create && this.create.bind(this);
     this.createdEl = create && create(this._getClbOpts());
     $el.find('[data-sm-fields]').append(this.createdEl || this.templateInput(model));

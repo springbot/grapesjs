@@ -4,11 +4,14 @@ export default class PropertySelectView extends PropertyView {
   templateInput() {
     const pfx = this.pfx;
     const ppfx = this.ppfx;
+    let icon = this.model.get('iconName');
+    icon = icon ? `<div class="${ppfx}icon"><div class="${icon}"></div></div>` : '';
     return `
       <div class="${ppfx}field ${ppfx}select">
-        <span id="${pfx}input-holder"></span>
+      ${icon}
+        <span id="${ppfx}input-holder"></span>
         <div class="${ppfx}sel-arrow">
-          <div class="${ppfx}d-s-arrow"></div>
+          <div class="fas fa-caret-down"></div>
         </div>
       </div>
     `;
@@ -25,7 +28,7 @@ export default class PropertySelectView extends PropertyView {
   }
 
   onRender() {
-    const { model, pfx } = this;
+    const { model, ppfx } = this;
     const options = model.getOptions();
 
     if (!this.input) {
@@ -40,7 +43,7 @@ export default class PropertySelectView extends PropertyView {
         optionsRes.push(`<option value="${value}" ${styleAttr}>${name}</option>`);
       });
 
-      const inputH = this.el.querySelector(`#${pfx}input-holder`);
+      const inputH = this.el.querySelector(`#${ppfx}input-holder`);
       inputH.innerHTML = `<select>${optionsRes.join('')}</select>`;
       this.input = inputH.firstChild;
     }

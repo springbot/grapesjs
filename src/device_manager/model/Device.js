@@ -7,6 +7,7 @@ import { Model } from 'backbone';
  * @property {String} [height=''] Height to set for the editor iframe, eg. '600px'
  * @property {String} [widthMedia=''] The width which will be used in media queries, If empty the width will be used
  * @property {Number} [priority=null] Setup the order of media queries
+ * @property {String} [iconName=''] FA icon class
  */
 export default class Device extends Model {
   defaults() {
@@ -15,16 +16,15 @@ export default class Device extends Model {
       width: null,
       height: '',
       widthMedia: null,
-      priority: null
+      priority: null,
+      iconName: '',
     };
   }
 
   initialize() {
-    this.get('widthMedia') === null &&
-      this.set('widthMedia', this.get('width'));
+    this.get('widthMedia') === null && this.set('widthMedia', this.get('width'));
     this.get('width') === null && this.set('width', this.get('widthMedia'));
-    !this.get('priority') &&
-      this.set('priority', parseFloat(this.get('widthMedia')) || 0);
+    !this.get('priority') && this.set('priority', parseFloat(this.get('widthMedia')) || 0);
     const toCheck = ['width', 'height', 'widthMedia'];
     toCheck.forEach(prop => this.checkUnit(prop));
   }

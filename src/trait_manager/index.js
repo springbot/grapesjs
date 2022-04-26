@@ -7,7 +7,9 @@ import TraitCheckboxView from './view/TraitCheckboxView';
 import TraitNumberView from './view/TraitNumberView';
 import TraitColorView from './view/TraitColorView';
 import TraitButtonView from './view/TraitButtonView';
+import ManagerLabelView from './view/ManagerLabelView';
 import { Model, Module } from 'common';
+import ManagerLabel from './model/ManagerLabel';
 
 export const evAll = 'trait';
 export const evPfx = `${evAll}:`;
@@ -67,6 +69,15 @@ export default () => {
 
       const update = debounce(() => this.__onUp());
       model.listenTo(em, 'trait:update', update);
+      this.managerLabel = new ManagerLabelView({
+        model: new ManagerLabel(),
+        editor: config.em,
+        config: c,
+      });
+
+      model.listenTo(this.managerLabel.model, 'click [data-traits-label]', () => {
+        console.log('AHHHHH');
+      });
 
       return this;
     },

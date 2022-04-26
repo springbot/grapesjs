@@ -101,10 +101,10 @@
 }
 
 .#{$app-prefix}field {
-  background-color: $mainDkColor;
+  background-color: #fcfcfc;
   border: none;
   box-shadow: none;
-  border-radius: 2px;
+  border-radius: 4px;
   box-sizing: border-box;
   padding: 0;
   position: relative;
@@ -113,13 +113,28 @@
     resize: vertical;
   }
 
-  .#{$app-prefix}sel-arrow {
-    height: 100%;
-    width: 9px;
+  .#{$app-prefix}sel-arrow,
+  .#{$app-prefix}icon {
+    height: 32px;
+    width: 32px;
     position: absolute;
-    right: 0;
     top: 0;
     z-index: 0;
+    box-sizing: border-box;
+    padding: 9px 0px;
+    text-align: center;
+    color: #737373;
+  }
+
+  .#{$app-prefix}icon {
+    color: #B3B3B3;
+    &~.#{$app-prefix}chk-icon {
+      margin-left: 32px;
+    }
+  }
+
+  .#{$app-prefix}sel-arrow {
+    right: 0;
   }
 
   .#{$app-prefix}d-s-arrow {
@@ -138,13 +153,13 @@
 
   &-arrows {
     position: absolute;
-    cursor: ns-resize;
+    // cursor: ns-resize;
     margin: auto;
     height: 20px;
     width: 9px;
     z-index: 10;
     bottom: 0;
-    right: $inputPadding - 2px;
+    right: 8px;
     top: 0;
   }
 
@@ -200,9 +215,10 @@
 
 /* ??? */
 .#{$app-prefix}field-checkbox {
+  width: 100%;
+  background-color: unset;
   padding: 0;
-  width: 17px;
-  height: 17px;
+  height: 32px;
   display: block;
   cursor: pointer;
 
@@ -211,19 +227,32 @@
   }
 
   input:checked + .#{$app-prefix}chk-icon {
-    border-color: rgba(255, 255, 255, 0.5);
-    border-width: 0 2px 2px 0;
-    border-style: solid;
+    background-color: #3EB049;
+    div {
+      left: 10px;
+    }
   }
 }
 
 .#{$app-prefix}radio-item {
   flex: 1 1 auto;
   text-align: center;
-  border-left: 1px solid $darkTextShadow;
+  border-left: #DCE0E5 0.25px solid;
+  font-size: 14px;
 
   &:first-child {
     border: none;
+    border-radius: 4px 0 0 4px;
+    &>label {
+      border-radius: 4px 0 0 4px;
+    }
+  }
+
+  &:last-child {
+    border-radius: 0 4px 4px 0;
+    &>label {
+      border-radius: 0 4px 4px 0;
+    }
   }
 
   &:hover {
@@ -235,7 +264,10 @@
   }
 
   input:checked + .#{$app-prefix}radio-item-label {
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255,255,255,0.9);
+    filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.09));
+    box-shadow: #fff inset 0 0 0 1px;
+    color: #4a4a4a;
   }
 
   &s {
@@ -246,10 +278,12 @@
 .#{$app-prefix}radio-item-label {
   cursor: pointer;
   display: block;
-  padding: $inputPadding;
+  padding: 8px 0px;
+  color: #B3B3B3;
 }
 
 .#{$app-prefix}field-units {
+  display: none;
   position: absolute;
   margin: auto;
   right: 10px;
@@ -275,17 +309,17 @@
   position: absolute;
   height: 0;
   width: 0;
-  border-left: 3px solid transparent;
+  border-left: 4px solid transparent;
   border-right: 4px solid transparent;
   border-top: 4px solid $arrowColor;
-  bottom: 4px;
+  bottom: 3px;
   cursor: pointer;
 }
 
 .#{$app-prefix}field-arrow-u {
   border-bottom: 4px solid $arrowColor;
   border-top: none;
-  top: 4px;
+  top: 3px;
 }
 
 .#{$app-prefix}field-select {
@@ -338,13 +372,15 @@
 
 .#{$app-prefix}btn {
   &-prim {
-    color: inherit;
-    background-color: $mainLhColor;
-    border-radius: 2px;
+    color: #737373;
+    background-color: #f8f8f8;
+    border-radius: 4px;
     padding: 3px 6px;
     padding: $inputPadding;
     cursor: pointer;
-    border: none;
+    border: 2px solid white;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 4px 0px #00000017;
 
     &:active {
       background-color: $mainLhColor;
@@ -352,18 +388,31 @@
   }
 
   &--full {
-    width: 100%;
+    width: 240px;
   }
 }
 
 .#{$app-prefix}chk-icon {
-  @include transform(rotate(45deg));
-
   box-sizing: border-box;
   display: block;
+  position: absolute;
   height: 14px;
-  margin: 0 5px;
-  width: 6px;
+  margin: 7.5px 0;
+  width: 25px;
+  height: 17px;
+  border-radius: 8px;
+  background-color: #7f7f7f;
+  transition: background-color .1s;
+  div {
+    height: 13px;
+    width: 13px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: left .1s;
+  }
 }
 
 .#{$app-prefix}add-trasp {
@@ -382,5 +431,23 @@
 
   &:active {
     background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
+.#{$app-prefix}field {
+  select, input {
+    height: 32px;
+    padding: 8px;
+    padding-right: 32px;
+  }
+  .#{$app-prefix}icon{
+    &+input {
+      padding: 8px 8px 8px 32px;
+    }
+    &+span,&+div{
+      select, input {
+        padding-left: 32px;
+      }
+    }
   }
 }

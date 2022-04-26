@@ -39,7 +39,7 @@ export default Backbone.View.extend({
     this.clsField = `${ppfx}field ${ppfx}field-${type}`;
     [
       ['change:value', this.onValueChange],
-      ['remove', this.removeView]
+      ['remove', this.removeView],
     ].forEach(([event, clb]) => {
       model.off(event, clb);
       this.listenTo(model, event, clb);
@@ -57,7 +57,7 @@ export default Backbone.View.extend({
     return {
       component: this.target,
       trait: this.model,
-      elInput: this.getInputElem()
+      elInput: this.getInputElem(),
     };
   },
 
@@ -83,7 +83,7 @@ export default Backbone.View.extend({
     }
     this.onEvent({
       ...this.getClbOpts(),
-      event
+      event,
     });
   },
 
@@ -124,11 +124,19 @@ export default Backbone.View.extend({
         this.createLabel({
           label,
           component: target,
-          trait: this
+          trait: this,
         }) || '';
     }
 
     $el.find('[data-label]').append(tpl);
+  },
+
+  renderIcon() {
+    const { $el } = this;
+    const { iconName } = this.model.attributes;
+    let tpl = `<div class="${iconName}"></div>`;
+
+    $el.find('[data-icon]').append(tpl);
   },
 
   /**
@@ -139,10 +147,7 @@ export default Backbone.View.extend({
   getLabel() {
     const { em } = this;
     const { label, name } = this.model.attributes;
-    return (
-      em.t(`traitManager.traits.labels.${name}`) ||
-      capitalize(label || name).replace(/-/g, ' ')
-    );
+    return em.t(`traitManager.traits.labels.${name}`) || capitalize(label || name).replace(/-/g, ' ');
   },
 
   /**
@@ -191,9 +196,7 @@ export default Backbone.View.extend({
 
   getInputElem() {
     const { input, $input } = this;
-    return (
-      input || ($input && $input.get && $input.get(0)) || this.getElInput()
-    );
+    return input || ($input && $input.get && $input.get(0)) || this.getElInput();
   },
 
   getModelValue() {
@@ -227,9 +230,7 @@ export default Backbone.View.extend({
     let tpl = model.el;
 
     if (!tpl) {
-      tpl = this.createInput
-        ? this.createInput(this.getClbOpts())
-        : this.getInputEl();
+      tpl = this.createInput ? this.createInput(this.getClbOpts()) : this.getInputEl();
     }
 
     if (isString(tpl)) {
@@ -260,10 +261,12 @@ export default Backbone.View.extend({
   render() {
     const { $el, pfx, ppfx, model } = this;
     const { type, id } = model.attributes;
+    const { full } = model.props();
     const hasLabel = this.hasLabel && this.hasLabel();
+    const iconName = model.get('iconName');
     const cls = `${pfx}trait`;
     this.$input = null;
-    let tmpl = `<div class="${cls} ${cls}--${type}">
+    let tmpl = `<div class="${cls} ${cls}--${type} ${full ? 'full' : ''}">
       ${hasLabel ? `<div class="${ppfx}label-wrp" data-label></div>` : ''}
       <div class="${ppfx}field-wrp ${ppfx}field-wrp--${type}" data-input>
         ${
@@ -278,9 +281,13 @@ export default Backbone.View.extend({
     $el.empty().append(tmpl);
     hasLabel && this.renderLabel();
     this.renderField();
-    this.el.className = `${cls}__wrp ${cls}__wrp-${id}`;
+    if (iconName) {
+      $el.find(`.${ppfx}field`).prepend(`<div class="${ppfx}icon" data-icon></div>`);
+      this.renderIcon();
+    }
+    this.el.className = `${cls}__wrp ${cls}__wrp-${id}$`;
     this.postUpdate();
     this.onRender(this.getClbOpts());
     return this;
-  }
+  },
 });

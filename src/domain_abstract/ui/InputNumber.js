@@ -11,13 +11,32 @@ export default Input.extend({
     'change select': 'handleUnitChange',
     'click [data-arrow-up]': 'upArrowClick',
     'click [data-arrow-down]': 'downArrowClick',
-    'mousedown [data-arrows]': 'downIncrement',
     keydown: 'handleKeyDown',
   },
 
   template() {
     const ppfx = this.ppfx;
+    const pfx = this.model.view.pfx;
+    const icon = this.model.get('iconName');
+    const textLabel = this.model.get('textLabel');
+    let iconEl = '';
+    switch (icon) {
+      case '':
+      case undefined:
+        iconEl = `<div>${textLabel ? textLabel : ''}</div>`;
+        break;
+      case 'border-width':
+        iconEl = `<div class="fal fa-horizontal-rule fa-fw"></div>
+                  <div class="far fa-horizontal-rule fa-fw"></div>
+                  <div class="fas fa-horizontal-rule fa-fw"></div>`;
+        break;
+      default:
+        iconEl = `<div class="${icon}"></div>`;
+        break;
+    }
+    iconEl = icon || textLabel ? `<div class="${ppfx}icon">${iconEl}</div>` : '';
     return `
+      ${iconEl}
       <span class="${ppfx}input-holder"></span>
       <span class="${ppfx}field-units"></span>
       <div class="${ppfx}field-arrows" data-arrows>

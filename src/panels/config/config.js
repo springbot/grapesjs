@@ -1,11 +1,9 @@
-const swv = 'sw-visibility';
-const expt = 'export-template';
-const osm = 'open-sm';
-const otm = 'open-tm';
-const ola = 'open-layers';
-const obl = 'open-blocks';
-const ful = 'fullscreen';
-const prv = 'preview';
+var swv = 'sw-visibility';
+var expt = 'export-template';
+var oms = 'open-managers';
+var obl = 'open-blocks';
+var ful = 'fullscreen';
+var prv = 'preview';
 
 export default {
   stylePrefix: 'pn-',
@@ -14,80 +12,78 @@ export default {
   defaults: [
     {
       id: 'commands',
-      buttons: [{}]
+      buttons: [{}],
     },
     {
       id: 'options',
       buttons: [
         {
-          active: true,
-          id: swv,
-          className: 'fa fa-square-o',
-          command: swv,
-          context: swv,
-          attributes: { title: 'View components' }
+          id: 'show',
+          className: 'far fa-ellipsis-v',
+          command: 'open-hidden-options',
+          context: 'show-context',
+          attributes: {
+            title: 'More options',
+            style: 'order: 100;',
+          },
         },
-        {
-          id: prv,
-          className: 'fa fa-eye',
-          command: prv,
-          context: prv,
-          attributes: { title: 'Preview' }
-        },
-        {
-          id: ful,
-          className: 'fa fa-arrows-alt',
-          command: ful,
-          context: ful,
-          attributes: { title: 'Fullscreen' }
-        },
-        {
-          id: expt,
-          className: 'fa fa-code',
-          command: expt,
-          attributes: { title: 'View code' }
-        }
-      ]
+      ],
     },
     {
       id: 'views',
       buttons: [
         {
-          id: osm,
-          className: 'fa fa-paint-brush',
-          command: osm,
+          id: oms,
+          className: 'fas fa-paint-brush',
+          command: oms,
           active: true,
           togglable: 0,
-          attributes: { title: 'Open Style Manager' }
-        },
-        {
-          id: otm,
-          className: 'fa fa-cog',
-          command: otm,
-          togglable: 0,
-          attributes: { title: 'Settings' }
-        },
-        {
-          id: ola,
-          className: 'fa fa-bars',
-          command: ola,
-          togglable: 0,
-          attributes: { title: 'Open Layer Manager' }
+          attributes: { title: 'Open Style Manager' },
         },
         {
           id: obl,
-          className: 'fa fa-th-large',
+          className: 'fas fa-th-large',
           command: obl,
           togglable: 0,
-          attributes: { title: 'Open Blocks' }
-        }
-      ]
-    }
+          attributes: { title: 'Open Blocks' },
+        },
+      ],
+    },
+    {
+      id: 'options-hidden',
+      visible: 0,
+      buttons: [
+        {
+          id: ful,
+          className: 'far fa-expand',
+          command: ful,
+          context: ful,
+          label: 'Expand view',
+          attributes: { title: 'Fullscreen' },
+        },
+        {
+          id: 'import-mjml',
+          className: 'far fa-code',
+          command: 'import-mjml',
+          context: 'import-mjml',
+          label: 'Import MJML',
+          attributes: { title: 'Import MJML' },
+        },
+        {
+          id: 'export-mjml',
+          className: 'far fa-download',
+          command: 'export-mjml',
+          context: 'export-mjml',
+          label: 'Export MJML',
+          attributes: { title: 'Export MJML' },
+        },
+      ],
+    },
   ],
 
   // Editor model
   em: null,
 
   // Delay before show children buttons (in milliseconds)
-  delayBtnsShow: 300
+  delayBtnsShow: 300,
 };

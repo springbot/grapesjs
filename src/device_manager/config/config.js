@@ -8,24 +8,21 @@ export default {
       id: 'desktop',
       name: 'Desktop',
       width: '',
+      iconName: 'far fa-desktop',
     },
     {
       id: 'tablet',
       name: 'Tablet',
-      width: '770px',
+      width: '768px',
       widthMedia: '992px',
-    },
-    {
-      id: 'mobileLandscape',
-      name: 'Mobile landscape',
-      width: '568px',
-      widthMedia: '768px',
+      iconName: 'far fa-tablet-alt',
     },
     {
       id: 'mobilePortrait',
       name: 'Mobile portrait',
       width: '320px',
       widthMedia: '480px',
+      iconName: 'far fa-mobile-alt',
     },
   ],
 };

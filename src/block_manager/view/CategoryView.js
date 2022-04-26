@@ -2,11 +2,12 @@ import { View } from 'backbone';
 import html from 'utils/html';
 
 export default class CategoryView extends View {
-  template({ pfx, label }) {
+  template({ pfx, label, icon }) {
     return html`
       <div class="${pfx}title">
-        <i class="${pfx}caret-icon"></i>
-        ${label}
+        <div class="${pfx}icon"><div class="${icon}"></div></div>
+        <div class="${pfx}label">${label}</div>
+        <div class="${pfx}caret"><div class="fas fa-caret-down"></div></div>
       </div>
       <div class="${pfx}blocks-c"></div>
     `;
@@ -21,8 +22,6 @@ export default class CategoryView extends View {
     const pfx = config.pStylePrefix || '';
     this.em = config.em;
     this.pfx = pfx;
-    this.caretR = 'fa fa-caret-right';
-    this.caretD = 'fa fa-caret-down';
     this.iconClass = `${pfx}caret-icon`;
     this.activeClass = `${pfx}open`;
     this.className = `${pfx}block-category`;
@@ -40,13 +39,11 @@ export default class CategoryView extends View {
 
   open() {
     this.$el.addClass(this.activeClass);
-    this.getIconEl().className = `${this.iconClass} ${this.caretD}`;
     this.getBlocksEl().style.display = '';
   }
 
   close() {
     this.$el.removeClass(this.activeClass);
-    this.getIconEl().className = `${this.iconClass} ${this.caretR}`;
     this.getBlocksEl().style.display = 'none';
   }
 
@@ -76,14 +73,13 @@ export default class CategoryView extends View {
   }
 
   render() {
-    const { em, el, $el, model, pfx } = this;
-    const label =
-      em.t(`blockManager.categories.${model.id}`) || model.get('label');
-    el.innerHTML = this.template({ pfx, label });
+    const { em, el, $el, model, pfx, config } = this;
+    const label = em.t(`blockManager.categories.${model.id}`) || model.get('label');
+    const icon = config.categoryIcons[model.id];
+    el.innerHTML = this.template({ pfx, label, icon });
     $el.addClass(this.className);
     $el.css({ order: model.get('order') });
     this.updateVisibility();
-
     return this;
   }
 }

@@ -11,6 +11,7 @@ import Properties from './Properties';
  * @property {String} name Sector name, eg. `Typography`
  * @property {Boolean} [open=true] Indicates the open state.
  * @property {Array<Object>} [properties=[]] Indicate an array of Property defintions.
+ * @property {String} [iconName=''] FA icon name.
  */
 export default class Sector extends Model {
   defaults() {

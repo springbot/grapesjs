@@ -5,13 +5,8 @@ export default class DevicesView extends View {
   template({ ppfx, label }) {
     return html`
       <div class="${ppfx}device-label">${label}</div>
-      <div class="${ppfx}field ${ppfx}select">
-        <span id="${ppfx}input-holder">
-          <select class="${ppfx}devices"></select>
-        </span>
-        <div class="${ppfx}sel-arrow">
-          <div class="${ppfx}d-s-arrow"></div>
-        </div>
+      <div class="${ppfx}field ${ppfx}field-radio">
+        <div class="${ppfx}radio-items ${ppfx}devices"></div>
       </div>
       <button style="display:none" class="${ppfx}add-trasp">+</button>
     `;
@@ -19,7 +14,7 @@ export default class DevicesView extends View {
 
   events() {
     return {
-      change: 'updateDevice'
+      change: 'updateDevice',
     };
   }
 
@@ -43,11 +38,10 @@ export default class DevicesView extends View {
    * Update device of the editor
    * @private
    */
-  updateDevice() {
+  updateDevice(e) {
     var em = this.em;
     if (em) {
-      var devEl = this.devicesEl;
-      var val = devEl ? devEl.val() : '';
+      var val = e.target ? e.target.value : '';
       em.set('device', val);
     }
   }
@@ -62,7 +56,7 @@ export default class DevicesView extends View {
     if (em && em.getDeviceModel && devEl) {
       var device = em.getDeviceModel();
       var name = device ? device.get('id') : '';
-      devEl.val(name);
+      devEl.find(`input[value="${name}"]`).checked = true;
     }
   }
 
@@ -72,13 +66,20 @@ export default class DevicesView extends View {
    * @private
    */
   getOptions() {
-    const { collection, em } = this;
+    const { collection, em, ppfx } = this;
     let result = '';
 
     collection.each(device => {
-      const { name, id } = device.attributes;
+      const { name, id, iconName } = device.attributes;
       const label = (em && em.t && em.t(`deviceManager.devices.${id}`)) || name;
-      result += `<option value="${id || name}">${label}</option>`;
+      const inputId = `${device.cid}-device`;
+      const checked = em.get('device') === id ? ' checked' : '';
+      result += `
+      <div class="${ppfx}radio-item">
+        <input id="${inputId}" type="radio" name="device" value="${id}"${checked}>
+        <label class="${ppfx}radio-item-label ${iconName}" for="${inputId}" title="${label}"></label>
+      </div>
+      `;
     });
 
     return result;

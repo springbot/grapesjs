@@ -89,6 +89,7 @@
         styleManager : {
           sectors: [{
               name: 'General',
+              iconName: "far fa-eye",
               open: false,
               buildProps: ['float', 'display', 'position', 'top', 'right', 'left', 'bottom']
             },{
@@ -106,7 +107,7 @@
             },{
               name: 'Decorations',
               open: false,
-              buildProps: ['border-radius-c', 'background-color', 'border-radius', 'border', 'box-shadow', 'background'],
+              buildProps: ['background-color', 'border-radius', 'border', 'box-shadow', 'background'],
             },{
               name: 'Extra',
               open: false,
@@ -117,6 +118,7 @@
       });
 
       editor.BlockManager.add('testBlock', {
+        category: 'testing',
         label: 'Block',
         attributes: { class:'gjs-fonts gjs-f-b1' },
         content: `<div style="padding-top:50px; padding-bottom:50px; text-align:center">Test block</div>`

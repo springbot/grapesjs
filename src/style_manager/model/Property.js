@@ -9,6 +9,7 @@ import { capitalize, camelCase, hasWin } from 'utils/mixins';
  * @property {String} default Defaul value of the property.
  * @property {String} label Label to use in UI, eg. `Text Align`.
  * @property {Function} [onChange] Change callback.
+ * @property {Boolean} noLabel true if no label.
  * \n
  * ```js
  *  onChange: ({ property, from, to }) => {

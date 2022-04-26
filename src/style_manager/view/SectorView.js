@@ -3,15 +3,16 @@ import html from 'utils/html';
 import PropertiesView from './PropertiesView';
 
 export default class SectorView extends View {
-  template({ pfx, label }) {
+  template({ pfx, label, icon }) {
     const icons = this.em?.getConfig('icons');
     const iconCaret = icons?.caret || '';
     const clsPfx = `${pfx}sector-`;
 
     return html`
       <div class="${clsPfx}title" data-sector-title>
-        <div class="${clsPfx}caret">$${iconCaret}</div>
+        <div class="${clsPfx}icon"><div class="${this.model.get('iconName')}"></div></div>
         <div class="${clsPfx}label">${label}</div>
+        <div class="${clsPfx}caret"><div class="fas fa-caret-down"></div></div>
       </div>
     `;
   }
@@ -35,10 +36,14 @@ export default class SectorView extends View {
   }
 
   updateOpen() {
-    const { $el, model, pfx } = this;
+    const { $el, model, pfx, em } = this;
     const isOpen = model.isOpen();
     $el[isOpen ? 'addClass' : 'removeClass'](`${pfx}open`);
     this.getPropertiesEl().style.display = isOpen ? '' : 'none';
+    if (isOpen) {
+      em.attributes.TraitManager.managerLabel.model.setOpen(false);
+      model.collection.each(sector => sector != model && sector.setOpen(false));
+    }
   }
 
   updateVisibility() {
@@ -52,7 +57,8 @@ export default class SectorView extends View {
 
   toggle() {
     const { model } = this;
-    model.setOpen(!model.get('open'));
+    const open = !model.get('open');
+    model.setOpen(open);
   }
 
   renderProperties() {

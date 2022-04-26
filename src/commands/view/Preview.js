@@ -48,7 +48,7 @@ export default {
 
     if (!this.helper) {
       const helper = document.createElement('span');
-      helper.className = `${pfx}off-prv fa fa-eye-slash`;
+      helper.className = `${pfx}off-prv far fa-eye-slash`;
       editorEl.appendChild(helper);
       helper.onclick = () => this.stopCommand();
       this.helper = helper;
@@ -93,5 +93,5 @@ export default {
 
     editor.refresh();
     this.tglEffects();
-  }
+  },
 };

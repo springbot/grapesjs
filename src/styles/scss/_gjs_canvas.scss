@@ -1,5 +1,5 @@
 $frameAnimation: 0.35s ease !default;
-$canvasTop: 40px !default;
+$canvasTop: 48px !default;
 $guide_pad: 5px !default;
 
 .#{$prefix} {
@@ -194,13 +194,13 @@ $guide_pad: 5px !default;
 .#{$cv-prefix}canvas {
   background-color: rgba(0, 0, 0, 0.15);
   box-sizing: border-box;
-  width: (100% - $leftWidth);
+  width: calc(100% - $leftWidth);
   height: calc(100% - #{$canvasTop});
   bottom: 0;
   overflow: hidden;
   z-index: 1;
   position: absolute;
-  left: 0;
+  right: 0;
   top: $canvasTop;
 
   &.#{$cui-cls} {

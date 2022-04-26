@@ -20,5 +20,8 @@ export default {
   blocks: [],
 
   // Avoid rendering the default block manager.
-  custom: false
+  custom: false,
+
+  // ex: { categoryName: 'far fa-eye', }
+  categoryIcons: { testing: 'far fa-eye' },
 };
