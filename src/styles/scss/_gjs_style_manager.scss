@@ -61,7 +61,7 @@
   }
 
   &properties {
-    font-size: $fontSizeS;
+    font-size: 14px !important;
     padding: 16px 8px 24px 8px;
     display: flex;
     flex-wrap: wrap;
@@ -78,6 +78,7 @@
     margin: 16px 0 8px 0;
     display: flex;
     align-items: center;
+    font-weight: 500;
   }
 }
 
@@ -241,7 +242,7 @@
 
     .#{$sm-prefix}radio:checked + label {
       background-color: rgba(255,255,255,0.9);
-      filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.09));
+      filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.1));
       box-shadow: #fff inset 0 0 0 1px;
     }
 
@@ -538,10 +539,26 @@
   &border-width .#{$app-prefix}icon {
     line-height: 4px;
     padding: 10px 0;
-    &>* {
+    &>div {
       line-height: 4px;
       padding: 0;
       font-size: 12px;
+    }
+  }
+
+  &border-color {
+    .#{$app-prefix}field-color-picker {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &::after {
+        content: '';
+        width: 6px;
+        height: 6px;
+        background-color: #Fcfcfc;
+        border: 1px solid #b3b3b3;
+        box-sizing: border-box;
+      }
     }
   }
 }

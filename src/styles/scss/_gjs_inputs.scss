@@ -19,6 +19,7 @@
 .#{$app-prefix} {
   &label {
     line-height: 18px;
+    font-weight: 500;
   }
 
   &fields {
@@ -121,9 +122,15 @@
     top: 0;
     z-index: 0;
     box-sizing: border-box;
-    padding: 9px 0px;
     text-align: center;
     color: #737373;
+    padding: 9px 0px;
+    div {
+      &:not(.far, .fas, .fal) {
+        line-height: 1rem;
+
+      }
+    }
   }
 
   .#{$app-prefix}icon {
@@ -170,20 +177,20 @@
 }
 
 .#{$app-prefix}field-color {
-  input {
-    padding-right: $colorpSize;
+  .#{$app-prefix}input-holder > input {
+    padding-left: 32px;
     box-sizing: border-box;
   }
 }
 
 .#{$app-prefix}field-colorp {
-  border-left: 1px solid $mainDkColor;
+  border: 1px solid #b3b3b3;
+  border-radius: 2px;
   box-sizing: border-box;
-  height: 100%;
-  padding: 2px;
+  height: 14px;
   position: absolute;
-  right: 0;
-  top: 0;
+  left: 9px;
+  top: 9px;
   width: $colorpSize;
   z-index: 10;
 
@@ -204,6 +211,8 @@
 
 .#{$app-prefix}field-color-picker {
   background-color: $fontColor;
+  border: 1px solid #b3b3b3;
+  box-sizing: border-box;
   cursor: pointer;
   height: 100%;
   width: 100%;
@@ -256,7 +265,13 @@
   }
 
   &:hover {
-    background: $mainDkColor;
+    .#{$app-prefix}radio-item-label {
+      filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.1));
+      background: #fcfcfc;
+    }
+    input:checked + .#{$app-prefix}radio-item-label {
+      filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.2));
+    }
   }
 
   input {
@@ -264,8 +279,8 @@
   }
 
   input:checked + .#{$app-prefix}radio-item-label {
-    background-color: rgba(255,255,255,0.9);
-    filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.09));
+    background-color: #fdfdfd;
+    filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.1));
     box-shadow: #fff inset 0 0 0 1px;
     color: #4a4a4a;
   }
@@ -385,6 +400,9 @@
     &:active {
       background-color: $mainLhColor;
     }
+    &:hover {
+      filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.1));
+    }
   }
 
   &--full {
@@ -450,4 +468,8 @@
       }
     }
   }
+}
+
+select, input {
+  font-size: $fontSizeS;
 }

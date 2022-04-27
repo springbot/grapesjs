@@ -7,5 +7,5 @@ export default {
 
   // Default options for the target input
   optionsTarget: [{ value: false }, { value: '_blank' }],
-  labelContainer: 'label',
+  titleLabelSuffix: ' settings',
 };

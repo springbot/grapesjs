@@ -48,6 +48,10 @@
       color: #4A4A4A;
       font-weight: bold;
     }
+
+    &:not(.open)+.#{$trt-prefix}traits {
+      display: none;
+    }
   }
 }
 
@@ -84,7 +88,10 @@
     align-items: flex-end;
     box-sizing: border-box;
     width: 100%;
-    font-size: $fontSizeS;
+    font-size: 14px;
+    &:empty {
+      display: none;
+    }
   }
 
   .#{$app-prefix}label {

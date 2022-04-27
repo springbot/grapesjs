@@ -74,11 +74,6 @@ export default () => {
         editor: config.em,
         config: c,
       });
-
-      model.listenTo(this.managerLabel.model, 'click [data-traits-label]', () => {
-        console.log('AHHHHH');
-      });
-
       return this;
     },
 
