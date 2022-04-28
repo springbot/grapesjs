@@ -133,8 +133,8 @@ export default Backbone.View.extend({
 
   renderIcon() {
     const { $el } = this;
-    const { iconName } = this.model.attributes;
-    let tpl = `<div class="${iconName}"></div>`;
+    const { iconName, icon } = this.model.attributes;
+    let tpl = `<div class="${iconName || icon}"></div>`;
 
     $el.find('[data-icon]').append(tpl);
   },
@@ -263,7 +263,7 @@ export default Backbone.View.extend({
     const { type, id } = model.attributes;
     const { full } = model.props();
     const hasLabel = this.hasLabel && this.hasLabel();
-    const iconName = model.get('iconName');
+    const iconName = model.get('iconName') || model.get('icon');
     const cls = `${pfx}trait`;
     this.$input = null;
     let tmpl = `<div class="${cls} ${cls}--${type} ${full ? 'full' : ''}">

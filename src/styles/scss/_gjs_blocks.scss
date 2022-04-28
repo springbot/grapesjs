@@ -34,7 +34,6 @@
     align-items: center;
 
     .#{$app-prefix}icon, .#{$app-prefix}caret {
-      transition: transform 0.1s;
       width: 48px;
       text-align: center;
       color: #737373;

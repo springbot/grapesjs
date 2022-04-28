@@ -411,7 +411,7 @@ $colorsAll: (one, $primaryColor),
   box-shadow: 0px 2px 15px rgba(71,71,121,0.08);
   margin: 1px 0;
   div:first-child, div:last-child {
-    transition: all .1s;
+    transition: color .1s;
   }
 }
 
