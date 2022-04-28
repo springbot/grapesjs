@@ -126,9 +126,9 @@
     color: #737373;
     padding: 9px 0px;
     div {
+      line-height: 1;
       &:not(.far, .fas, .fal) {
         line-height: 1rem;
-
       }
     }
   }
@@ -294,6 +294,7 @@
   cursor: pointer;
   display: block;
   padding: 8px 0px;
+  margin: 0;
   color: #B3B3B3;
 }
 
@@ -470,6 +471,6 @@
   }
 }
 
-select, input {
+select, input, button {
   font-size: $fontSizeS;
 }

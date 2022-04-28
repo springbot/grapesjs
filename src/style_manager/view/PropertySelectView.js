@@ -4,7 +4,7 @@ export default class PropertySelectView extends PropertyView {
   templateInput() {
     const pfx = this.pfx;
     const ppfx = this.ppfx;
-    let icon = this.model.get('iconName');
+    let icon = this.model.get('iconName') || this.model.get('icon');
     icon = icon ? `<div class="${ppfx}icon"><div class="${icon}"></div></div>` : '';
     return `
       <div class="${ppfx}field ${ppfx}select">

@@ -17,7 +17,7 @@ export default Input.extend({
   template() {
     const ppfx = this.ppfx;
     const pfx = this.model.view.pfx;
-    const icon = this.model.get('iconName');
+    const icon = this.model.get('iconName') || this.model.get('icon');
     const textLabel = this.model.get('textLabel');
     let iconEl = '';
     switch (icon) {

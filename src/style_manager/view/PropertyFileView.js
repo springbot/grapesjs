@@ -17,28 +17,50 @@ export default class PropertyFileView extends PropertyView {
 
     return `
       <div class="${pfx}field ${pfx}file">
+        <div id="${pfx}preview-box" class="${pfx}preview-file" data-preview-box>
+          <div id="${pfx}preview-file" class="${pfx}preview-file-cnt" data-preview></div>
+        </div>
         <div id='${pfx}input-holder'>
           <div class="${pfx}btn-c">
             <button class="${pfx}btn" id="${pfx}images" type="button" data-open-assets>
-              ${em.t('styleManager.fileButton')}
+              Add Image
+            </button>
+          </div>
+          <div class="${pfx}btn-c">
+            <button class="${pfx}btn" id="${pfx}edit" type="button">
+              <i class="far fa-edit"></i> Edit
+            </button>
+          </div>
+          <div class="${pfx}btn-c">
+            <button class="${pfx}btn" id="${pfx}images" type="button" data-open-assets>
+              Upload
+            </button>
+          </div>
+          <div class="${pfx}btn-c">
+            <button class="${pfx}btn" id="${pfx}close" type="button" data-clear-asset>
+              <i class="far fa-times-circle"></i> Delete
             </button>
           </div>
           <div style="clear:both;"></div>
-        </div>
-        <div id="${pfx}preview-box" class="${pfx}preview-file" data-preview-box>
-          <div id="${pfx}preview-file" class="${pfx}preview-file-cnt" data-preview></div>
-          <div id="${pfx}close" class="${pfx}preview-file-close" data-clear-asset>${iconClose}</div>
         </div>
       </div>
     `;
   }
 
   __setValueInput(value) {
-    const { model, el } = this;
+    const { model, el, pfx } = this;
     const valueDef = model.getDefaultValue();
     const prvBoxEl = el.querySelector('[data-preview-box]');
     const prvEl = el.querySelector('[data-preview]');
-    prvBoxEl.style.display = !value || value === valueDef ? 'none' : '';
+    const noImage = !value || value === valueDef;
+    const buttons = el.querySelectorAll(`.${pfx}btn-c`).forEach((btn, i) => {
+      if (i === 0) {
+        btn.style.display = noImage ? '' : 'none';
+      } else {
+        btn.style.display = noImage ? 'none' : '';
+      }
+    });
+    prvBoxEl.style.display = noImage ? 'none' : '';
     prvEl.style.backgroundImage = value || model.getDefaultValue();
   }
 

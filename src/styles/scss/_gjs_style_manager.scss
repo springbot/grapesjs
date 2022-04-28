@@ -9,8 +9,7 @@
   }
 
   &header {
-    font-weight: lighter;
-    padding: 10px;
+    display: none !important;
   }
 
   // Sector
@@ -304,21 +303,21 @@
   }
 
   .#{$sm-prefix}btn {
-    background-color: lighten($mainDkColor, 13%);
+    font-weight: 400;
+    background-color: #f8f8f8;
     border-radius: 4px;
-    box-shadow: 1px 1px 0 lighten($mainDkColor, 2%), 1px 1px 0 lighten($mainDkColor, 17%) inset;
-    padding: 5px;
-    position: relative;
+    box-shadow: 0 0 4px 0 rgba(0,0,0,0.1);
     text-align: center;
-    height: auto;
+    color: #737373;
+    border: 2px solid white;
+    box-sizing: border-box;
+    padding: 5px 0;
     width: 100%;
     cursor: pointer;
-    color: $fontColor;
-    box-sizing: border-box;
-    text-shadow: -1px -1px 0 $mainDkColor;
-    border: none;
 
-    @include opacity(0.85);
+    &:hover {
+      filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.1));
+    }
   }
 
   .#{$sm-prefix}btn-c {
@@ -337,19 +336,20 @@
 }
 
 .#{$sm-prefix}preview-file {
-  background-color: $lightBorder;
-  border-radius: 2px;
-  margin-top: 5px;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid darken($lightBorder, 1%);
-  padding: 3px 20px;
+  height: 116px;
+  background-color: #f8f8f8;
+  box-shadow: 0 0 4px 0 rgba(0,0,0,0.1);
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  border: 2px solid white;
+  padding: 6px;
 
   &-cnt {
-    background-size: auto 100%;
+    background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
-    height: 50px;
+    height: 100%;
+    width: 100%;
   }
 
   &-close {
@@ -559,6 +559,17 @@
         border: 1px solid #b3b3b3;
         box-sizing: border-box;
       }
+    }
+  }
+}
+
+.#{$sm-prefix}file {
+  ##{$sm-prefix}input-holder {
+    display: flex;
+    gap: 9px;
+
+    div:not(:first-child)>button {
+      width: 74px;
     }
   }
 }
